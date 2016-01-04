@@ -1,4 +1,4 @@
-﻿namespace GammaStressAgent
+﻿namespace GammaStressAgent.BaseService
 {
     public interface IStresser
     {

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Linq;
 
-namespace GammaStressAgent
+namespace GammaStressAgent.BaseService
 {
     class CpuLoader : IDisposable, IStresser
     {

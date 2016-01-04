@@ -1,4 +1,4 @@
-﻿namespace GammaStressAgent
+﻿namespace GammaStressAgent.BaseService
 {
     //abstract factory
     public abstract class StressItemFactory

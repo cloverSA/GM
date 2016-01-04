@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace GammaStressAgent
+namespace GammaStressAgent.BaseService
 {
     public class Logger
     {

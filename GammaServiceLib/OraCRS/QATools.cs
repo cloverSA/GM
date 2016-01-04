@@ -7,7 +7,7 @@ using GeneralUtility;
 using System.IO.Compression;
 using System.Text;
 //
-namespace GammaServiceLib
+namespace GammaServiceLib.OraCRS
 {
 
     public class QATools : IQATools
@@ -16,8 +16,8 @@ namespace GammaServiceLib
         private const string TX_RESULT_SUC = "[GAMMA_SUC]";
         public string ClearLog()
         {
-            List<string> orabases = CrsEnv.GetOracleRegProperty("ORACLE_BASE", true);
-            List<string> orahome = CrsEnv.GetOracleRegProperty("ORACLE_HOME", true);
+            var orabases = CrsEnv.GetOracleRegProperty("ORACLE_BASE", true);
+            var orahome = CrsEnv.GetOracleRegProperty("ORACLE_HOME", true);
             StringBuilder sb = new StringBuilder();
 
 
@@ -92,8 +92,8 @@ namespace GammaServiceLib
             {
                 Directory.CreateDirectory(log_upload);
             }
-            List<string> orabases = CrsEnv.GetOracleRegProperty("ORACLE_BASE", true);
-            List<string> orahome = CrsEnv.GetOracleRegProperty("ORACLE_HOME", true);
+            var orabases = CrsEnv.GetOracleRegProperty("ORACLE_BASE", true);
+            var orahome = CrsEnv.GetOracleRegProperty("ORACLE_HOME", true);
 
             int orahome_counter = 1;
             string zip_log = string.Empty;

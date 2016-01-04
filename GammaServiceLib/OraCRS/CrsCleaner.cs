@@ -8,7 +8,7 @@ using System.Text;
 using GeneralUtility;
 
 
-namespace GammaServiceLib
+namespace GammaServiceLib.OraCRS
 {
 
     public class CrsCleaner : ICrsCleaner

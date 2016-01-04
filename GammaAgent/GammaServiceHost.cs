@@ -3,6 +3,7 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 
 using GammaServiceLib;
+using GammaServiceLib.OraCRS;
 
 namespace GammaAgent
 {

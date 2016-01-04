@@ -1,26 +1,44 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace GammaServiceLib
+namespace GeneralUtility
 {
-    public class CmdExecutor : ICmdExecutor
+    public class PureCmdExec
     {
-        private const string TX_RESULT_FAIL = "[GAMMA_ERROR]";
-        private const string TX_RESULT_SUC = "[GAMMA_SUC]";
-        public string ShellExecutor(string filename, string arguments)
+        public static string PureCmdExector(string filename, string arguments, string working_dir = "", string usr = "", SecureString pwd = null, string domain = "")
         {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.ErrorDialog = true;
             startInfo.UseShellExecute = false;
             startInfo.CreateNoWindow = true;
-    
+
             startInfo.FileName = filename;
             startInfo.Arguments = arguments;
             startInfo.RedirectStandardOutput = true;
             startInfo.RedirectStandardError = true;
-
+            if (working_dir != "")
+            {
+                startInfo.WorkingDirectory = working_dir;
+            }
+            if (usr != "")
+            {
+                startInfo.UserName = usr;
+            }
+            if (pwd != null)
+            {
+                startInfo.Password = pwd;
+            }
+            if (domain != "")
+            {
+                startInfo.Domain = domain;
+            }
             var stdOutput = new StringBuilder();
             var stdErrorOutput = new StringBuilder();
             process.StartInfo = startInfo;
@@ -29,6 +47,8 @@ namespace GammaServiceLib
 
             try
             {
+                process.EnableRaisingEvents = true;
+
                 process.Start();
                 process.BeginOutputReadLine();
                 process.BeginErrorReadLine();
@@ -36,35 +56,31 @@ namespace GammaServiceLib
             }
             catch (Exception e)
             {
-                throw new Exception(string.Format("{0} OS error when executing: {1} : {2} {3}", TX_RESULT_FAIL, Format(filename, arguments), e.Message, e));
+                return (string.Format("OS error when executing: {0} {1} : {2} {3}", filename, arguments, e.Message, e));
             }
 
             if (process.ExitCode == 0)
             {
                 if (string.IsNullOrEmpty(stdOutput.ToString().Trim()))
                 {
-                    return string.Format("{0} Execution succeed, no output.", TX_RESULT_SUC);
+                    return string.Empty;
                 }
                 else
                 {
-                    return string.Format("{0} Execution succeed, {1} {2}", TX_RESULT_SUC, Environment.NewLine, stdOutput.ToString());
+                    return stdOutput.ToString().Trim();
                 }
-                
+
             }
             else
             {
                 var message = new StringBuilder();
-                message.AppendFormat("{0} {1}  finished with exit code = {2} ", TX_RESULT_FAIL, Format(filename, arguments), process.ExitCode);
-                message.AppendLine();
                 if (!string.IsNullOrEmpty(stdErrorOutput.ToString().Trim()))
                 {
-                    message.AppendLine("Std error output:");
                     message.AppendLine(stdErrorOutput.ToString());
                 }
 
                 if (stdOutput.Length != 0)
                 {
-                    message.AppendLine("Std output:");
                     message.AppendLine(stdOutput.ToString());
                 }
 
@@ -72,23 +88,5 @@ namespace GammaServiceLib
             }
 
         }
-
-        private System.Security.SecureString ConvertToSecureString(string strPassword)
-        {
-            var secureStr = new System.Security.SecureString();
-            if (strPassword.Length > 0)
-            {
-                foreach (var c in strPassword.ToCharArray()) secureStr.AppendChar(c);
-            }
-            return secureStr;
-        }
-
-        private string Format(string filename, string arguments)
-        {
-            return "'" + filename +
-                ((string.IsNullOrEmpty(arguments)) ? string.Empty : " " + arguments) +
-                "'";
-        }
     }
-
 }

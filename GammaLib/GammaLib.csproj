@@ -58,6 +58,7 @@
     <Compile Include="Impersonation\LogonEnums.cs" />
     <Compile Include="Impersonation\NativeMethods.cs" />
     <Compile Include="Impersonation\SafeTokenHandle.cs" />
+    <Compile Include="PureCmdExec.cs" />
     <Compile Include="RemoteServiceSetup.cs" />
     <Compile Include="WinSCP_Uploader.cs" />
   </ItemGroup>

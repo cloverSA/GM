@@ -1,8 +1,7 @@
 ﻿using System;
 using System.ServiceProcess;
 //GammaServiceLib
-using GammaStressAgent;
-
+using GammaStressAgent.BaseService;
 
 namespace GammaAgent
 {
