@@ -1,0 +1,34 @@
+﻿<Page x:Class="GammaCrsQAInstaller.Pages.BinLocPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GammaCrsQAInstaller.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="350" d:DesignWidth="525"
+      Title="BinLocPage">
+        <Grid>
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="3*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <DockPanel LastChildFill="False" Margin="0" Grid.Row="0">
+                <DockPanel LastChildFill="True" Margin="40,40,40,0" DockPanel.Dock="Top" >
+                    <Label Content="Serivce Local Binary Location : " DockPanel.Dock="Left" Width="{Binding ActualWidth, ElementName=label, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=label, Mode=OneWay}" />
+                    <TextBox x:Name="SrvLocBinTB" DockPanel.Dock="Left" Width="{Binding ActualWidth, ElementName=SrvRemoteBinTB, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=SrvRemoteBinTB, Mode=OneWay}"/>
+                </DockPanel>
+                <DockPanel LastChildFill="True" Margin="40,40,40,0" DockPanel.Dock="Top">
+                    <Label x:Name="label" Content="Service Target Binary Location : " DockPanel.Dock="Left" />
+                    <TextBox x:Name="SrvRemoteBinTB" DockPanel.Dock="Left"/>
+                </DockPanel>
+            </DockPanel>
+            <DockPanel LastChildFill="False" Margin="0" Grid.Row="1">
+                <Button x:Name="NextBtn" Content="Next" MinHeight="40" MinWidth="80" VerticalAlignment="Top" Margin="0,5,40,0" DockPanel.Dock="Right"
+                    Command="NavigationCommands.NextPage" CommandParameter="Pages/UserInfoPage.xaml" CommandTarget="{Binding ElementName=SetupFrame}" Click="NextBtn_Click"/>
+            </DockPanel>
+        </Grid>
+    <Page.CommandBindings>
+        <CommandBinding Command="NavigationCommands.NextPage" Executed="BinLocNextPageExecuteHandler" CanExecute="BinLocNextPageCanExecuteHandler" />
+    </Page.CommandBindings>
+</Page>

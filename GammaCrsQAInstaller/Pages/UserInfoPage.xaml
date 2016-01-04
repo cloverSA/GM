@@ -1,0 +1,44 @@
+﻿<Page x:Class="GammaCrsQAInstaller.Pages.UserInfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GammaCrsQAInstaller.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="350" d:DesignWidth="525"
+      Title="UserInfoPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="False" Margin="0" Grid.Row="0">
+            <DockPanel LastChildFill="True" Margin="40,20,40,0" DockPanel.Dock="Top">
+                <Label x:Name="label" Content="Log on domain name : " DockPanel.Dock="Left" />
+                <TextBox x:Name="DomainnameTB" DockPanel.Dock="Left"/>
+            </DockPanel>
+            <DockPanel LastChildFill="True" Margin="40,20,40,0" DockPanel.Dock="Top" >
+                <Label Content="Log on user name : " DockPanel.Dock="Left" Width="{Binding ActualWidth, ElementName=label, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=label, Mode=OneWay}" />
+                <TextBox x:Name="UsernameTB" DockPanel.Dock="Left" Width="{Binding ActualWidth, ElementName=DomainnameTB, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=DomainnameTB, Mode=OneWay}"/>
+            </DockPanel>
+            
+            <DockPanel LastChildFill="True" Margin="40,20,40,0" DockPanel.Dock="Top" >
+                <Label Content="Log on password : " DockPanel.Dock="Left" Width="{Binding ActualWidth, ElementName=label, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=label, Mode=OneWay}" />
+                <PasswordBox x:Name="LogonPwdBox" DockPanel.Dock="Left" Width="{Binding ActualWidth, ElementName=DomainnameTB, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=DomainnameTB, Mode=OneWay}"/>
+            </DockPanel>
+        </DockPanel>
+        <DockPanel LastChildFill="False" Margin="0" Grid.Row="1">
+            
+            
+            <Button x:Name="NextBtn" Content="Next" MinHeight="40" MinWidth="80" VerticalAlignment="Top" Margin="0,5,40,0" DockPanel.Dock="Right"
+                    Command="NavigationCommands.NextPage" CommandParameter="Pages/NodeListPage.xaml" CommandTarget="{Binding ElementName=SetupFrame}" Click="NextBtn_Click"/>
+            <Button x:Name="PrevBtn" Content="Back" MinHeight="40" MinWidth="80" VerticalAlignment="Top" Margin="0,5,20,0" DockPanel.Dock="Right"
+                    Command="NavigationCommands.PreviousPage" CommandTarget="{Binding ElementName=SetupFrame}"/>
+        </DockPanel>
+    </Grid>
+    <Page.CommandBindings>
+        <CommandBinding Command="NavigationCommands.NextPage" Executed="NextPage_Executed" CanExecute="NextPage_CanExecute"/>
+        <CommandBinding Command="NavigationCommands.PreviousPage" Executed="PreviousPage_Executed" CanExecute="Preivous_CanExecute"/>
+    </Page.CommandBindings>
+</Page>

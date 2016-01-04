@@ -1,0 +1,42 @@
+﻿<Page x:Class="GammaCrsQAInstaller.Pages.UploadFilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GammaCrsQAInstaller.Pages"
+      xmlns:ma="clr-namespace:GammaCrsQAInstaller.MasterPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="500"
+      Title="UploadFilePage">
+
+    <ma:Master>
+        <ma:Master.Tools>
+
+
+                <DockPanel LastChildFill="False" Margin="0" Grid.Row="0">
+                    <DockPanel  DockPanel.Dock="Top" Margin="0" MinWidth="150" MaxWidth="500">
+                        <Label x:Name="label" Content="Username" DockPanel.Dock="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+                        <TextBox x:Name="SftpUserTB" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10,0"/>
+                    </DockPanel>
+                    <DockPanel  DockPanel.Dock="Top" Margin="0" MinWidth="150" MaxWidth="500">
+                        <Label Content="Password" DockPanel.Dock="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="{Binding ActualWidth, ElementName=label, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=label_user, Mode=OneWay}"/>
+                        <PasswordBox x:Name="SftpPWDTB" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="{Binding Margin, ElementName=SftpUserTB}" Width="{Binding ActualWidth, ElementName=SftpUserTB, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=SftpUserTB, Mode=OneWay}"/>
+                    </DockPanel>
+                    <DockPanel  DockPanel.Dock="Top" Margin="0"  MinWidth="150" MaxWidth="500">
+                        <Label Content="Bug#" DockPanel.Dock="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="{Binding ActualWidth, ElementName=label, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=label, Mode=OneWay}"/>
+                        <TextBox x:Name="SftpLocTB" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="{Binding Margin, ElementName=SftpUserTB}" Width="{Binding ActualWidth, ElementName=SftpUserTB, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=SftpUserTB, Mode=OneWay}"/>
+                    </DockPanel>
+                    <DockPanel DockPanel.Dock="Top" Margin="0"  MinWidth="150" MaxWidth="500">
+                        <Label Content="Location" DockPanel.Dock="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="{Binding ActualHeight, ElementName=label, Mode=OneWay}" Width="{Binding ActualWidth, ElementName=label, Mode=OneWay}"/>
+                        <TextBox x:Name="UploadPath" DockPanel.Dock="Right" Margin="{Binding Margin, ElementName=SftpUserTB}" VerticalAlignment="Center" Width="{Binding ActualWidth, ElementName=SftpUserTB, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=SftpUserTB, Mode=OneWay}"/>
+                    </DockPanel>
+                    <DockPanel  DockPanel.Dock="Top" Margin="0" MinWidth="150" MaxWidth="250">
+                        <Button x:Name="LogInBtn" Content="Upload" Padding="4" Command="NavigationCommands.GoToPage" CommandParameter="Pages/QAToolsPage.xaml" CommandTarget="{Binding ElementName=ToolsFrame}" Click="LogInBtn_Click"/>
+                    </DockPanel>
+
+
+                </DockPanel>
+
+        </ma:Master.Tools>
+    </ma:Master>
+</Page>
