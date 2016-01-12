@@ -123,7 +123,7 @@ namespace GeneralUtility
             return SvcMgrShellExecuteAsyncPrototype(host, "delete " + ServiceName, OnOpCompleted, "query service", callback);
         }
 
-        private async Task InstallSingleNode(string host, bool callback = true)
+        private async Task<string> InstallSingleNode(string host, bool callback = true)
         {
             //Pre-req. Setup net use
             VerifyNodes();
@@ -138,13 +138,13 @@ namespace GeneralUtility
                     rs = await RemoteServiceStop(host);
                     if (rs.Contains("error"))
                     {
-                        return;
+                        return rs;
                     }
                 }
                 rs = await RemoteServiceDelete(host);
                 if (rs.Contains("error"))
                 {
-                    return;
+                    return rs;
                 }
             }
 
@@ -154,7 +154,8 @@ namespace GeneralUtility
                 rs = await RemoteCopyBinaries(host);
                 if (rs.Contains("error"))
                 {
-                    return;
+                    OnOpCompleted(new OpResultArgs() { OpResult = rs, Hostname = host, OpType = "remote copy file" });
+                    return rs;
                 }
             }
             else
@@ -162,7 +163,12 @@ namespace GeneralUtility
                 //local node copy file
                 if (!Source_location.Trim().ToLower().Equals(Target_location.Trim().ToLower()))
                 {
-                    GammaUtility.ShellExecutor(@"xcopy.exe", "/I /Y /E /V {0} {1}", Source_location, Target_location);
+                    rs = GammaUtility.ShellExecutor(@"xcopy.exe", String.Format(@"/I /Y /E /V ""{0}"" ""{1}"" ", Source_location, Target_location));
+                    if (rs.Contains("error")) 
+                    {
+                        OnOpCompleted(new OpResultArgs() { OpResult = rs, Hostname = host, OpType = "local copy file" });
+                        return rs;
+                    }
                 }
             }
             
@@ -170,7 +176,7 @@ namespace GeneralUtility
             rs = await RemoteServiceInstall(host);
             if (rs.Contains("error"))
             {
-                return;
+                return rs;
             }
             //Step extra, hook to do something else  before starting
             if (HasExtraTask())
@@ -181,11 +187,12 @@ namespace GeneralUtility
             rs = await RemoteServiceStart(host);
             if (rs.Contains("error"))
             {
-                return;
+                return rs;
             }
             await Task.Delay(TimeSpan.FromSeconds(1));
             //Step5. Query service
-            await RemoteServiceQuery(host);
+            rs = await RemoteServiceQuery(host);
+            return rs;
         }
 
         public Task AllInOne()

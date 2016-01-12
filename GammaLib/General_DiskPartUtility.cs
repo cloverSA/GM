@@ -7,50 +7,63 @@ namespace GeneralUtility
 {
     public class DiskPartUtility
     {
-        Dictionary<String, List<String>> partInfo = null;
-        Dictionary<String, String> diskInfo = null;
+        Dictionary<string, List<string>> partInfo = null;
+        Dictionary<string, string> diskInfo = null;
         Process diskpart_session;
 
         public DiskPartUtility()
         {
-            partInfo = new Dictionary<String, List<String>>();
-            diskInfo = new Dictionary<String, String>();
-            DiskPart_DiskCount();
-            DiskPart_ReadPart();
+            diskInfo = DiskPart_DiskCount();
+            partInfo = DiskPart_ReadPart();
         }
 
-        private void DiskPart_ReadPart()
+        private string DiskPart_ListPart(string num)
         {
             DiskPart_Init();
-            List<String> diskNumber = new List<String>();//store the order the foreach below for disks.
-            int currentDisk = -1;
-            foreach (KeyValuePair<String, String> pair in diskInfo)
-            {
-                diskNumber.Add(pair.Key);
-                diskpart_session.StandardInput.WriteLine(String.Format("select disk {0}", pair.Key));
-                diskpart_session.StandardInput.WriteLine("list part");
-            }
+            //store the order the foreach below for disks.
+            diskpart_session.StandardInput.WriteLine(string.Format("select disk {0}", num));
+            diskpart_session.StandardInput.WriteLine("list part");
             diskpart_session.StandardInput.WriteLine("exit");
-            String output = diskpart_session.StandardOutput.ReadToEnd().Trim();
+            string output = diskpart_session.StandardOutput.ReadToEnd().Trim();
             //Console.WriteLine(output);
             DiskPart_Close();
-            //Process the result 
-            Regex regex_diskinfo = new Regex(@"Partition\s(\d+).*Logical.*?(\d+)\sGB", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-            MatchCollection matches = regex_diskinfo.Matches(output);
-            if (matches.Count != 0)
+            return output;
+        }
+
+        private string DiskPart_ListDisk()
+        {
+            DiskPart_Init();
+            diskpart_session.StandardInput.WriteLine("rescan");
+            diskpart_session.StandardInput.WriteLine("list disk");
+            diskpart_session.StandardInput.WriteLine("exit");
+            string output = diskpart_session.StandardOutput.ReadToEnd().Trim();
+
+            DiskPart_Close();
+            return output;
+        }
+
+        private Dictionary<string, List<string>> DiskPart_ReadPart()
+        {
+            var the_part_info = new Dictionary<string, List<string>>();
+            foreach (KeyValuePair<string, string> pair in diskInfo)
             {
-                foreach (Match m in matches)
+                string output = DiskPart_ListPart(pair.Key);
+                Regex regex_diskinfo = new Regex(@"Partition\s(\d+).*Logical.*?(\d+)\sGB", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+
+                MatchCollection matches = regex_diskinfo.Matches(output);
+                Console.WriteLine(output);
+                if (matches.Count != 0)
                 {
-                    //Console.WriteLine(m.Value);
-                    if (m.Groups[1].Value.Trim() == "1")
+                    the_part_info[pair.Key] = new List<string>();
+                    foreach (Match m in matches)
                     {
-                        currentDisk += 1;
-                        partInfo[diskNumber[currentDisk]] = new List<String>();
+                        the_part_info[pair.Key].Add(m.Groups[2].Value);
                     }
-                    partInfo[diskNumber[currentDisk]].Add(m.Groups[2].Value);
                 }
             }
+            return the_part_info;
         }
+
         private void DiskPart_Init()
         {
             diskpart_session = new Process();
@@ -61,16 +74,11 @@ namespace GeneralUtility
             diskpart_session.StartInfo.RedirectStandardInput = true;
             diskpart_session.Start();
         }
-        private void DiskPart_DiskCount()
+
+        private Dictionary<string, string> DiskPart_DiskCount()
         {
-            DiskPart_Init();
-            diskpart_session.StandardInput.WriteLine("rescan");
-            diskpart_session.StandardInput.WriteLine("list disk");
-            diskpart_session.StandardInput.WriteLine("exit");
-            String output = diskpart_session.StandardOutput.ReadToEnd().Trim();
-
-            DiskPart_Close();
-
+            string output = DiskPart_ListDisk();
+            diskInfo = new Dictionary<string, string>();
             //Process the result 
             Regex regex_diskinfo = new Regex(@"Disk\s(\d+).*Online.*?(\d+)\sGB", RegexOptions.Multiline | RegexOptions.IgnoreCase);
             MatchCollection matches = regex_diskinfo.Matches(output);
@@ -82,12 +90,14 @@ namespace GeneralUtility
                     diskInfo[matches[i].Groups[1].Value] = matches[i].Groups[2].Value;
                 }
             }
+            return diskInfo;
         }
-        public String DiskPart_ReCreate()
+
+        public string DiskPart_ReCreate()
         {
-            String cmd = "";
+            string cmd = "";
             DiskPart_Init();
-            foreach (KeyValuePair<String, List<String>> pair in partInfo)
+            foreach (KeyValuePair<string, List<string>> pair in partInfo)
             {
                 cmd += String.Format("SELECT DISK {0}\n", pair.Key);
                 cmd += "CLEAN\n";
@@ -100,7 +110,7 @@ namespace GeneralUtility
                 diskpart_session.StandardInput.WriteLine("ATTRIBUTES DISK CLEAR READONLY");
                 diskpart_session.StandardInput.WriteLine("CONVERT MBR");
                 diskpart_session.StandardInput.WriteLine("CREATE PARTITION EXTENDED");
-                foreach (String logical_size in pair.Value)
+                foreach (string logical_size in pair.Value)
                 {
                     cmd += String.Format("CREATE PARTITION LOGICAL SIZE {0}\n", int.Parse(logical_size) * 1024);
                     diskpart_session.StandardInput.WriteLine(String.Format("CREATE PARTITION LOGICAL SIZE {0}", int.Parse(logical_size) * 1024));
@@ -112,14 +122,14 @@ namespace GeneralUtility
             return cmd;
         }
 
-        public String DiskPart_RmDrvLtr()
+        public string DiskPart_RmDrvLtr()
         {
-            String cmd = "";
+            string cmd = "";
             DiskPart_Init();
             diskpart_session.StandardInput.WriteLine("rescan");
             diskpart_session.StandardInput.WriteLine("list vol");
             diskpart_session.StandardInput.WriteLine("exit");
-            String output = diskpart_session.StandardOutput.ReadToEnd().Trim();
+            string output = diskpart_session.StandardOutput.ReadToEnd().Trim();
 
             DiskPart_Close();
             Regex regex_diskinfo = new Regex(@"Volume\s(\d+).*Raw", RegexOptions.Multiline | RegexOptions.IgnoreCase);
