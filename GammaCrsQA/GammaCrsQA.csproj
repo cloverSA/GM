@@ -78,6 +78,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ClearEnvViewModel.cs" />
+    <Compile Include="ViewModel\CmdExecuteViewModel.cs" />
+    <Compile Include="ViewModel\QAToolsBaseView.cs" />
+    <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="WcfFacecade\QAToolsFacade.cs" />
     <Compile Include="WcfProxy\CmdExecutorProxy.cs" />
     <Compile Include="WcfProxy\CrsCleanerProxy.cs" />
@@ -155,6 +159,7 @@
   <ItemGroup>
     <SplashScreen Include="Resources\splash.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
