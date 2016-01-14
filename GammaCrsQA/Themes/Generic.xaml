@@ -22,13 +22,9 @@
                 
 
                         <GroupBox x:Name="groupBox1" Header="Operation Result" Margin="0" Grid.Row="2">
-                            <RichTextBox x:Name="ToolsRTB" Margin="0,5,0,0">
-                                <FlowDocument>
-                                    <Paragraph>
-                                        <Run Text=""/>
-                                    </Paragraph>
-                                </FlowDocument>
-                            </RichTextBox>
+                            <TextBox x:Name="ToolsTB" Margin="0,5,0,0">
+                                
+                            </TextBox>
                         </GroupBox>
 
                     </Grid>

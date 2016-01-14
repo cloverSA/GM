@@ -25,9 +25,5 @@ namespace GammaCrsQAInstaller.Pages
             QAToolsFacade.RmLog();
         }
 
-        private void SetupBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

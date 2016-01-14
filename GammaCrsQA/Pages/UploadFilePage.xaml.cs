@@ -29,7 +29,11 @@ namespace GammaCrsQAInstaller.Pages
 
         private void LogInBtn_Click(object sender, RoutedEventArgs e)
         {
-            QAToolsFacade.UploadLogToSftp(SftpUserTB.Text.Trim(), SftpPWDTB.Password, SftpLocTB.Text.Trim(), UploadPath.Text.Trim());
+            bool do_upload = (MessageBox.Show("Upload Now?", "Upload Log", MessageBoxButton.YesNo) == MessageBoxResult.Yes) ? true : false;
+            if (do_upload)
+            {
+                QAToolsFacade.UploadLogToSftp(SftpUserTB.Text.Trim(), SftpPWDTB.Password, SftpLocTB.Text.Trim(), UploadPath.Text.Trim());
+            }
         }
     }
 

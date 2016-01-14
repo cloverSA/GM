@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 
 
 //Manager transaction submitted from UI.
@@ -140,14 +142,33 @@ namespace GammaCrsQAInstaller.TXManager
                 ResultComesBack(trx);
             });
         }
-
+        /*
         private void ResultComesBack(IGammaClientTransaction transaction)
         {
-            if (OnResultComesBack != null)
+            var handler = OnResultComesBack;
+            if (handler != null)
             {
-                OnResultComesBack(this, new GammaUIUpdateArgs() { TRANSACTION = transaction });
+                Application.Current.Dispatcher.BeginInvoke(
+                    DispatcherPriority.Normal, new Action(() =>
+                    {
+                        if (handler != null)
+                        {
+                            handler(this, new GammaUIUpdateArgs() { TRANSACTION = transaction });
+                        }
+                    }));
             }
-            //Result will be consumed, no need to keep the transaction anymore.
+            TransactionExpired(transaction);
+        }
+        */
+        private void ResultComesBack(IGammaClientTransaction transaction)
+        {
+            var handler = OnResultComesBack;
+            if (handler != null)
+            {
+
+                handler(this, new GammaUIUpdateArgs() { TRANSACTION = transaction });
+
+            }
             TransactionExpired(transaction);
         }
 

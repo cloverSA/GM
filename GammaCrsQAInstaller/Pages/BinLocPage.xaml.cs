@@ -41,6 +41,11 @@ namespace GammaCrsQAInstaller.Pages
 
         private void NextBtn_Click(object sender, RoutedEventArgs e)
         {
+            var xcopy_template_file = System.IO.Path.Combine(SrvLocBinTB.Text.Trim(), "machine.conf");
+            if (!System.IO.File.Exists(xcopy_template_file))
+            {
+                System.IO.File.WriteAllText(xcopy_template_file, "xcopy template");
+            }
             SetupInfo.SetValue(SetupInfoKeys.SrvLocBin, SrvLocBinTB.Text.Trim());
             SetupInfo.SetValue(SetupInfoKeys.SrvRemoteBin, SrvRemoteBinTB.Text.Trim());
         }

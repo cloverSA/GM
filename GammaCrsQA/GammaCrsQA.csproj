@@ -64,11 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MVVMBehaviour\TextBoxBehaviour.cs" />
     <Compile Include="Pages\QAToolsPage.xaml.cs">
       <DependentUpon>QAToolsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\SetupSerivcePage.xaml.cs">
-      <DependentUpon>SetupSerivcePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\UploadFilePage.xaml.cs">
       <DependentUpon>UploadFilePage.xaml</DependentUpon>
@@ -78,6 +76,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ClearEnvViewModel.cs" />
+    <Compile Include="ViewModel\CmdExecuteViewModel.cs" />
+    <Compile Include="ViewModel\QAToolsBaseView.cs" />
+    <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="WcfFacecade\QAToolsFacade.cs" />
     <Compile Include="WcfProxy\CmdExecutorProxy.cs" />
     <Compile Include="WcfProxy\CrsCleanerProxy.cs" />
@@ -107,10 +109,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\QAToolsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\SetupSerivcePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,6 +153,7 @@
   <ItemGroup>
     <SplashScreen Include="Resources\splash.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

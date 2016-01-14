@@ -52,16 +52,16 @@ namespace GammaCrsQAInstaller.MasterPages
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            var rtb = Template.FindName("ToolsRTB", this) as RichTextBox;
+            var tb = Template.FindName("ToolsTB", this) as TextBox;
             SynchronizationContext sc = SynchronizationContext.Current;
             //GetTemplateChild("toolsRTB") as RichTextBox;
-            if (rtb != null)
+            if (tb != null)
             {
                 GammaClientTXManager.GetInstance().OnResultComesBack += (s, e) => {
                     sc.Post((obj) => {
                         if (e.TRANSACTION.TX_TYPE == GammaTransactionType.QATOOLS)
                         {
-                            rtb.AppendText(string.Format("\u2028{0}: {1}\u2028", e.TRANSACTION.Machine, e.TRANSACTION.TX_RESULT));
+                            tb.AppendText(string.Format("\r\n{0}: {1}\r\n", e.TRANSACTION.Machine, e.TRANSACTION.TX_RESULT));
                         }
                     }, null);
                     
