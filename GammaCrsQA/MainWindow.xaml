@@ -77,7 +77,9 @@
                         </Grid>
                     </TabItem>
                     <TabItem Header="WorkLoad">
-                        <Grid Background="#FFE5E5E5"/>
+                        <Grid Background="#FFE5E5E5">
+                            <Frame x:Name="WorkloadFrame" NavigationUIVisibility="Hidden" Source="Pages/WorkloadClusterPage.xaml"/>
+                        </Grid>
                     </TabItem>
                 </TabControl>
             </DockPanel>

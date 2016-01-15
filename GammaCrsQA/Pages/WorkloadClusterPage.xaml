@@ -1,0 +1,48 @@
+﻿<Page x:Class="GammaCrsQA.Pages.WorkloadClusterPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GammaCrsQA.Pages"
+      xmlns:gvm="clr-namespace:GammaCrsQA.ViewModel"
+      mc:Ignorable="d" 
+      d:DesignHeight="539" d:DesignWidth="787"
+      Title="WorkloadClusterPage">
+    <Page.DataContext>
+        <gvm:ClusterInfoViewModel/>
+    </Page.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <GridSplitter x:Name="gridSplitter" Height="5" Grid.Row="1" HorizontalAlignment="Stretch"/>
+        <GroupBox x:Name="groupBox" Header="Cluster Selection" Margin="40,20" >
+            <DataGrid x:Name="dataGrid" ItemsSource="{Binding ClusterItems}" AutoGenerateColumns="False">
+                
+                <DataGrid.Columns>
+                    
+                    <DataGridTemplateColumn Header="Select">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <RadioButton IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" GroupName="workload"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Cluster name" Binding="{Binding ClusterName}" MinWidth="40"/>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <DockPanel LastChildFill="False" Grid.Row="2">
+            <Button x:Name="button" Content="Next" VerticalAlignment="Top" DockPanel.Dock="Right" MinHeight="70" MinWidth="100" Margin="0,20,40,0"
+                    Command="NavigationCommands.NextPage" CommandParameter="Pages/WorkloadDBPage.xaml" CommandTarget="{Binding ElementName=WorkloadFrame}"/>
+
+        </DockPanel>
+
+    </Grid>
+    <Page.CommandBindings>
+        <CommandBinding Command="NavigationCommands.NextPage" Executed="NextPage_Executed" CanExecute="NextPage_CanExecute"/>
+    </Page.CommandBindings>
+</Page>

@@ -27,14 +27,16 @@ namespace GammaServiceLib.OraCRS
             if (homes.Count() != 1)
             {
                 throw new Exception("CrsEnv Get more than one Active CRS HOME");
-            } else {
+            }
+            else
+            {
                 return homes.First();
             }
         }
 
         public static IEnumerable<string> GetRACHome()
         {
-            var homes = GetOraHomeInventory((str)=> {
+            var homes = GetOraHomeInventory((str) => {
                 if (str.Contains(@"CRS=""true"""))
                 {
                     return false;
@@ -50,12 +52,12 @@ namespace GammaServiceLib.OraCRS
         public static string GetDBHOMEByName(string dbname)
         {
             var crs = GetCurrentCrsHome();
-            var cmd = Path.Combine(crs, srvctl);
+            var cmd = Path.Combine(crs, "bin", srvctl);
             var args = string.Format("config database -db {0}", dbname);
             var pattern = @"^Oracle home:(.*)$";
             var cmd_rs = GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
             Match match = Regex.Match(cmd_rs, pattern, RegexOptions.Multiline);
-            if(match.Groups.Count > 1)
+            if (match.Groups.Count > 1)
             {
                 return match.Groups[1].Value.Trim();
             }
@@ -68,8 +70,16 @@ namespace GammaServiceLib.OraCRS
         public static string GetDBNames()
         {
             var crs = GetCurrentCrsHome();
-            var cmd = Path.Combine(crs, srvctl);
+            var cmd = Path.Combine(crs, "bin", srvctl);
             var args = string.Format("config database");
+            return GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
+        }
+
+        public static string GetClusterNames()
+        {
+            var crs = GetCurrentCrsHome();
+            var cmd = Path.Combine(crs, "bin", "cemutlo");
+            var args = string.Format("-n");
             return GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
         }
     }

@@ -50,8 +50,15 @@ namespace GammaServiceLib.OraCRS
 
         public static IEnumerable<string> GetOracleRegProperty(string property, string[] home_keys, bool distinc_value = false)
         {
+            //str is the elem in IEnumberable<string> that who will uses these function in its Where statement.
             Func<string, bool> subkey_filter = (str) => {
                 var tmp = from key in home_keys where key.Contains(str) select key;
+                /*
+                var tmp = home_keys.Where(
+                    (s) => {
+                        return s.Contains(str);
+                    });
+                */
                 if (tmp.Count() > 0)
                 {
                     return true;
@@ -118,8 +125,6 @@ namespace GammaServiceLib.OraCRS
             return reg_homes.Except(inv_homes);
 
         }
-
-
 
         public static IEnumerable<string> GetOraHomeInventory()
         {

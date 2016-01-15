@@ -64,6 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Cluster.cs" />
+    <Compile Include="Model\OraDB.cs" />
+    <Compile Include="MVVMBehaviour\DataGridComboBoxColumnWithBindingHack.cs" />
     <Compile Include="MVVMBehaviour\TextBoxBehaviour.cs" />
     <Compile Include="Pages\QAToolsPage.xaml.cs">
       <DependentUpon>QAToolsPage.xaml</DependentUpon>
@@ -71,15 +74,27 @@
     <Compile Include="Pages\UploadFilePage.xaml.cs">
       <DependentUpon>UploadFilePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\WorkloadClusterPage.xaml.cs">
+      <DependentUpon>WorkloadClusterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WorkloadDBPage.xaml.cs">
+      <DependentUpon>WorkloadDBPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WorkloadInstallationPage.xaml.cs">
+      <DependentUpon>WorkloadInstallationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ClearEnvViewModel.cs" />
+    <Compile Include="ViewModel\ClusterInfoViewModel.cs" />
     <Compile Include="ViewModel\CmdExecuteViewModel.cs" />
+    <Compile Include="ViewModel\DBInfoViewModel.cs" />
     <Compile Include="ViewModel\QAToolsBaseView.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\Test.cs" />
     <Compile Include="WcfFacecade\QAToolsFacade.cs" />
     <Compile Include="WcfProxy\CmdExecutorProxy.cs" />
     <Compile Include="WcfProxy\CrsCleanerProxy.cs" />
@@ -116,6 +131,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\WorkloadClusterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WorkloadDBPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WorkloadInstallationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -148,6 +175,10 @@
     <ProjectReference Include="..\GammaLib\GammaLib.csproj">
       <Project>{349077d7-2b02-4a37-a246-d41443da5cdd}</Project>
       <Name>GammaLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GammaServiceLib\GammaServiceLib.csproj">
+      <Project>{1ff49551-efb5-46bb-9de3-d4ee4b979094}</Project>
+      <Name>GammaServiceLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
