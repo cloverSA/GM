@@ -103,11 +103,27 @@ namespace GammaAgent
         }
     }
 
+    class CrsEnvServiceHost : GammaServiceHost
+    {
+        public CrsEnvServiceHost(string uri) : base(uri) { }
+
+        public override Type GetInterfaceType()
+        {
+            return typeof(ICrsEnv);
+        }
+
+        public override Type GetServiceType()
+        {
+            return typeof(CrsEnv);
+        }
+    }
+
     abstract class GammaServiceHostFactory
     {
         public abstract GammaServiceHost GetCrsCleanerSerivceHost();
         public abstract GammaServiceHost GetQAToolsSerivceHost();
         public abstract GammaServiceHost GetCmdExecutorSerivceHost();
+        public abstract GammaServiceHost GetCrsEnvSerivceHost();
     }
 
     class GammaSimpleNetworkServiceHostFactory : GammaServiceHostFactory
@@ -128,6 +144,10 @@ namespace GammaAgent
         public override GammaServiceHost GetCmdExecutorSerivceHost()
         {
             return new CmdExecutorServiceHost(string.Format("http://{0}:{1}/GammaService/CmdExecutor", agent_info.HostIP, agent_info.HostPort));
+        }
+        public override GammaServiceHost GetCrsEnvSerivceHost()
+        {
+            return new CrsEnvServiceHost(string.Format("http://{0}:{1}/GammaService/CrsEnv", agent_info.HostIP, agent_info.HostPort));
         }
     }
 
