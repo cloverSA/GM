@@ -33,5 +33,19 @@ namespace GammaCrsQA.Pages
         {
             e.CanExecute = true;
         }
+
+
+        private void PreviousPage_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (this.NavigationService.CanGoBack)
+            {
+                this.NavigationService.GoBack();
+            }
+        }
+
+        private void Preivous_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
     }
 }

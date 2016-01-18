@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GammaCrsQAInstaller.Properties {
+namespace GammaCrsQA.Properties {
     using System;
     
     

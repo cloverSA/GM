@@ -1,8 +1,8 @@
-﻿using GammaCrsQAInstaller.NetworkManager;
-using GammaCrsQAInstaller.WcfProxy;
+﻿using GammaCrsQA.NetworkManager;
+using GammaCrsQA.WcfProxy;
 using System.Threading.Tasks;
 
-namespace GammaCrsQAInstaller.TXManager
+namespace GammaCrsQA.TXManager
 {
     partial class GammaClientTXManager : IGammaClientTXManager
     {

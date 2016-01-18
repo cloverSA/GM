@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GammaCrsQAInstaller.NetworkManager
+namespace GammaCrsQA.NetworkManager
 {
     abstract class NodeNetManager
     {

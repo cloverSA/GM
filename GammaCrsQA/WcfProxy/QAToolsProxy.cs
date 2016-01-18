@@ -3,7 +3,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 
 using GeneralUtility;
-namespace GammaCrsQAInstaller.WcfProxy
+namespace GammaCrsQA.WcfProxy
 {
     public class QAToolsProxy : GammaClientBase<IQATools>, IQATools
     {

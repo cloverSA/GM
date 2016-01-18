@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using GammaCrsQAInstaller.WcfFacecade;
-namespace GammaCrsQAInstaller.Pages
+using GammaCrsQA.WcfFacecade;
+namespace GammaCrsQA.Pages
 {
     /// <summary>
     /// Interaction logic for QAToolsPage.xaml

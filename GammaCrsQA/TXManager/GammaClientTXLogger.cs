@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 
-namespace GammaCrsQAInstaller.TXManager
+namespace GammaCrsQA.TXManager
 {
 
     interface IGammaClientTXLogger

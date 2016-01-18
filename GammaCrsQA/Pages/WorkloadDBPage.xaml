@@ -33,7 +33,7 @@
                     <DataGridTextColumn Header="DB name" Binding="{Binding DBName}" MinWidth="40"/>
 
 
-                    <DataGridComboBoxColumn SelectedItemBinding="{Binding WorkLoad}">
+                    <DataGridComboBoxColumn SelectedItemBinding="{Binding WorkLoad}" Header="WorkLoad Type">
 
                         <DataGridComboBoxColumn.ElementStyle>
                             <Style TargetType="{x:Type ComboBox}">

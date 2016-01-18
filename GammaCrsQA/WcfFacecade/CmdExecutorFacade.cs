@@ -1,5 +1,5 @@
-﻿using GammaCrsQAInstaller.NetworkManager;
-using GammaCrsQAInstaller.WcfProxy;
+﻿using GammaCrsQA.NetworkManager;
+using GammaCrsQA.WcfProxy;
 
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GammaCrsQAInstaller.WcfFacecade
+namespace GammaCrsQA.WcfFacecade
 {
     class GammaCmdExecutorServiceFacade
     {

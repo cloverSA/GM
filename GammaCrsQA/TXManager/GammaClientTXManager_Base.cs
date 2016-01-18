@@ -13,7 +13,7 @@ using System.Windows.Threading;
 //4. Manage the Update of UI in event OnResultComesBack, 
 //   the UI who whish to received the result of task generated here should register to it.
 
-namespace GammaCrsQAInstaller.TXManager
+namespace GammaCrsQA.TXManager
 {
     partial interface IGammaClientTXManager
     {

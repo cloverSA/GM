@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using System.Threading.Tasks;
 
-namespace GammaCrsQAInstaller.WcfProxy
+namespace GammaCrsQA.WcfProxy
 {
     public class CmdExecutorProxy : GammaClientBase<ICmdExecutor>, ICmdExecutor
     {

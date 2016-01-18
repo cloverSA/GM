@@ -1,4 +1,4 @@
-﻿using GammaCrsQAInstaller.WcfFacecade;
+﻿using GammaCrsQA.WcfFacecade;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 
-namespace GammaCrsQAInstaller.Pages
+namespace GammaCrsQA.Pages
 {
     /// <summary>
     /// Interaction logic for UploadFilePage.xaml

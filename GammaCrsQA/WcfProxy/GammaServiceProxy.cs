@@ -1,8 +1,8 @@
 ﻿using System.ServiceModel;
 using GeneralUtility;
-using GammaCrsQAInstaller.NetworkManager;
+using GammaCrsQA.NetworkManager;
 
-namespace GammaCrsQAInstaller.WcfProxy
+namespace GammaCrsQA.WcfProxy
 {
     //stick to Contract on GammaServiceLib
     [ServiceContract()]
@@ -84,6 +84,12 @@ namespace GammaCrsQAInstaller.WcfProxy
         {
             string uri = string.Format("http://{0}:{1}/GammaService/QATools", machine.NetworkCompent.GetWorkingNic(), machine.NetworkCompent.GetWorkingServicePort());
             return new QAToolsProxy(uri);
+        }
+
+        public static CrsEnvProxy GetCrsEnvProxy(IGammaMachineInfo machine)
+        {
+            string uri = string.Format("http://{0}:{1}/GammaService/CrsEnv", machine.NetworkCompent.GetWorkingNic(), machine.NetworkCompent.GetWorkingServicePort());
+            return new CrsEnvProxy(uri);
         }
     }
 

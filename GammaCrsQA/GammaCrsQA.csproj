@@ -93,6 +93,7 @@
     <Compile Include="ViewModel\DBInfoViewModel.cs" />
     <Compile Include="ViewModel\QAToolsBaseView.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\WorkloadSetupInfo.cs" />
     <Compile Include="WcfFacecade\QAToolsFacade.cs" />
     <Compile Include="WcfProxy\CmdExecutorProxy.cs" />
     <Compile Include="WcfProxy\CrsCleanerProxy.cs" />
@@ -103,11 +104,15 @@
     <Compile Include="TXManager\GammaClientTXManager_Base.cs" />
     <Compile Include="TXManager\GammaClientTXManager_QATools.cs" />
     <Compile Include="WcfFacecade\CmdExecutorFacade.cs" />
+    <Compile Include="WcfProxy\CrsEnvProxy.cs" />
     <Compile Include="WcfProxy\GammaServiceProxy.cs" />
     <Compile Include="MasterPages\Master.cs" />
     <Compile Include="NetworkManager\NetworkComponent.cs" />
     <Compile Include="NetworkManager\NodeNetManager.cs" />
     <Compile Include="WcfProxy\QAToolsProxy.cs" />
+    <Compile Include="Pages\WorkloadSetupPage.xaml.cs">
+      <DependentUpon>WorkloadSetupPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -144,6 +149,10 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\WorkloadSetupPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

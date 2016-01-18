@@ -1,11 +1,11 @@
-﻿using GammaCrsQAInstaller.NetworkManager;
-using GammaCrsQAInstaller.WcfFacecade;
+﻿using GammaCrsQA.NetworkManager;
+using GammaCrsQA.WcfFacecade;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
 
-namespace GammaCrsQAInstaller.TXManager
+namespace GammaCrsQA.TXManager
 {
     partial interface IGammaClientTXManager
     {

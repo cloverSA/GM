@@ -1,5 +1,5 @@
-﻿using GammaCrsQAInstaller.NetworkManager;
-using GammaCrsQAInstaller.TXManager;
+﻿using GammaCrsQA.NetworkManager;
+using GammaCrsQA.TXManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

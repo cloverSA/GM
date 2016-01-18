@@ -1,4 +1,4 @@
-﻿namespace GammaCrsQAInstaller.NetworkManager
+﻿namespace GammaCrsQA.NetworkManager
 {
     //In different network infrustructure, we can still get/set the working nic.
     public abstract class MachineNetworkComponent

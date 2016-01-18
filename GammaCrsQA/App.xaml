@@ -1,7 +1,7 @@
-﻿<Application x:Class="GammaCrsQAInstaller.App"
+﻿<Application x:Class="GammaCrsQA.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:GammaCrsQAInstaller"
+             xmlns:local="clr-namespace:GammaCrsQA"
              StartupUri="MainWindow.xaml">
 
 

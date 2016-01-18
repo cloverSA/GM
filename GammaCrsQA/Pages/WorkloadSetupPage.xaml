@@ -1,0 +1,23 @@
+﻿<Page x:Class="GammaCrsQA.Pages.WorkloadSetupPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GammaCrsQA.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="539" d:DesignWidth="787"
+      Title="WorkloadSetupPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button x:Name="button" Content="Install DB WorkLoad" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="75" MinWidth="200" MinHeight="80"
+                Command="NavigationCommands.NextPage" CommandParameter="Pages/WorkloadClusterPage.xaml" CommandTarget="{Binding ElementName=WorkloadFrame}"/>
+
+    </Grid>
+    <Page.CommandBindings>
+        <CommandBinding Command="NavigationCommands.NextPage" Executed="NextPage_Executed" CanExecute="NextPage_CanExecute"/>
+    </Page.CommandBindings>
+</Page>

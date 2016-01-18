@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 
-namespace GammaCrsQAInstaller.NetworkManager
+namespace GammaCrsQA.NetworkManager
 {
     public enum NodeState
     {

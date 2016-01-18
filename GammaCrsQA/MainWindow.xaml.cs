@@ -7,10 +7,10 @@ using System.Windows.Documents;
 using System.Linq;
 using System.Windows.Input;
 using System;
-using GammaCrsQAInstaller.NetworkManager;
-using GammaCrsQAInstaller.TXManager;
+using GammaCrsQA.NetworkManager;
+using GammaCrsQA.TXManager;
 
-namespace GammaCrsQAInstaller
+namespace GammaCrsQA
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

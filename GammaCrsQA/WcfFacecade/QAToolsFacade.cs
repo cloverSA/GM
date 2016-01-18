@@ -1,9 +1,9 @@
-﻿using GammaCrsQAInstaller.NetworkManager;
-using GammaCrsQAInstaller.TXManager;
+﻿using GammaCrsQA.NetworkManager;
+using GammaCrsQA.TXManager;
 using GeneralUtility;
 using System.Linq;
 
-namespace GammaCrsQAInstaller.WcfFacecade
+namespace GammaCrsQA.WcfFacecade
 {
     class QAToolsFacade
     {

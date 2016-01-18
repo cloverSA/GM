@@ -1,10 +1,10 @@
-﻿using GammaCrsQAInstaller.NetworkManager;
+﻿using GammaCrsQA.NetworkManager;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GammaCrsQAInstaller.TXManager
+namespace GammaCrsQA.TXManager
 {
     enum GammaTransactionType
     {

@@ -36,13 +36,15 @@
             </DataGrid>
         </GroupBox>
         <DockPanel LastChildFill="False" Grid.Row="2">
-            <Button x:Name="button" Content="Next" VerticalAlignment="Top" DockPanel.Dock="Right" MinHeight="70" MinWidth="100" Margin="0,20,40,0"
+            <Button Content="Next" VerticalAlignment="Top" DockPanel.Dock="Right" MinHeight="70" MinWidth="100" Margin="0,20,40,0"
                     Command="NavigationCommands.NextPage" CommandParameter="Pages/WorkloadDBPage.xaml" CommandTarget="{Binding ElementName=WorkloadFrame}"/>
-
+            <Button Content="Previous" VerticalAlignment="Top" DockPanel.Dock="Right" MinHeight="70" MinWidth="100" Margin="0,20,40,0"
+                    Command="NavigationCommands.PreviousPage" CommandTarget="{Binding ElementName=WorkloadFrame}"/>
         </DockPanel>
 
     </Grid>
     <Page.CommandBindings>
         <CommandBinding Command="NavigationCommands.NextPage" Executed="NextPage_Executed" CanExecute="NextPage_CanExecute"/>
+        <CommandBinding Command="NavigationCommands.PreviousPage" Executed="PreviousPage_Executed" CanExecute="Preivous_CanExecute"/>
     </Page.CommandBindings>
 </Page>
