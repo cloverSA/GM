@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GammaServiceLib.OraCRS
 {
-    partial class CrsEnv
+    partial class CrsEnv : ICrsEnv
     {
         private static string srvctl = "srvctl.bat";
         public static string GetCurrentCrsHome()
@@ -49,7 +49,7 @@ namespace GammaServiceLib.OraCRS
             return homes;
         }
 
-        public static string GetDBHOMEByName(string dbname)
+        public string GetDBHOMEByName(string dbname)
         {
             var crs = GetCurrentCrsHome();
             var cmd = Path.Combine(crs, "bin", srvctl);
@@ -67,7 +67,7 @@ namespace GammaServiceLib.OraCRS
             }
         }
 
-        public static string GetDBNames()
+        public string GetDBNames()
         {
             var crs = GetCurrentCrsHome();
             var cmd = Path.Combine(crs, "bin", srvctl);
@@ -75,12 +75,48 @@ namespace GammaServiceLib.OraCRS
             return GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
         }
 
-        public static string GetClusterNames()
+        public string GetClusterNames()
         {
             var crs = GetCurrentCrsHome();
             var cmd = Path.Combine(crs, "bin", "cemutlo");
             var args = string.Format("-n");
             return GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
+        }
+
+        public string GetScan()
+        {
+            var crs = GetCurrentCrsHome();
+            var cmd = Path.Combine(crs, "bin", "srvctl");
+            var args = string.Format("config scan");
+            var rs = GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
+            var pattern = @"^SCAN name:(.*?),";
+            Match match = Regex.Match(rs, pattern, RegexOptions.Multiline);
+            if (match.Groups.Count > 1)
+            {
+                return match.Groups[1].Value.Trim();
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        public string GetScanPort()
+        {
+            var crs = GetCurrentCrsHome();
+            var cmd = Path.Combine(crs, "bin", "srvctl");
+            var args = string.Format("config scan_listener");
+            var rs = GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
+            var pattern = @".*?Port: TCP:(.*?)$";
+            Match match = Regex.Match(rs, pattern, RegexOptions.Multiline);
+            if (match.Groups.Count > 1)
+            {
+                return match.Groups[1].Value.Trim();
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
     }
 }

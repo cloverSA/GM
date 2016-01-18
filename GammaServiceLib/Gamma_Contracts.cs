@@ -43,4 +43,23 @@ namespace GammaServiceLib
         [OperationContract()]
         string UploadLog(UploadRecord record);
     }
+
+    [ServiceContract]
+    public interface ICrsEnv
+    {
+        [OperationContract()]
+        string GetClusterNames();
+
+        [OperationContract()]
+        string GetDBNames();
+
+        [OperationContract()]
+        string GetDBHOMEByName(string dbname);
+
+        [OperationContract()]
+        string GetScan();
+
+        [OperationContract()]
+        string GetScanPort();
+    }
 }
