@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GammaCrsQA.Model;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Net.NetworkInformation;

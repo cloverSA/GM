@@ -1,6 +1,7 @@
 ﻿using System.ServiceModel;
 using GeneralUtility;
 using GammaCrsQA.NetworkManager;
+using GammaCrsQA.Model;
 
 namespace GammaCrsQA.WcfProxy
 {

@@ -1,4 +1,5 @@
-﻿using GammaCrsQA.NetworkManager;
+﻿using GammaCrsQA.Model;
+using GammaCrsQA.NetworkManager;
 using GammaCrsQA.WcfFacecade;
 using System.Collections.Generic;
 using System.Text;

@@ -1,6 +1,6 @@
-﻿using GammaCrsQA.NetworkManager;
+﻿using GammaCrsQA.Model;
+using GammaCrsQA.NetworkManager;
 using GammaCrsQA.WcfProxy;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;

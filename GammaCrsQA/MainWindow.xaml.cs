@@ -19,7 +19,6 @@ namespace GammaCrsQA
     {
 
         private NodeNetManager nodeNetManager;
-        private SynchronizationContext ui_sc = null;
         private static object locker = new object();
         private void InitTasks()
         {

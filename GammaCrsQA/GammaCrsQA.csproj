@@ -41,11 +41,13 @@
     </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Blend, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -94,6 +96,7 @@
     <Compile Include="ViewModel\QAToolsBaseView.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\WorkloadSetupInfo.cs" />
+    <Compile Include="ViewModel\WorkLoadSetupViewModel.cs" />
     <Compile Include="WcfFacecade\QAToolsFacade.cs" />
     <Compile Include="WcfProxy\CmdExecutorProxy.cs" />
     <Compile Include="WcfProxy\CrsCleanerProxy.cs" />
@@ -121,7 +124,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="NetworkManager\MachineInfo.cs" />
+    <Compile Include="Model\MachineInfo.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

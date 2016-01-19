@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using GeneralUtility;
 using GammaCrsQA.NetworkManager;
 using GammaCrsQA.WcfProxy;
+using GammaCrsQA.Model;
 
 namespace GammaCrsQA.TXManager
 {
