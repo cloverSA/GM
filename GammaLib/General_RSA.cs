@@ -42,7 +42,7 @@ namespace GeneralUtility
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -60,7 +60,7 @@ namespace GeneralUtility
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             return cypherText;
         }
@@ -79,7 +79,7 @@ namespace GeneralUtility
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             return plainText;
         }

@@ -13,13 +13,8 @@ namespace GammaCrsQA.ViewModel
     {
         public DBInfoViewModel()
         {
-            DBs = new ObservableCollection<OraDB>() {
+            DBs = WorkloadSetupInfo.GetValue <ObservableCollection<OraDB>>(WorkloadSetupKeys.DBS);
 
-                        new OraDB(1) {DBName="DB1", DBHome=@"c:\", DBID=1},
-                        new OraDB(2) {DBName="DB2", DBHome=@"c:\", DBID=2 },
-                        new OraDB(3) {DBName="DB3", DBHome=@"c:\", DBID=3 }
-
-                };
             WorkLoads = new ObservableCollection<string>() { "Swingbench", "Aroltp" };
         }
 

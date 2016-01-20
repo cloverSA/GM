@@ -114,6 +114,7 @@ namespace GammaServiceLib.OraCRS
             string output = crsctl.StandardOutput.ReadToEnd().Trim();
             crsctl.WaitForExit();
             crsctl.Close();
+            crsctl.Dispose();
             return output;
         }
 

@@ -51,5 +51,6 @@ namespace GammaCrsQA.ViewModel
     static class WorkloadSetupKeys
     {
         public static string CLUSTERS = "CLUSTER";
+        public static string DBS = "DB";
     }
 }
