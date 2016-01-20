@@ -41,7 +41,6 @@ namespace GeneralUtility
                 writer.WriteLine(content);
             }
             fs.Close();
-            fs.Dispose();
         }
         private void UpdateBallFile(string source_dir, string target_zipfile)
         {

@@ -6,6 +6,7 @@ using System.IO;
 using GeneralUtility;
 using System.IO.Compression;
 using System.Text;
+using System.Reflection;
 //
 namespace GammaServiceLib.OraCRS
 {
@@ -212,15 +213,15 @@ namespace GammaServiceLib.OraCRS
             {
                 t = System.IO.SearchOption.TopDirectoryOnly;
             }
-            RemoveFiles(Directory.EnumerateFiles(targetDir, "*.tr*", t), sb);
-            RemoveFiles(Directory.EnumerateFiles(targetDir, "*.log", t), sb);
-            RemoveFiles(Directory.EnumerateDirectories(targetDir, "cdmp_*", t), sb);
-
+            RemoveFiles(Directory.EnumerateFiles(targetDir, "*.tr*", t));
+            RemoveFiles(Directory.EnumerateFiles(targetDir, "*.log", t));
+            RemoveFiles(Directory.EnumerateDirectories(targetDir, "cdmp_*", t));
+            sb.AppendLine("finished!");
             return sb.ToString();
 
         }
 
-        private void RemoveFiles(IEnumerable<string> files, StringBuilder sb)
+        private void RemoveFiles(IEnumerable<string> files)
         {
             foreach (string file in files)
             {
@@ -230,15 +231,17 @@ namespace GammaServiceLib.OraCRS
                 }
                 catch (Exception ex)
                 {
-                    sb.AppendLine(file + " remove fails " + ex.Message);
+                    //do nothing.
                 }
+                
             }
             
         }
 
         public string UploadLog(UploadRecord record)
         {
-            IUploader uploadder = new WinSCPUploader(record);
+            var pwd = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            IUploader uploadder = new WinSCPUploader(record) { PrvKeyLoc = Path.Combine(pwd, "prvkf.xml") };
             string rs = uploadder.Upload();
             return rs;
         }

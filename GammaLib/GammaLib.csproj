@@ -53,6 +53,7 @@
     <Compile Include="General_GammaUtility.cs" />
     <Compile Include="General_McUninstaller.cs" />
     <Compile Include="General_Zipper.cs" />
+    <Compile Include="General_RSA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Impersonation\Impersonation.cs" />
     <Compile Include="Impersonation\LogonEnums.cs" />

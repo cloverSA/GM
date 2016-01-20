@@ -29,30 +29,28 @@ namespace GammaServiceLib.OraCRS
                         if (homeKey.GetValue(property) != null)
                         {
                             string result = homeKey.GetValue(property).ToString().ToLower().Trim();
-                            if (distinc_value)
-                            {
-                                if (!oraProperty.Contains(result))
-                                {
-                                    oraProperty.Add(result);
-                                }
-                            }
-                            else
-                            {
-                                oraProperty.Add(result);
-                            }
+                            oraProperty.Add(result);
                         }
                     }
 
                 }
             }
-            return oraProperty;
+            if (distinc_value)
+            {
+                return oraProperty.Distinct();
+            }
+            else
+            {
+                return oraProperty;
+            }
+            
         }
 
         public static IEnumerable<string> GetOracleRegProperty(string property, string[] home_keys, bool distinc_value = false)
         {
             //str is the elem in IEnumberable<string> that who will uses these function in its Where statement.
             Func<string, bool> subkey_filter = (str) => {
-                var tmp = from key in home_keys where key.Contains(str) select key;
+                var tmp = from key in home_keys where str.ToUpper().Contains(key) select key;
                 /*
                 var tmp = home_keys.Where(
                     (s) => {
@@ -69,12 +67,14 @@ namespace GammaServiceLib.OraCRS
                 
             };
 
-            return GetOracleRegProperty(property, subkey_filter);
+            return GetOracleRegProperty(property, subkey_filter, distinc_value);
+
+            
         }
         
         public static IEnumerable<string> GetOracleRegProperty(string property, bool distinc_value = false)
         {
-            return GetOracleRegProperty(property, ora_regkey_keywords);
+            return GetOracleRegProperty(property, ora_regkey_keywords, distinc_value);
         }
 
         public static string GetInventoryLoc()
@@ -114,7 +114,6 @@ namespace GammaServiceLib.OraCRS
             string output = crsctl.StandardOutput.ReadToEnd().Trim();
             crsctl.WaitForExit();
             crsctl.Close();
-            crsctl.Dispose();
             return output;
         }
 

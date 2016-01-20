@@ -1,7 +1,9 @@
 ﻿using GammaCrsQA.WcfFacecade;
+using GeneralUtility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,7 +34,8 @@ namespace GammaCrsQA.Pages
             bool do_upload = (MessageBox.Show("Upload Now?", "Upload Log", MessageBoxButton.YesNo) == MessageBoxResult.Yes) ? true : false;
             if (do_upload)
             {
-                QAToolsFacade.UploadLogToSftp(SftpUserTB.Text.Trim(), SftpPWDTB.Password, SftpLocTB.Text.Trim(), UploadPath.Text.Trim());
+                var pwd = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                QAToolsFacade.UploadLogToSftp(SftpUserTB.Text.Trim(), GammaRSASimplify.RSAEncryptString(SftpPWDTB.Password, System.IO.Path.Combine(pwd, "pubkf.xml")), SftpLocTB.Text.Trim(), UploadPath.Text.Trim());
             }
         }
     }

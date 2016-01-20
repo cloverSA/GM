@@ -16,7 +16,7 @@ namespace GeneralUtility
     public class WinSCPUploader : IUploader
     {
         public UploadRecord Record { get; set; }
-
+        public String PrvKeyLoc { get; set; }
         string SshHostKeyFingerprint = "ssh-rsa 1024 8f:e7:e1:85:90:c8:33:15:eb:8a:b7:5d:4e:27:3c:3c";
         string BugSftp = "bugsftp.us.oracle.com";
 
@@ -42,7 +42,7 @@ namespace GeneralUtility
                         Protocol = Protocol.Sftp,
                         HostName = this.BugSftp,
                         UserName = this.Record.Usr,
-                        Password = this.Record.Passwd,
+                        Password = GammaRSASimplify.RSADecryptString(this.Record.Passwd, PrvKeyLoc),
                         SshHostKeyFingerprint = this.SshHostKeyFingerprint
                     };
                     TransferOptions transferOptions = new TransferOptions();

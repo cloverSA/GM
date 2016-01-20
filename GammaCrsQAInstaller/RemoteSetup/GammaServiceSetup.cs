@@ -8,6 +8,8 @@ namespace GammaCrsQAInstaller.RemoteSetup
     class GammaServiceSetup : RemoteServiceSetup
     {
         private string agent_profile = @"machine.conf";
+        private string prvkf = "prvkf.xml";
+        private string pubkf = "pubkf.xml";  
         public string ClientProfile { get; private set; }
         public GammaServiceSetup()
         {
@@ -29,6 +31,12 @@ namespace GammaCrsQAInstaller.RemoteSetup
             var result = GammaUtility.ShellExecutor("xcopy.exe", string.Format(@" ""{0}"" ""{1}"" /Y", System.IO.Path.Combine(pwd, host),netpath));
             OnOpCompleted(new OpResultArgs() { OpResult = result, Hostname = host, OpType = "prepare agent profile" });
 
+        }
+
+        protected override void ExtraTask()
+        {
+            var pwd = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            GammaRSASimplify.GenerateKeyFiles(Path.Combine(Source_location, prvkf), Path.Combine(pwd, pubkf));
         }
     }
 

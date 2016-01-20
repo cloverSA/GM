@@ -198,6 +198,10 @@ namespace GeneralUtility
         public Task AllInOne()
         {
             var tasks = new List<Task>();
+            if (HasExtraTask())
+            {
+                ExtraTask();
+            }
             foreach (var host in Hosts)
             {
                 tasks.Add(InstallSingleNode(host));
@@ -211,6 +215,11 @@ namespace GeneralUtility
         }
 
         protected virtual void ExtraTask(string host)
+        {
+
+        }
+
+        protected virtual void ExtraTask()
         {
 
         }
