@@ -19,46 +19,11 @@ namespace GammaCrsQAInstaller.Pages
     /// <summary>
     /// Interaction logic for UserInfoPage.xaml
     /// </summary>
-    public partial class UserInfoPage : Page
+    public partial class UserInfoPage : UserControl
     {
         public UserInfoPage()
         {
             InitializeComponent();
-        }
-        private void NextBtn_Click(object sender, RoutedEventArgs e)
-        {
-            SetupInfo.SetValue(SetupInfoKeys.LogonUser, UsernameTB.Text.Trim());
-            SetupInfo.SetValue(SetupInfoKeys.LogonDomain, DomainnameTB.Text.Trim());
-            SetupInfo.SetValue(SetupInfoKeys.LogonPwd, LogonPwdBox.Password.Trim());
-        }
-
-        private void NextPage_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new Uri((string)e.Parameter, UriKind.Relative));
-        }
-
-        private void NextPage_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            if(UsernameTB.Text.Trim().Length!=0 &&
-                DomainnameTB.Text.Trim().Length!=0 &&
-                LogonPwdBox.Password.Trim().Length != 0)
-            {
-                e.CanExecute = true;
-            }
-        }
-
-
-        private void PreviousPage_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (this.NavigationService.CanGoBack)
-            {
-                this.NavigationService.GoBack();
-            }
-        }
-
-        private void Preivous_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
         }
     }
 }

@@ -39,8 +39,16 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MahApps.Metro, Version=1.2.3.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.2.3.0\lib\net45\MahApps.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.2.3.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,21 +67,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helper Classes\ApplicationViewModel.cs" />
+    <Compile Include="Helper Classes\ObservableObject.cs" />
+    <Compile Include="Helper Classes\RelayCommand.cs" />
+    <Compile Include="Helper Classes\IPageViewModel.cs" />
     <Compile Include="Pages\BinLocPage.xaml.cs">
       <DependentUpon>BinLocPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BinLocPageViewModel.cs" />
     <Compile Include="Pages\NodeListPage.xaml.cs">
       <DependentUpon>NodeListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\NodeListPageViewModel.cs" />
     <Compile Include="Pages\ResultPage.xaml.cs">
       <DependentUpon>ResultPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SummaryPage.xaml.cs">
-      <DependentUpon>SummaryPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Pages\ResultPageViewModel.cs" />
     <Compile Include="Pages\UserInfoPage.xaml.cs">
       <DependentUpon>UserInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\UserInfoPageViewModel.cs" />
     <Compile Include="RemoteSetup\GammaServiceSetup.cs" />
     <Compile Include="RemoteSetup\InstallerFactory.cs" />
     <Compile Include="RemoteSetup\Node.cs" />
@@ -104,13 +117,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\SummaryPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\UserInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -138,11 +151,13 @@
     <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -154,6 +169,12 @@
       <Project>{349077d7-2b02-4a37-a246-d41443da5cdd}</Project>
       <Name>GammaLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\WindowsIcons-license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

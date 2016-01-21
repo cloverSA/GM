@@ -18,22 +18,13 @@ namespace GammaCrsQAInstaller
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void GoToPageExecuteHandler(object sender, ExecutedRoutedEventArgs e)
-        {
-            SetupFrame.NavigationService.Navigate(new Uri((string)e.Parameter, UriKind.Relative));
-        }
-
-        private void GoToPageCanExecuteHandler(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
     }
 
 
