@@ -1,4 +1,5 @@
-﻿<Window x:Class="GammaCrsQA.MainWindow"
+﻿<Controls:MetroWindow  x:Class="GammaCrsQA.MainWindow"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gvm="clr-namespace:GammaCrsQA.ViewModel"
@@ -7,6 +8,11 @@
     <Window.CommandBindings>
         <CommandBinding Command="NavigationCommands.GoToPage" Executed="GoToPageExecuteHandler" CanExecute="GoToPageCanExecuteHandler" />
     </Window.CommandBindings>
+    <Window.Resources>
+        <Style x:Key="MenuLevel2" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
+            <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="15"></Setter>
+        </Style>
+    </Window.Resources>
     <Grid Background="#FFF0F0F0">
         <Grid Margin="15,15">
             <Grid.ColumnDefinitions>
@@ -18,7 +24,7 @@
             <DockPanel Margin="0">
                 <Label x:Name="label" Content="CDC CRS QA TOOLS" DockPanel.Dock="Top" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <TabControl x:Name="tabControl" DockPanel.Dock="Bottom">
-                    <TabItem Header="CrsClear">
+                    <TabItem Header="CrsClear" Style="{StaticResource MenuLevel2}">
                         <TabItem.DataContext>
                             <gvm:ClearEnvViewModel />
                         </TabItem.DataContext>
@@ -45,12 +51,12 @@
                             </GroupBox>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="QA Tools">
+                    <TabItem Header="QA Tools" Style="{StaticResource MenuLevel2}">
                         <Grid>
                             <Frame NavigationUIVisibility="Hidden" Name="ToolsFrame" Grid.Column="0" Grid.Row="1" Source="Pages/QAToolsPage.xaml" />
                         </Grid>
                     </TabItem>
-                    <TabItem Header="Executer">
+                    <TabItem Header="Executer" Style="{StaticResource MenuLevel2}">
                         <TabItem.DataContext>
                             <gvm:CmdExecuteViewModel />
                         </TabItem.DataContext>
@@ -76,7 +82,7 @@
                             </GroupBox>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="WorkLoad">
+                    <TabItem Header="WorkLoad" Style="{StaticResource MenuLevel2}">
                         <Grid Background="#FFE5E5E5">
                             <Frame x:Name="WorkloadFrame" NavigationUIVisibility="Hidden" Source="Pages/WorkloadSetupPage.xaml"/>
                         </Grid>
@@ -107,4 +113,4 @@
         </Grid>
     </Grid>
 
-</Window>
+</Controls:MetroWindow>
