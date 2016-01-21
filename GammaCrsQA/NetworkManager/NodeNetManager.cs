@@ -45,10 +45,14 @@ namespace GammaCrsQA.NetworkManager
             {
                 conf = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "machines.conf");
                 string[] lines = File.ReadAllLines(conf);
+
                 Machines = new ObservableCollection<IGammaMachineInfo>();
                 foreach (string info in lines)
                 {
-                    Machines.Add(MachineInfoFactory.GetSimpleNetworkMachineInfo(info));
+                    if (info.Length != 0)
+                    {
+                        Machines.Add(MachineInfoFactory.GetSimpleNetworkMachineInfo(info));
+                    }   
                 }
             }
             catch (Exception ex)
