@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -23,9 +24,10 @@ namespace GammaCrsQAInstaller.Pages
 
         public string ResultText { get; set; }
         private int progress_step = 1;
-        public void RunInstall(object progressbar)
+
+        public void RunInstall()
         {
-            var progressBar = progressbar as ProgressBar;
+            var progressBar =  FindControlByName.FindChild<ProgressBar>(Application.Current.MainWindow, "InstallProgressBar"); 
             var steps = SetupInfo.GetValue<ObservableCollection<Node>>(SetupInfoKeys.NodeList).Count * 5;
             this.progress_step = Convert.ToInt32((progressBar.Maximum / steps));
 
@@ -50,7 +52,15 @@ namespace GammaCrsQAInstaller.Pages
             var tb = sender as TextBox;
             tb.ScrollToEnd();
         }
+
+        public bool SaveContent()
+        {
+            //throw new NotImplementedException();
+            RunInstall();
+            return true;
+        }
+
         public ICommand ScrollDownCommand { get { return new RelayCommand<object>(ScrollDownResult); } }
-        public ICommand SaveContentCommand { get { return new RelayCommand<object>(RunInstall); } }
+        public ICommand SaveContentCommand { get { return new RelayCommand(RunInstall); } }
     }
 }

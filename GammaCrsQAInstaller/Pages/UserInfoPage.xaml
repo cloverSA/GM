@@ -7,14 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="350" d:DesignWidth="525"
       >
-    <UserControl.DataContext>
-        <local:UserInfoPageViewModel />
-    </UserControl.DataContext>
     <Grid Margin="10,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
         <GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Header="Result">
             <DockPanel LastChildFill="False" Margin="0" Grid.Row="0">
                 <DockPanel LastChildFill="True" Margin="40,20,40,0" DockPanel.Dock="Top">
@@ -32,12 +25,6 @@
                 </DockPanel>
             </DockPanel>
         </GroupBox>
-        <DockPanel LastChildFill="False" Margin="0" Grid.Row="1">
-
-
-            <Button Content="Save" MinHeight="40" MinWidth="80" VerticalAlignment="Top" Margin="0,5,40,0" DockPanel.Dock="Right"
-                    Command="{Binding SaveContentCommand}" CommandParameter="{Binding ElementName=LogonPwdBox}"/>
-            
-        </DockPanel>
+        <DockPanel LastChildFill="False" Margin="0" Grid.Row="1"/>
     </Grid>
 </UserControl>

@@ -6,14 +6,7 @@
       xmlns:local="clr-namespace:GammaCrsQAInstaller.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="350" d:DesignWidth="525">
-    <UserControl.DataContext>
-        <local:NodeListPageViewModel />
-    </UserControl.DataContext>
     <Grid Margin="10,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
         <DockPanel LastChildFill="True" Margin="0" Grid.Row="0">
             <GroupBox Header="NodeList" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <DataGrid x:Name="NodeListDG" ItemsSource="{Binding NodeList}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" AutoGenerateColumns="False">
@@ -30,12 +23,6 @@
             </GroupBox>
 
         </DockPanel>
-        <DockPanel LastChildFill="False" Margin="0" Grid.Row="1">
-
-
-            <Button Content="Save" MinHeight="40" MinWidth="80" VerticalAlignment="Top" Margin="0,5,40,0" DockPanel.Dock="Right"
-                    Command="{Binding SaveContentCommand}"/>
-            
-        </DockPanel>
+        <DockPanel LastChildFill="False" Margin="0" Grid.Row="1"/>
     </Grid>
 </UserControl>

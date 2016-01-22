@@ -6,15 +6,19 @@
       xmlns:local="clr-namespace:GammaCrsQAInstaller.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="350" d:DesignWidth="525">
+    <!--
+    We don't need this (create datacontext) to do the binding here
+    if we leave below lines active, 
+    This will endup:
+    One view model for this user control created by the WPF framework , (because we add below data context line, and all the binding here will bond to this view model.
+    One view model we created in ApplicationViewModel, and all the binding below will not reflect to the view model we created in the ApplicationViewModel
+    (Note the datatemplate will do the binding.)
+    
     <UserControl.DataContext>
         <local:BinLocPageViewModel />
     </UserControl.DataContext>
+    -->
     <Grid Margin="10,0">
-        <Grid.RowDefinitions>
-
-            <RowDefinition Height="3*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
         <GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Header="Result">
             <DockPanel LastChildFill="False" Margin="0" Grid.Row="0">
 
@@ -28,10 +32,5 @@
                 </DockPanel>
             </DockPanel>
         </GroupBox>
-        
-        <DockPanel LastChildFill="False" Margin="0" Grid.Row="1">
-            <Button Content="Save" MinHeight="40" MinWidth="80" VerticalAlignment="Top" Margin="0,5,40,0" DockPanel.Dock="Right"
-                    Command="{Binding ContentSaveCommand}"/>
-        </DockPanel>
     </Grid>
 </UserControl>

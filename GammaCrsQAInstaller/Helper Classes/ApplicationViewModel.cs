@@ -40,13 +40,16 @@ namespace GammaCrsQAInstaller.Helper
                 if (_changePageCommand == null)
                 {
                     _changePageCommand = new RelayCommand<IPageViewModel>(
-                        p => ChangeViewModel((IPageViewModel)p),
-                        p => p is IPageViewModel);
+                        p => ChangeViewModel((IPageViewModel)p));
                 }
 
                 return _changePageCommand;
             }
         }
+
+        public ICommand NextViewModelCommand { get { return new RelayCommand(NextViewModel); } }
+
+        public ICommand PreviousViewModelCommand { get { return new RelayCommand(PreviousViewModel); } }
 
         public List<IPageViewModel> PageViewModels
         {
@@ -81,13 +84,42 @@ namespace GammaCrsQAInstaller.Helper
 
         private void ChangeViewModel(IPageViewModel viewModel)
         {
+            /*
             if (!PageViewModels.Contains(viewModel))
+            {
                 PageViewModels.Add(viewModel);
+            }
+            */
+            if (CurrentPageViewModel.SaveContent())
+            {
+                CurrentPageViewModel = PageViewModels.FirstOrDefault(vm => vm == viewModel);
+            }
+               
+        }
 
-            CurrentPageViewModel = PageViewModels
-                .FirstOrDefault(vm => vm == viewModel);
+        private void NextViewModel()
+        {
+            if (CurrentPageViewModel.SaveContent())
+            {
+                int current_index = PageViewModels.FindIndex(vm => vm == CurrentPageViewModel);
+                if (current_index != PageViewModels.Count)
+                {
+                    CurrentPageViewModel = PageViewModels[current_index + 1];
+                }
+            }
+        }
+
+        private void PreviousViewModel()
+        {
+            int current_index = PageViewModels.FindIndex(vm => vm == CurrentPageViewModel);
+            if (current_index != 0)
+            {
+                CurrentPageViewModel = PageViewModels[current_index - 1];
+            }
         }
 
         #endregion
+
+
     }
 }

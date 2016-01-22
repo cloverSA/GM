@@ -12,6 +12,14 @@
     <Window.DataContext>
         <helptools:ApplicationViewModel/>
     </Window.DataContext>
+    <!-- 
+        This also bind the ViewModel to the Usercontrol, so you need not to set the usercontrol.datacontext to bind with the viewmodel.
+        If you set, then there will be 2 instances of view model, 
+        one is bind to the usercontrol.datacontext in the control, 
+        one in managed in ApplicationViewModel
+    
+        And the former's binding override the later.
+    -->
     <Window.Resources>
         <DataTemplate DataType="{x:Type pagevm:BinLocPageViewModel}">
             <pagevm:BinLocPage />
@@ -26,17 +34,18 @@
             <pagevm:ResultPage />
         </DataTemplate>
     </Window.Resources>
+    
     <Grid  Background="#FFF0F0F0">
         <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="4*"/>
-            </Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
 
-            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True" Margin="0" Grid.Row="0">
-                <Label x:Name="label" Content="Gamma Automation Installer" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" DockPanel.Dock="top" VerticalContentAlignment="Center"/>
-            </DockPanel>
-            <GridSplitter Margin="0" Grid.Row="1" Grid.RowSpan="1" ResizeDirection="Rows" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="10"/>
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True" Margin="0" Grid.Row="0">
+            <Label x:Name="label" Content="Gamma Automation Installer" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" DockPanel.Dock="top" VerticalContentAlignment="Center"/>
+        </DockPanel>
+        <GridSplitter Margin="0" Grid.Row="1" Grid.RowSpan="1" ResizeDirection="Rows" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="10"/>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -44,7 +53,22 @@
                 <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
             <GridSplitter Grid.Column="1" Grid.RowSpan="1"  VerticalAlignment="Stretch" ResizeDirection="Columns" Width="10"/>
-            <ContentControl Grid.Column="2" Content="{Binding CurrentPageViewModel}" />
+            <Grid  Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <!-- 
+                    Binding to a CurrentPageViewModel won't help you display the view. You need datatemplate to bind the view model to the usercontrol.
+                -->
+                <ContentControl Content="{Binding CurrentPageViewModel}" Grid.Row="0" />
+                <DockPanel  Grid.Row="1">
+                    <Button DockPanel.Dock="Right" Content="Next" Width="125" Height="45" HorizontalAlignment="Right" Margin="0,0,15,0" Command="{Binding NextViewModelCommand}"/>
+                    <Button DockPanel.Dock="Right" Content="Previous" Width="125" Height="45" HorizontalAlignment="Right" Margin="0,0,15,0" Command="{Binding PreviousViewModelCommand}"/>
+                </DockPanel>
+                
+
+            </Grid>
 
             <DockPanel Grid.Column="0">
                 <ItemsControl ItemsSource="{Binding PageViewModels}">

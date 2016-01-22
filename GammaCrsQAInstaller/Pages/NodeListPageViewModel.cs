@@ -69,18 +69,19 @@ namespace GammaCrsQAInstaller.Pages
             return ok;
         }
 
-        public void SaveContent()
+        public bool SaveContent()
         {
+            bool rs = true;
             if (NodelistValidator())
             {
                 SetupInfo.SetValue(SetupInfoKeys.NodeList, this.NodeList);
             } else
             {
                 MessageBox.Show("Invalid input of node information.");
+                rs = false;
             }
+            return rs;
         }
-
-        public ICommand SaveContentCommand { get { return new RelayCommand(SaveContent); } }
 
     }
 }

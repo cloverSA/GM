@@ -9,5 +9,6 @@ namespace GammaCrsQAInstaller.Helper
     public interface IPageViewModel
     {
         string Name { get; }
+        bool SaveContent();
     }
 }

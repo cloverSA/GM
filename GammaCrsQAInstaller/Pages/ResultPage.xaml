@@ -7,9 +7,6 @@
       xmlns:local="clr-namespace:GammaCrsQAInstaller.Pages"
       mc:Ignorable="d" 
             d:DesignHeight="350" d:DesignWidth="525">
-    <UserControl.DataContext>
-        <local:ResultPageViewModel/>
-    </UserControl.DataContext>
     <Grid Margin="10,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
