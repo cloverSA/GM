@@ -102,7 +102,7 @@ namespace GammaCrsQAInstaller.Helper
             if (CurrentPageViewModel.SaveContent())
             {
                 int current_index = PageViewModels.FindIndex(vm => vm == CurrentPageViewModel);
-                if (current_index != PageViewModels.Count)
+                if (current_index + 1 != PageViewModels.Count)
                 {
                     CurrentPageViewModel = PageViewModels[current_index + 1];
                 }

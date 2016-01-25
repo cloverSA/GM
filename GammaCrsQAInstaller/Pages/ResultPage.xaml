@@ -14,9 +14,9 @@
         </Grid.RowDefinitions>
         <DockPanel LastChildFill="True" Margin="0" Grid.Row="0">
             <GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" DockPanel.Dock="Left" Header="Result">
-                <TextBox x:Name="ResultRTB" Text="{Binding ResultText}">
+                <TextBox x:Name="ResultRTB" Text="{Binding ResultText}" VerticalScrollBarVisibility="Visible">
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
+                        <i:EventTrigger EventName="TextChanged">
                             <i:InvokeCommandAction Command="{Binding Path=ScrollDownCommand}" CommandParameter="{Binding ElementName=ResultTB}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,8 +22,22 @@ namespace GammaCrsQAInstaller.Pages
                 return "Result";
             }
         }
-
-        public string ResultText { get; set; }
+        private string _resultText;
+        public string ResultText {
+            get
+            {
+                return _resultText;
+            }
+            set
+            {
+                if (_resultText == value)
+                {
+                    return;
+                }
+                _resultText = value;
+                OnPropertyChanged("ResultText");
+            }
+        }
         private int progress_step = 1;
 
         public void RunInstall()
@@ -30,13 +45,16 @@ namespace GammaCrsQAInstaller.Pages
             var progressBar =  FindControlByName.FindChild<ProgressBar>(Application.Current.MainWindow, "InstallProgressBar"); 
             var steps = SetupInfo.GetValue<ObservableCollection<Node>>(SetupInfoKeys.NodeList).Count * 5;
             this.progress_step = Convert.ToInt32((progressBar.Maximum / steps));
-
+            SynchronizationContext sc = SynchronizationContext.Current;
             var t = Task.Run(() =>
             {
                 var installer = InstallerFactory.GetGammaServiceSetup();
                 installer.OnOpCompletedEventHandler += (s, e)=> {
-                    ResultText += string.Format("--------------------\n{0}\n{1}\n{2}\n", e.Hostname, e.OpType, e.OpResult);
-                    progressBar.Value += this.progress_step;
+                    sc.Post((obj) => {
+                        ResultText += string.Format("--------------------\n{0}\n{1}\n{2}\n", e.Hostname, e.OpType, e.OpResult);
+                        progressBar.Value += this.progress_step;
+                    }, null);
+                    
                 };
                 return installer.AllInOne();
             });
@@ -50,6 +68,8 @@ namespace GammaCrsQAInstaller.Pages
         private void ScrollDownResult(object sender)
         {
             var tb = sender as TextBox;
+            tb.Focus();
+            tb.CaretIndex = tb.Text.Length;
             tb.ScrollToEnd();
         }
 
