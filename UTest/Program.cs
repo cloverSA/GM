@@ -2,6 +2,7 @@
 using GeneralUtility;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -14,6 +15,7 @@ namespace UTest
         static void Main(string[] args)
         {
             //SLibTest.Test();
+            SLibTest.Swingbench();
             Console.ReadLine();
         }
     }
@@ -42,6 +44,14 @@ namespace UTest
             GammaRSASimplify.GenerateKeyFiles(@"C:\temp\prv", @"C:\temp\pub");
             var enresult = GammaRSASimplify.RSAEncryptString(test, @"C:\temp\pub");
             var deresult = GammaRSASimplify.RSADecryptString(enresult, @"C:\temp\prv");
+        }
+
+        public static void Swingbench()
+        {
+            var sw = new Swingbench(){ DBDirName="swingbench", DBHost="rwsam13.us.oracle.com", DBPumpUser="system", DBPumpPwd="oracle",
+             SwingbenchDmpDir=@"C:\swingbench\MyDmp\soe_dmp", SwingbenchDmpFilename="SOE.DMP", SwingbenchDmpFilePath=Path.Combine(@"C:\swingbench\MyDmp\soe_dmp", "SOE.DMP"),
+             TargetDBHome=@"C:\app\cdctest\product\12.2.0\dbhome_1", TargetDBName="raca", SysPwd="oracle", SysUsr="sys"};
+            sw.InstallWorkload();
         }
     }
 }

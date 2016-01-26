@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GammaServiceLib.OraCRS
 {
-    class Swingbench
+    public class Swingbench
     {
         private static string tmp_dir = @"c:\temp\";
         private static string sw_install = Path.Combine(@"c:\temp\", "sw_install.bat");
@@ -23,6 +23,8 @@ namespace GammaServiceLib.OraCRS
         public string DBPumpPwd { get; set; }
         public string DBHost { get; set; }
         public string DBDirName { get; set; }
+        public string SysUsr { get; set; }
+        public string SysPwd { get; set; }
 
         private void GenMainBat()
         {
@@ -30,40 +32,56 @@ namespace GammaServiceLib.OraCRS
             {
                 Directory.CreateDirectory(tmp_dir);
             }
-            File.AppendAllText(sw_install, string.Format(@"set ORACLE_HOME={0}", TargetDBHome));
-            File.AppendAllText(sw_install, string.Format(@"sqlplus {0}/{1}@{2}/{3}@{4}", DBPumpUser, DBPumpPwd, DBHost, TargetDBName, sw_pre_sql));
-            File.AppendAllText(sw_install, string.Format(@"cd {0}", tmp_dir));
-            File.AppendAllText(sw_install, string.Format(@"Impdp {0}/{1} fromuser=soe touser=soe directory=soe_workload file={2} log=logfile_imp.log",
-                                                            DBPumpUser, DBPumpPwd, SwingbenchDmpFilename));
-            File.AppendAllText(sw_install, string.Format(@"sqlplus {0}/{1}@{2}/{3}@{4}", DBPumpUser, DBPumpPwd, DBHost, TargetDBName, sw_post_sql));
+            var lines = new List<string>();
+            var sqlplus = Path.Combine(TargetDBHome, "bin", "sqlplus.exe");
+            var Impdp = Path.Combine(TargetDBHome, "bin", "Impdp.exe");
+            lines.Add(string.Format(@"set ORACLE_HOME={0}", TargetDBHome));
+            lines.Add(GetSysExecuteSqlStr(sw_pre_sql));
+            lines.Add(string.Format(@"cd {0}", SwingbenchDmpDir));
+            lines.Add(string.Format(@"{0} {1}/{2}@{3}/{4} fromuser=soe touser=soe directory={5} file={6} log=logfile_imp.log",
+                                                           Impdp, DBPumpUser, DBPumpPwd, DBHost, TargetDBName, DBDirName, SwingbenchDmpFilename));
+            lines.Add(GetSysExecuteSqlStr(sw_post_sql));
+            lines.Add("exit");
+            File.WriteAllLines(sw_install, lines);
         }
 
+        private string GetSysExecuteSqlStr(string sql)
+        {
+            var sqlplus = Path.Combine(TargetDBHome, "bin", "sqlplus.exe");
+            return string.Format(@"{0} {1}/{2}@{3}/{4} as sysdba @{5}", sqlplus, SysUsr, SysPwd, DBHost, TargetDBName, sql);
+        }
         private void GenSwingbenchPrereqSql()
         {
             //SwingbenchDmpDir is also the db directory
-            string sw_install_sql = string.Format(@"create or replace directory {1} as '{0}';
-                                                grant read,write on directory soe_workload to system;", SwingbenchDmpDir, DBDirName);
-            File.WriteAllText(@"c:\temp\sw_pre.sql", sw_install_sql);
+            var lines = new List<string>();
+            lines.Add("drop user soe cascade;");
+            lines.Add("drop tablespace soe including contents and datafiles;");
+            lines.Add("create tablespace soe datafile size 1g autoextend on next 64m maxsize unlimited;");
+            lines.Add(string.Format(@"create or replace directory {1} as '{0}';",SwingbenchDmpDir, DBDirName));
+            lines.Add(string.Format("grant read,write on directory {0} to {1};", DBDirName, DBPumpUser));
+            lines.Add("exit");
+            File.WriteAllLines(sw_pre_sql, lines);
         }
         private void GenSwingbenchPostFixupSql()
         {
 
             //sw_post.sql, fix a bug for impdp
-            string sw_post_install_sql = @"grant execute on dbms_lock to public; 
-                                           grant execute on dbms_lock to soe; 
-                                           alter package ""SOE"".""ORDERENTRY"" compile;      
-                                           alter package ""SOE"".""ORDERENTRY"" compile body;";
-
-            File.WriteAllText(@"c:\temp\sw_post.sql", sw_post_install_sql);
+            var lines = new List<string>();
+            lines.Add("grant execute on dbms_lock to public;");
+            lines.Add("grant execute on dbms_lock to soe;");
+            lines.Add(@"alter package ""SOE"".""ORDERENTRY"" compile;");
+            lines.Add(@"alter package ""SOE"".""ORDERENTRY"" compile body;");
+            lines.Add("exit");
+            File.WriteAllLines(sw_post_sql, lines);
 
         }
 
-        private void InstallWorkload()
+        public void InstallWorkload()
         {
             GenMainBat();
             GenSwingbenchPrereqSql();
             GenSwingbenchPostFixupSql();
-            GeneralUtility.PureCmdExec.PureCmdExector("cmd.exe", string.Format(@"/C {0}", sw_install));
+            //GeneralUtility.PureCmdExec.PureCmdExector("cmd.exe", string.Format(@"/C {0}", sw_install));
         }
 
 

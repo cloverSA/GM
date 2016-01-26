@@ -131,7 +131,7 @@ namespace GammaServiceLib.OraCRS
             var result = new List<string>();
             string pattern = @"<HOME.*?LOC=""(.*?)"".*>";
             var inventory = GetInventoryLoc();
-            var inf = Path.Combine(inventory, @"\ContentsXML\inventory.xml");
+            var inf = Path.Combine(inventory, @"ContentsXML\inventory.xml");
             string[] lines = File.ReadAllLines(inf);
             foreach (var line in lines)
             {
