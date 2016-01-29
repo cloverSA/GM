@@ -68,9 +68,13 @@ namespace GammaCrsQAInstaller.Pages
         private void ScrollDownResult(object sender)
         {
             var tb = sender as TextBox;
-            tb.Focus();
-            tb.CaretIndex = tb.Text.Length;
-            tb.ScrollToEnd();
+            if (tb != null)
+            {
+                tb.Focus();
+                tb.CaretIndex = tb.Text.Length;
+                tb.ScrollToEnd();
+            }
+            
         }
 
         public bool SaveContent()
