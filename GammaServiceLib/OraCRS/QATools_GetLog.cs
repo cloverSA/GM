@@ -1,74 +1,16 @@
-﻿using System;
+﻿using GeneralUtility;
+using System;
 using System.Collections.Generic;
 using System.IO;
-
-//GammaLib
-using GeneralUtility;
 using System.IO.Compression;
+using System.Linq;
 using System.Text;
-using System.Reflection;
-//
+using System.Threading.Tasks;
+
 namespace GammaServiceLib.OraCRS
 {
-
-    public class QATools : IQATools
+    public partial class QATools : IQATools
     {
-        private const string TX_RESULT_FAIL = "[GAMMA_ERROR]";
-        private const string TX_RESULT_SUC = "[GAMMA_SUC]";
-        public string ClearLog()
-        {
-            var orabases = CrsEnv.GetOracleRegProperty("ORACLE_BASE", true);
-            var orahome = CrsEnv.GetOracleRegProperty("ORACLE_HOME", true);
-            StringBuilder sb = new StringBuilder();
-
-
-            foreach (string orabase in orabases)
-            {
-                if (Directory.Exists(orabase))
-                {
-                    string diag = System.IO.Path.Combine(orabase, "diag");
-                    string crsdata = System.IO.Path.Combine(orabase, "crsdata");
-                    string cfgtool = System.IO.Path.Combine(orabase, "cfgtoollogs");
-                    if (Directory.Exists(diag))
-                    {
-                        sb.AppendLine("cleaning dir " + diag);
-                        sb.AppendLine(ClearLogFromDir(diag, true));
-                    }
-
-                    if (Directory.Exists(crsdata))
-                    {
-                        sb.AppendLine("cleaning dir " + crsdata);
-                        sb.AppendLine(ClearLogFromDir(crsdata, true));
-                    }
-
-                    if (Directory.Exists(cfgtool))
-                    {
-                        sb.AppendLine("cleaning dir " + cfgtool);
-                        sb.AppendLine(ClearLogFromDir(cfgtool, true));
-                    }
-
-                }
-
-                foreach (string home in orahome)
-                {
-                    if (Directory.Exists(home))
-                    {
-                        string log = System.IO.Path.Combine(home, "log");
-                        if (Directory.Exists(log))
-                        {
-                            sb.AppendLine("cleaning dir " + log);
-                            sb.AppendLine(ClearLogFromDir(log, true));
-                        }
-                            
-                    }
-
-                }
-
-            }
-
-            return sb.ToString();
-        }
-
         public string GetLog(bool collect_dump)
         {
             string inventory_log = System.IO.Path.Combine(CrsEnv.GetInventoryLoc(), "logs");
@@ -89,10 +31,12 @@ namespace GammaServiceLib.OraCRS
             {
                 Directory.CreateDirectory(log_dir);
             }
-            if (!Directory.Exists(log_upload))
+            if (Directory.Exists(log_upload))
             {
-                Directory.CreateDirectory(log_upload);
+                Directory.Delete(log_upload, true);
             }
+            Directory.CreateDirectory(log_upload);
+
             var orabases = CrsEnv.GetOracleRegProperty("ORACLE_BASE", true);
             var orahome = CrsEnv.GetOracleRegProperty("ORACLE_HOME", true);
 
@@ -106,10 +50,11 @@ namespace GammaServiceLib.OraCRS
 
                 if (Directory.Exists(inventory_log))
                 {
-                    sb.AppendLine("Collecting log from "+ inventory_log);
+                    sb.AppendLine("Collecting log from " + inventory_log);
                     zipper.RunZip(inventory_log, System.IO.Path.Combine(log_dir, string.Format("{0}_inventory_log", Environment.MachineName)));
                 }
-                try { 
+                try
+                {
                     foreach (string orabase in orabases)
                     {
 
@@ -130,7 +75,8 @@ namespace GammaServiceLib.OraCRS
                         }
 
                     }
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     sb.AppendFormat("Hit ex when zipping file in {0}, {1}", orabases.ToString(), ex.Message);
                     sb.AppendLine();
@@ -160,7 +106,7 @@ namespace GammaServiceLib.OraCRS
                         {
                             zipper.RunZip(home_log, zip_log);
                         }
-                           
+
                         dirInfo = null;
 
                         writer.WriteLine(string.Format("home: {0}, zip_log: {1}", home, zip_log));
@@ -182,7 +128,7 @@ namespace GammaServiceLib.OraCRS
 
                 }
                 ZipFile.CreateFromDirectory(log_dir, System.IO.Path.Combine(log_upload, string.Format("{0}_logs.zip", machine_time)));
-                sb.AppendLine("logs are collected and zipped in "+ System.IO.Path.Combine(log_upload, string.Format("{0}_logs.zip", machine_time)));
+                sb.AppendLine("logs are collected and zipped in " + System.IO.Path.Combine(log_upload, string.Format("{0}_logs.zip", machine_time)));
                 using (FileStream fs = new FileStream(stat_file, FileMode.Append))
                 using (StreamWriter writer = new StreamWriter(fs))
                 {
@@ -200,52 +146,5 @@ namespace GammaServiceLib.OraCRS
             return sb.ToString();
 
         }
-
-        private string ClearLogFromDir(string targetDir, bool recursive = true)
-        {
-            StringBuilder sb = new StringBuilder();
-            System.IO.SearchOption t;
-            if (recursive)
-            {
-                t = System.IO.SearchOption.AllDirectories;
-            }
-            else
-            {
-                t = System.IO.SearchOption.TopDirectoryOnly;
-            }
-            RemoveFiles(Directory.EnumerateFiles(targetDir, "*.tr*", t));
-            RemoveFiles(Directory.EnumerateFiles(targetDir, "*.log", t));
-            RemoveFiles(Directory.EnumerateDirectories(targetDir, "cdmp_*", t));
-            sb.AppendLine("finished!");
-            return sb.ToString();
-
-        }
-
-        private void RemoveFiles(IEnumerable<string> files)
-        {
-            foreach (string file in files)
-            {
-                try
-                {
-                    File.Delete(file.Trim());
-                }
-                catch (Exception ex)
-                {
-                    //do nothing.
-                }
-                
-            }
-            
-        }
-
-        public string UploadLog(UploadRecord record)
-        {
-            var pwd = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            IUploader uploadder = new WinSCPUploader(record) { PrvKeyLoc = Path.Combine(pwd, "prvkf.xml") };
-            string rs = uploadder.Upload();
-            return rs;
-        }
     }
-
-
 }

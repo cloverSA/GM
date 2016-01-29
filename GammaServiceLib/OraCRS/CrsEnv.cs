@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace GammaServiceLib.OraCRS
 {
-    public partial class CrsEnv
+    public partial class CrsEnv : ICrsEnv
     {
         private const string oraRegBase = @"SOFTWARE\ORACLE";
 

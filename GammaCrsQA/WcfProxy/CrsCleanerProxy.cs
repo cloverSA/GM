@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GammaServiceLib;
+using System;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
@@ -25,7 +26,7 @@ namespace GammaCrsQA.WcfProxy
             string result = string.Empty;
             try
             {
-                client = channel_Factory.CreateChannel();
+                client = channel_factory.CreateChannel();
                 result = client.CleanDisk();
                 ((ICommunicationObject)client).Close();
             }
@@ -46,7 +47,7 @@ namespace GammaCrsQA.WcfProxy
             string result = string.Empty;
             try
             {
-                client = channel_Factory.CreateChannel();
+                client = channel_factory.CreateChannel();
                 result = client.RemoveDrvLtr();
                 ((ICommunicationObject)client).Close();
             }
@@ -67,7 +68,7 @@ namespace GammaCrsQA.WcfProxy
             string result = string.Empty;
             try
             {
-                client = channel_Factory.CreateChannel();
+                client = channel_factory.CreateChannel();
                 result = client.RemoveOraFiles();
                 ((ICommunicationObject)client).Close();
             }
@@ -88,7 +89,7 @@ namespace GammaCrsQA.WcfProxy
             string result = string.Empty;
             try
             {
-                client = channel_Factory.CreateChannel();
+                client = channel_factory.CreateChannel();
                 result = client.RemoveOraKeys();
                 ((ICommunicationObject)client).Close();
             }
@@ -109,7 +110,7 @@ namespace GammaCrsQA.WcfProxy
             string result = string.Empty;
             try
             {
-                client = channel_Factory.CreateChannel();
+                client = channel_factory.CreateChannel();
                 result = client.RmOraGroup();
                 ((ICommunicationObject)client).Close();
             }
@@ -170,7 +171,7 @@ namespace GammaCrsQA.WcfProxy
             string result = string.Empty;
             try
             {
-                client = channel_Factory.CreateChannel();
+                client = channel_factory.CreateChannel();
                 client.RestartComputer();
                 ((ICommunicationObject)client).Close();
             }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GammaServiceLib.OraCRS
 {
-    partial class CrsEnv : ICrsEnv
+    public partial class CrsEnv : ICrsEnv
     {
         private static string srvctl = "srvctl.bat";
         public static string GetCurrentCrsHome()

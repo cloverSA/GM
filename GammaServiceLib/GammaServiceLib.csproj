@@ -49,16 +49,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OraCRS\CmdExecutor.cs" />
-    <Compile Include="OraCRS\CrsCleaner.cs" />
+    <Compile Include="OraCRS\CrsCleaner_RemoveOraKeys.cs" />
+    <Compile Include="OraCRS\CrsCleaner_CleanDisk.cs" />
+    <Compile Include="OraCRS\CrsCleaner_ClearEnvironmentVarPath.cs" />
+    <Compile Include="OraCRS\CrsCleaner_RemoveOraFiles.cs" />
+    <Compile Include="OraCRS\CrsCleaner_RmOraGroup.cs" />
     <Compile Include="OraCRS\CrsEnv.cs" />
-    <Compile Include="OraCRS\OraHome.cs" />
-    <Compile Include="OraCRS\QATools.cs" />
+    <Compile Include="OraCRS\CrsEnv_Svcs.cs" />
+    <Compile Include="OraCRS\DBWorkLoad_SW.cs" />
+    <Compile Include="OraCRS\QATools_ClearLog.cs" />
     <Compile Include="Gamma_Contracts.cs" />
     <Compile Include="BaseService\Stresser_CpuLoader.cs" />
     <Compile Include="BaseService\Stresser_Interfaces.cs" />
     <Compile Include="BaseService\Stresser_Factory.cs" />
     <Compile Include="BaseService\Stresser_Logger.cs" />
     <Compile Include="BaseService\Stresser_MemLoader.cs" />
+    <Compile Include="OraCRS\QATools_GetLog.cs" />
+    <Compile Include="OraCRS\QATools_UploadLog.cs" />
     <Compile Include="OraCRS\Swingbench.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

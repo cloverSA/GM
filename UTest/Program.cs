@@ -48,9 +48,18 @@ namespace UTest
 
         public static void Swingbench()
         {
-            var sw = new Swingbench(){ DBDirName="swingbench", DBHost="rwsam13.us.oracle.com", DBPumpUser="system", DBPumpPwd="oracle",
-             SwingbenchDmpDir=@"C:\swingbench\MyDmp\soe_dmp", SwingbenchDmpFilename="SOE.DMP", SwingbenchDmpFilePath=Path.Combine(@"C:\swingbench\MyDmp\soe_dmp", "SOE.DMP"),
-             TargetDBHome=@"C:\app\cdctest\product\12.2.0\dbhome_1", TargetDBName="raca", SysPwd="oracle", SysUsr="sys"};
+            var sw = new Swingbench(){
+                DBDirName ="swingbench",
+                DBHost ="rwsam13.us.oracle.com",
+                DBPumpUser ="system",
+                DBPumpPwd ="oracle",
+                SwingbenchDmpDir=@"C:\swingbench\MyDmp\soe_dmp",
+                SwingbenchDmpFilename ="SOE.DMP",
+                SwingbenchDmpFilePath =Path.Combine(@"C:\swingbench\MyDmp\soe_dmp", "SOE.DMP"),
+                TargetDBHome=@"C:\app\cdctest\product\12.2.0\dbhome_1",
+                TargetDBName ="raca",
+                SysPwd ="oracle",
+                SysUsr ="sys"};
             sw.InstallWorkload();
         }
     }

@@ -114,6 +114,7 @@
     <Compile Include="TXManager\GammaClientTXManager_QATools.cs" />
     <Compile Include="WcfFacecade\CmdExecutorFacade.cs" />
     <Compile Include="WcfProxy\CrsEnvProxy.cs" />
+    <Compile Include="WcfProxy\DBWorkloadProxy.cs" />
     <Compile Include="WcfProxy\GammaServiceProxy.cs" />
     <Compile Include="MasterPages\Master.cs" />
     <Compile Include="NetworkManager\NetworkComponent.cs" />

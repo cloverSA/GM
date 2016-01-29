@@ -3,6 +3,8 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 
 using GeneralUtility;
+using GammaServiceLib;
+
 namespace GammaCrsQA.WcfProxy
 {
     public class QAToolsProxy : GammaClientBase<IQATools>, IQATools
@@ -25,7 +27,7 @@ namespace GammaCrsQA.WcfProxy
             string result = string.Empty;
             try
             {
-                client = channel_Factory.CreateChannel();
+                client = channel_factory.CreateChannel();
                 result = client.ClearLog();
                 ((ICommunicationObject)client).Close();
             }
@@ -46,7 +48,7 @@ namespace GammaCrsQA.WcfProxy
             string result = string.Empty;
             try
             {
-                client = channel_Factory.CreateChannel();
+                client = channel_factory.CreateChannel();
                 result = client.GetLog(collect_dump);
                 ((ICommunicationObject)client).Close();
             }
@@ -67,7 +69,7 @@ namespace GammaCrsQA.WcfProxy
             string result = string.Empty;
             try
             {
-                client = channel_Factory.CreateChannel();
+                client = channel_factory.CreateChannel();
                 string rs = client.UploadLog(record);
                 if (result.ToLower().Contains("exception"))
                 {

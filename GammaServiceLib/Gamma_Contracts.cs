@@ -62,4 +62,11 @@ namespace GammaServiceLib
         [OperationContract()]
         string GetScanPort();
     }
+
+    [ServiceContract]
+    public interface IDBWorkload
+    {
+        [OperationContract()]
+        string InstallSwingBench(string hostname, string dbhome, string dbname, string system_pwd, string sys_pwd, string workloadDmpLoc, string workloadDmpFileName);
+    }
 }

@@ -31,7 +31,7 @@ namespace GammaCrsQA.WcfProxy
             string rs = string.Empty;
             try
             {
-                client = channel_Factory.CreateChannel();
+                client = channel_factory.CreateChannel();
                 rs = client.GetClusterNames();
                 ((ICommunicationObject)client).Close();
             }
@@ -59,7 +59,7 @@ namespace GammaCrsQA.WcfProxy
             string rs = string.Empty;
             try
             {
-                client = channel_Factory.CreateChannel();
+                client = channel_factory.CreateChannel();
                 rs = client.GetDBHOMEByName(dbname);
                 ((ICommunicationObject)client).Close();
             }
@@ -87,7 +87,7 @@ namespace GammaCrsQA.WcfProxy
             string rs = string.Empty;
             try
             {
-                client = channel_Factory.CreateChannel();
+                client = channel_factory.CreateChannel();
                 rs = client.GetDBNames();
                 ((ICommunicationObject)client).Close();
             }
@@ -115,7 +115,7 @@ namespace GammaCrsQA.WcfProxy
             string rs = string.Empty;
             try
             {
-                client = channel_Factory.CreateChannel();
+                client = channel_factory.CreateChannel();
                 rs = client.GetScan();
                 ((ICommunicationObject)client).Close();
             }
@@ -143,7 +143,7 @@ namespace GammaCrsQA.WcfProxy
             string rs = string.Empty;
             try
             {
-                client = channel_Factory.CreateChannel();
+                client = channel_factory.CreateChannel();
                 rs = client.GetScanPort();
                 ((ICommunicationObject)client).Close();
             }

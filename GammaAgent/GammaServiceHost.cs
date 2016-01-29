@@ -118,12 +118,26 @@ namespace GammaAgent
         }
     }
 
+    class DBWorkloadServiceHost: GammaServiceHost
+    {
+        public DBWorkloadServiceHost(string uri): base(uri) { }
+        public override Type GetInterfaceType()
+        {
+            return typeof(IDBWorkload);
+        }
+        public override Type GetServiceType()
+        {
+            return typeof(DBWorkLoad);
+        }
+    }
+
     abstract class GammaServiceHostFactory
     {
         public abstract GammaServiceHost GetCrsCleanerSerivceHost();
         public abstract GammaServiceHost GetQAToolsSerivceHost();
         public abstract GammaServiceHost GetCmdExecutorSerivceHost();
         public abstract GammaServiceHost GetCrsEnvSerivceHost();
+        public abstract GammaServiceHost GetDBWorkloadSerivceHost();
     }
 
     class GammaSimpleNetworkServiceHostFactory : GammaServiceHostFactory
@@ -148,6 +162,10 @@ namespace GammaAgent
         public override GammaServiceHost GetCrsEnvSerivceHost()
         {
             return new CrsEnvServiceHost(string.Format("http://{0}:{1}/GammaService/CrsEnv", agent_info.HostIP, agent_info.HostPort));
+        }
+        public override GammaServiceHost GetDBWorkloadSerivceHost()
+        {
+            return new DBWorkloadServiceHost(string.Format("http://{0}:{1}/GammaService/DBWorkload", agent_info.HostIP, agent_info.HostPort));
         }
     }
 

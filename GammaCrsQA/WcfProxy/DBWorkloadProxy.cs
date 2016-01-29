@@ -1,32 +1,37 @@
 ﻿using GammaServiceLib;
 using System;
-using System.ServiceModel;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using System.ServiceModel;
 
 namespace GammaCrsQA.WcfProxy
 {
-    public class CmdExecutorProxy : GammaClientBase<ICmdExecutor>, ICmdExecutor
+    public class DBWorkloadProxy : GammaClientBase<IDBWorkload>, IDBWorkload
     {
-        public CmdExecutorProxy(string uri_address) : base(uri_address)
+        public DBWorkloadProxy(string uri):base(uri)
         {
+
         }
-        public override ChannelFactory<ICmdExecutor> CreateProxyChannelFactory()
+
+        public override ChannelFactory<IDBWorkload> CreateProxyChannelFactory()
         {
             var service_binding = new WSHttpBinding(SecurityMode.None);
             service_binding.SendTimeout = TimeSpan.FromMinutes(25);
             var service_endpoint = new EndpointAddress(server_host_uri);
-            var factory = new ChannelFactory<ICmdExecutor>(service_binding, service_endpoint);
+            var factory = new ChannelFactory<IDBWorkload>(service_binding, service_endpoint);
             return factory;
         }
 
-        public string ShellExecutor(string filename, string arguments)
+        public string InstallSwingBench(string hostname, string dbhome, string dbname, string system_pwd, string sys_pwd, string workloadDmpLoc, string workloadDmpFileName)
         {
-            ICmdExecutor client = null;
+            IDBWorkload client = null;
             string rs = string.Empty;
             try
             {
                 client = channel_factory.CreateChannel();
-                rs = client.ShellExecutor(filename, arguments);
+                rs = client.InstallSwingBench(hostname, dbhome, dbname, system_pwd, sys_pwd, workloadDmpLoc, workloadDmpFileName);
                 ((ICommunicationObject)client).Close();
             }
             catch (Exception ex)
@@ -39,13 +44,5 @@ namespace GammaCrsQA.WcfProxy
             }
             return rs;
         }
-
-        public Task<string> ShellExecutorAsync(string filename, string arguments)
-        {
-            return Task.Run(()=> {
-                return ShellExecutor(filename, arguments);
-            });
-        }
-
     }
 }
