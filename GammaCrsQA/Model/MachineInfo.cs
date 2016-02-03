@@ -14,7 +14,7 @@ namespace GammaCrsQA.Model
 
     public interface IGammaMachineInfo
     {
-        MachineNetworkComponent NetworkCompent { get; set; }
+        IMachineNetworkComponent NetworkCompent { get; set; }
         NodeState Alive { get; set; }
         bool IsSelected { get; set; }
         string MachineName { get; set; }
@@ -31,9 +31,9 @@ namespace GammaCrsQA.Model
 
         private bool selected = true;
 
-        private MachineNetworkComponent network_comp;
+        private IMachineNetworkComponent network_comp;
 
-        public MachineNetworkComponent NetworkCompent
+        public IMachineNetworkComponent NetworkCompent
         {
             get { return this.network_comp; }
             set { this.network_comp = value; }

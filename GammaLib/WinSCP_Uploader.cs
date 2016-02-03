@@ -15,12 +15,12 @@ namespace GeneralUtility
 
     public class WinSCPUploader : IUploader
     {
-        public UploadRecord Record { get; set; }
+        public IUploadRecord Record { get; set; }
         public String PrvKeyLoc { get; set; }
         string SshHostKeyFingerprint = "ssh-rsa 1024 8f:e7:e1:85:90:c8:33:15:eb:8a:b7:5d:4e:27:3c:3c";
         string BugSftp = "bugsftp.us.oracle.com";
 
-        public WinSCPUploader(UploadRecord rec)
+        public WinSCPUploader(IUploadRecord rec)
         {
             Record = rec;
             if (!Record.Usr.Contains(@"@oracle.com"))
@@ -103,16 +103,5 @@ namespace GeneralUtility
             return Upload(Record.Source, Record.Target);
         }
     }
-    [DataContract]
-    public class UploadRecord
-    {
-        [DataMember]
-        public string Usr { get; set; }
-        [DataMember]
-        public string Passwd { get; set; }
-        [DataMember]
-        public string Target { get; set; }
-        [DataMember]
-        public string Source { get; set; }
-    }
+
 }

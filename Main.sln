@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GammaAgent", "GammaAgent\GammaAgent.csproj", "{F687446E-726A-4765-B286-442D6C0EBC56}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GammaCrsQAInstaller", "GammaCrsQAInstaller\GammaCrsQAInstaller.csproj", "{387845E5-D147-446A-AC32-BDF9AFE73AB1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTest", "UTest\UTest.csproj", "{5133B1FD-A7CB-4A7E-AAE4-27C57A90458D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GammaClient", "GammaClient\GammaClient.csproj", "{AEA55118-7899-4911-AD7C-E75DDB21FF0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{5133B1FD-A7CB-4A7E-AAE4-27C57A90458D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5133B1FD-A7CB-4A7E-AAE4-27C57A90458D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5133B1FD-A7CB-4A7E-AAE4-27C57A90458D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEA55118-7899-4911-AD7C-E75DDB21FF0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEA55118-7899-4911-AD7C-E75DDB21FF0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEA55118-7899-4911-AD7C-E75DDB21FF0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA55118-7899-4911-AD7C-E75DDB21FF0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

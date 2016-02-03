@@ -270,7 +270,7 @@ namespace GammaCrsQA.TXManager
                 TX_RESULT = string.Empty,
                 TX_RESULT_CODE = GammaTransactionRC.RUNNING,
             };
-            //init event handler
+            
             GammaClientTXLogger.GetInstance().RegisterTransaction(trx);
             return trx;
         }

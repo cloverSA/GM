@@ -1,5 +1,7 @@
 ﻿using System.ServiceModel;
 using GeneralUtility;
+using System.Runtime.Serialization;
+
 namespace GammaServiceLib
 {
     [ServiceContract()]
@@ -68,5 +70,18 @@ namespace GammaServiceLib
     {
         [OperationContract()]
         string InstallSwingBench(string hostname, string dbhome, string dbname, string system_pwd, string sys_pwd, string workloadDmpLoc, string workloadDmpFileName);
+    }
+
+    [DataContract]
+    public class UploadRecord : IUploadRecord
+    {
+        [DataMember]
+        public string Usr { get; set; }
+        [DataMember]
+        public string Passwd { get; set; }
+        [DataMember]
+        public string Target { get; set; }
+        [DataMember]
+        public string Source { get; set; }
     }
 }

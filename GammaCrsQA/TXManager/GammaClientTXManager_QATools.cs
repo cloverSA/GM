@@ -51,7 +51,7 @@ namespace GammaCrsQA.TXManager
                 case GammaTXQATools.UPLOAD:
                     if (qatoolArgs != null)
                     {
-                        UploadRecord tmp = qatoolArgs as UploadRecord;
+                        GammaServiceLib.UploadRecord tmp = qatoolArgs as GammaServiceLib.UploadRecord;
                         task = GammaProxyFactory.GetQAToolsProxy(machine).UploadLogAsync(tmp);
                     }
                     else

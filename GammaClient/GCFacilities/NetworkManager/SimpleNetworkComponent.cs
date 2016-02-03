@@ -1,15 +1,13 @@
-﻿namespace GammaCrsQA.NetworkManager
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GammaClient.GCFacilities.NetworkManager
 {
-    //In different network infrustructure, we can still get/set the working nic.
-    public interface IMachineNetworkComponent
-    {
-        string GetWorkingNic();
-        void SetWorkingNic(string value);
-        string GetWorkingServicePort();
-        void SetWorkingServicePort(string value);
-    }
     //only support communication using public nic, no service discovery.
-    public class SimpleNetworkComponent : IMachineNetworkComponent
+    public class SimpleNetworkComponent : WCFProxy.IMachineNetworkComponent
     {
         private string public_ip;
         private string service_port;
@@ -42,11 +40,5 @@
 
     }
 
-    public class NetworkComponentFactory
-    {
-        public static SimpleNetworkComponent GetSimpleNetworkComponent(string ip, string port)
-        {
-            return new SimpleNetworkComponent(ip, port);
-        }
-    }
+
 }
