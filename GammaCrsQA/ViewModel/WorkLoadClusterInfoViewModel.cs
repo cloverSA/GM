@@ -12,9 +12,22 @@ using System.Windows.Controls;
 using System.Windows.Input;
 namespace GammaCrsQA.ViewModel
 {
-    class ClusterInfoViewModel : INotifyPropertyChanged
+    class WorkLoadClusterInfoViewModel : IPageViewModel
     {
-        public ClusterInfoViewModel()
+        private bool _canSwitchPage = false;
+        public bool CanSwitchPage
+        {
+            get
+            {
+                return _canSwitchPage;
+            }
+
+            set
+            {
+                _canSwitchPage = value;
+            }
+        }
+        public WorkLoadClusterInfoViewModel()
         {
             ClusterItems = WorkloadSetupInfo.GetValue<ObservableCollection<Cluster>>(WorkloadSetupKeys.CLUSTERS);
             WorkLoads = new ObservableCollection<string>() { "Swingbench", "Aroltp" };

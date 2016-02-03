@@ -90,19 +90,27 @@
     <Compile Include="Pages\WorkloadInstallationPage.xaml.cs">
       <DependentUpon>WorkloadInstallationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\IPageViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\NavigatorInTabPages.cs" />
+    <Compile Include="ViewModel\QAToolsNavigateViewModel.cs" />
+    <Compile Include="ViewModel\QAToolsViewModel.cs" />
+    <Compile Include="ViewModel\WorkLoadNavigateViewModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ClearEnvViewModel.cs" />
-    <Compile Include="ViewModel\ClusterInfoViewModel.cs" />
+    <Compile Include="ViewModel\WorkLoadClusterInfoViewModel.cs" />
     <Compile Include="ViewModel\CmdExecuteViewModel.cs" />
-    <Compile Include="ViewModel\DBInfoViewModel.cs" />
-    <Compile Include="ViewModel\QAToolsBaseView.cs" />
+    <Compile Include="ViewModel\WorkLoadDBInfoViewModel.cs" />
+    <Compile Include="ViewModel\ObservableObject.cs" />
+    <Compile Include="ViewModel\TabPagesBaseView.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\WorkloadSetupInfo.cs" />
     <Compile Include="ViewModel\WorkLoadSetupViewModel.cs" />
+    <Compile Include="ViewModel\WorkLoadInstallViewModel.cs" />
     <Compile Include="WcfFacecade\QAToolsFacade.cs" />
     <Compile Include="WcfProxy\CmdExecutorProxy.cs" />
     <Compile Include="WcfProxy\CrsCleanerProxy.cs" />
@@ -116,7 +124,6 @@
     <Compile Include="WcfProxy\CrsEnvProxy.cs" />
     <Compile Include="WcfProxy\DBWorkloadProxy.cs" />
     <Compile Include="WcfProxy\GammaServiceProxy.cs" />
-    <Compile Include="MasterPages\Master.cs" />
     <Compile Include="NetworkManager\NetworkComponent.cs" />
     <Compile Include="NetworkManager\NodeNetManager.cs" />
     <Compile Include="WcfProxy\QAToolsProxy.cs" />
@@ -157,10 +164,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Icons.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

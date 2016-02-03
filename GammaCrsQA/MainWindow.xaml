@@ -2,17 +2,19 @@
     xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:gvm="clr-namespace:GammaCrsQA.ViewModel"
     xmlns:gbehave="clr-namespace:GammaCrsQA.MVVMBehaviour"
+    xmlns:gpage="clr-namespace:GammaCrsQA.Pages"
     Title="CrsQATools" Height="539" Width="787" WindowStartupLocation="CenterScreen">
-    <Window.CommandBindings>
-        <CommandBinding Command="NavigationCommands.GoToPage" Executed="GoToPageExecuteHandler" CanExecute="GoToPageCanExecuteHandler" />
-    </Window.CommandBindings>
     <Window.Resources>
         <Style x:Key="MenuLevel2" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
             <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="15"></Setter>
         </Style>
     </Window.Resources>
+    <Window.DataContext>
+        <gvm:MainWindowViewModel/>
+    </Window.DataContext>
     <Grid Background="#FFF0F0F0">
         <Grid Margin="15,15">
             <Grid.ColumnDefinitions>
@@ -24,6 +26,9 @@
             <DockPanel Margin="0">
                 <Label x:Name="label" Content="CDC CRS QA TOOLS" DockPanel.Dock="Top" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <TabControl x:Name="tabControl" DockPanel.Dock="Bottom">
+                    <!-- 
+                        Tab for clear environment.
+                    -->
                     <TabItem Header="CrsClear" Style="{StaticResource MenuLevel2}">
                         <TabItem.DataContext>
                             <gvm:ClearEnvViewModel />
@@ -38,24 +43,36 @@
                             <DockPanel Margin="0">
                                 <Label x:Name="label2" DockPanel.Dock="Top" Content="Clear Environment"/>
                                 <StackPanel x:Name="ClearEnvStack" DockPanel.Dock="Bottom">
-                                    <Button x:Name="ClearRegBtn" Content="Clear Registry" Margin="0,5" Command="{Binding ClearRegistry}" IsEnabled="{Binding GroupAbled}" />
-                                    <Button x:Name="ClearGroupBtn" Content="Clear Group" Margin="0,0,0,5" Command="{Binding ClearGroup}" IsEnabled="{Binding GroupAbled}" />
-                                    <Button x:Name="RebootBtn" Content="Reboot" Margin="0,0,0,5" Command="{Binding RebootNode}" IsEnabled="{Binding GroupAbled}" />
-                                    <Button x:Name="ClearDiskBtn" Content="Clear Disk" Margin="0,0,0,5" Command="{Binding ClearDisk}" IsEnabled="{Binding GroupAbled}" />
-                                    <Button x:Name="RmDrvLtrBtn" Content="Remove DriveLetter" Margin="0,0,0,5" Command="{Binding ClearDrive}" IsEnabled="{Binding GroupAbled}" />
-                                    <Button x:Name="RmFilesBtn" Content="Remove Files" Command="{Binding ClearFile}" IsEnabled="{Binding GroupAbled}" />
+                                    <Button x:Name="ClearRegBtn" Content="Clear Registry" Margin="0,5" Command="{Binding ClearRegistry}" IsEnabled="{Binding CanExec}" />
+                                    <Button x:Name="ClearGroupBtn" Content="Clear Group" Margin="0,0,0,5" Command="{Binding ClearGroup}" IsEnabled="{Binding CanExec}" />
+                                    <Button x:Name="RebootBtn" Content="Reboot" Margin="0,0,0,5" Command="{Binding RebootNode}" IsEnabled="{Binding CanExec}" />
+                                    <Button x:Name="ClearDiskBtn" Content="Clear Disk" Margin="0,0,0,5" Command="{Binding ClearDisk}" IsEnabled="{Binding CanExec}" />
+                                    <Button x:Name="RmDrvLtrBtn" Content="Remove DriveLetter" Margin="0,0,0,5" Command="{Binding ClearDrive}" IsEnabled="{Binding CanExec}" />
+                                    <Button x:Name="RmFilesBtn" Content="Remove Files" Command="{Binding ClearFile}" IsEnabled="{Binding CanExec}" />
                                 </StackPanel>
                             </DockPanel>
                             <GroupBox x:Name="groupBox" Grid.Column="2" Header="Operation Result" Margin="0">
-                                <TextBox x:Name="ClearEnvTB" Margin="0" TextWrapping="Wrap" Background="White" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Text="{Binding QAOpResult}"/>
+                                <TextBox x:Name="ClearEnvTB" Margin="0" TextWrapping="Wrap" Background="White" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Text="{Binding OpResult}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding Path=ScrollDownCommand}" CommandParameter="{Binding ElementName=ClearEnvTB}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                             </GroupBox>
                         </Grid>
                     </TabItem>
+                    <!-- 
+                        Tab for qa tools
+                    -->
                     <TabItem Header="QA Tools" Style="{StaticResource MenuLevel2}">
                         <Grid>
                             <Frame NavigationUIVisibility="Hidden" Name="ToolsFrame" Grid.Column="0" Grid.Row="1" Source="Pages/QAToolsPage.xaml" />
                         </Grid>
                     </TabItem>
+                    <!-- 
+                        Tab for cmd executor
+                    -->
                     <TabItem Header="Executer" Style="{StaticResource MenuLevel2}">
                         <TabItem.DataContext>
                             <gvm:CmdExecuteViewModel />
@@ -82,16 +99,37 @@
                             </GroupBox>
                         </Grid>
                     </TabItem>
+                    <!-- 
+                        Tab for workload installation
+                    -->
                     <TabItem Header="WorkLoad" Style="{StaticResource MenuLevel2}">
+                        <TabItem.DataContext>
+                            <gvm:WorkLoadNavigateViewModel/>
+                        </TabItem.DataContext>
+                        <TabItem.Resources>
+                            <DataTemplate DataType="{x:Type gvm:WorkLoadSetupViewModel}">
+                                <gpage:WorkloadSetupPage/>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type gvm:WorkLoadClusterInfoViewModel}">
+                                <gpage:WorkloadClusterPage/>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type gvm:WorkLoadDBInfoViewModel}">
+                                <gpage:WorkloadDBPage/>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type gvm:WorkLoadInstallViewModel}">
+                                <gpage:WorkloadInstallationPage/>
+                            </DataTemplate>
+                        </TabItem.Resources>
+                        
                         <Grid Background="#FFE5E5E5">
-                            <Frame x:Name="WorkloadFrame" NavigationUIVisibility="Hidden" Source="Pages/WorkloadSetupPage.xaml"/>
+                            <ContentControl Content="{Binding CurrentPageViewModel}" />
                         </Grid>
                     </TabItem>
                 </TabControl>
             </DockPanel>
             <DockPanel Grid.Column="2" Margin="0">
                 <Label x:Name="label1" Content="Node List" Height="30" DockPanel.Dock="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                <DataGrid x:Name="MachinesDG" AutoGenerateColumns="False">
+                <DataGrid x:Name="MachinesDG" AutoGenerateColumns="False" ItemsSource="{Binding Machines}">
                     <DataGrid.ItemBindingGroup>
                         <BindingGroup/>
                     </DataGrid.ItemBindingGroup>

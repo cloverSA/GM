@@ -9,9 +9,22 @@ using System.Threading.Tasks;
 
 namespace GammaCrsQA.ViewModel
 {
-    class DBInfoViewModel : INotifyPropertyChanged
+    class WorkLoadDBInfoViewModel : IPageViewModel
     {
-        public DBInfoViewModel()
+        private bool _canSwitchPage = false;
+        public bool CanSwitchPage
+        {
+            get
+            {
+                return _canSwitchPage;
+            }
+
+            set
+            {
+                _canSwitchPage = value;
+            }
+        }
+        public WorkLoadDBInfoViewModel()
         {
             DBs = WorkloadSetupInfo.GetValue <ObservableCollection<OraDB>>(WorkloadSetupKeys.DBS);
 

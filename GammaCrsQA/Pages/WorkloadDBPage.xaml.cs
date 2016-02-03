@@ -18,35 +18,12 @@ namespace GammaCrsQA.Pages
     /// <summary>
     /// Interaction logic for WorkloadDBPage.xaml
     /// </summary>
-    public partial class WorkloadDBPage : Page
+    public partial class WorkloadDBPage : UserControl
     {
         public WorkloadDBPage()
         {
             InitializeComponent();
         }
 
-        private void NextPage_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new Uri((string)e.Parameter, UriKind.Relative));
-        }
-
-        private void NextPage_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
-
-        private void PreviousPage_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (this.NavigationService.CanGoBack)
-            {
-                this.NavigationService.GoBack();
-            }
-        }
-
-        private void Preivous_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
     }
 }

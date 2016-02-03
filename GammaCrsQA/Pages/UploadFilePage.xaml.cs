@@ -22,7 +22,7 @@ namespace GammaCrsQA.Pages
     /// <summary>
     /// Interaction logic for UploadFilePage.xaml
     /// </summary>
-    public partial class UploadFilePage : Page
+    public partial class UploadFilePage : UserControl
     {
         public UploadFilePage()
         {

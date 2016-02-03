@@ -17,32 +17,9 @@ namespace GammaCrsQA
     /// </summary>
     public partial class MainWindow
     {
-
-        private NodeNetManager nodeNetManager;
-        private static object locker = new object();
-        private void InitTasks()
-        {
-            nodeNetManager = NodeNetManagerFactory.GetSimpleNetworkManager();
-            this.MachinesDG.ItemsSource = nodeNetManager.Machines;
-            nodeNetManager.StartNodeCheck();
-
-        }
-
         public MainWindow()
         {
             InitializeComponent();
-            InitTasks();
         }
-
-        private void GoToPageExecuteHandler(object sender, ExecutedRoutedEventArgs e)
-        {
-            ToolsFrame.NavigationService.Navigate(new Uri((string)e.Parameter, UriKind.Relative));
-        }
-
-        private void GoToPageCanExecuteHandler(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
     }
 }

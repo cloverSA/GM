@@ -19,36 +19,12 @@ namespace GammaCrsQA.Pages
     /// <summary>
     /// Interaction logic for WorkloadClusterPage.xaml
     /// </summary>
-    public partial class WorkloadClusterPage : Page
+    public partial class WorkloadClusterPage : UserControl
     {
         public WorkloadClusterPage()
         {
             InitializeComponent();
         }
-
-        private void NextPage_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new Uri((string)e.Parameter, UriKind.Relative));
-        }
-        private void NextPage_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
-
-        private void PreviousPage_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (this.NavigationService.CanGoBack)
-            {
-                this.NavigationService.GoBack();
-            }
-        }
-
-        private void Preivous_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
         
     }
 }

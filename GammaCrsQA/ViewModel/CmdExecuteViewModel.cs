@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace GammaCrsQA.ViewModel
 {
-    class CmdExecuteViewModel : QAToolsBaseView
+    class CmdExecuteViewModel : TabPagesBaseView
     {
         #region Members
         private string inputcmd;
@@ -73,8 +73,8 @@ namespace GammaCrsQA.ViewModel
 
         void ExecuteShellOnNodes()
         {
-            QAOpResult = string.Empty;
-            GroupAbled = false;
+            OpResult = string.Empty;
+            CanExec = false;
 
             var tasks = new List<Task<string>>();
             var tx_mgr = GammaClientTXManagerFactory.GetGammaClientTXManager();
@@ -98,7 +98,7 @@ namespace GammaCrsQA.ViewModel
             var all_job = Task.WhenAll(tasks);
 
             all_job.GetAwaiter().OnCompleted(() => {
-                GroupAbled = true;
+                CanExec = true;
             });
 
         }
@@ -111,7 +111,7 @@ namespace GammaCrsQA.ViewModel
         {
             if (e.TRANSACTION.TX_TYPE == GammaTransactionType.COMMAND)
             {
-                QAOpResult += string.Format("\r\n{0}: {1}\r\n", e.TRANSACTION.Machine, e.TRANSACTION.TX_RESULT);
+                OpResult += string.Format("\r\n{0}: {1}\r\n", e.TRANSACTION.Machine, e.TRANSACTION.TX_RESULT);
             }
         }
 

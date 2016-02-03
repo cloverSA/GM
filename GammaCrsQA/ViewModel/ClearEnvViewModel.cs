@@ -11,24 +11,24 @@ using System.Windows.Input;
 
 namespace GammaCrsQA.ViewModel
 {
-    class ClearEnvViewModel : QAToolsBaseView
+    class ClearEnvViewModel : TabPagesBaseView
     {
         #region constructor
 
         public ClearEnvViewModel()
         {
-            GammaClientTXManagerFactory.GetGammaClientTXManager().OnResultComesBack += RaiseClearEnvResultComeback;
+            GammaClientTXManagerFactory.GetGammaClientTXManager().OnResultComesBack += RaiseResultComeback;
         }
 
         #endregion
 
         #region TransactionManager Consumer
 
-        private void RaiseClearEnvResultComeback(object sender, GammaUIUpdateArgs e)
+        private void RaiseResultComeback(object sender, GammaUIUpdateArgs e)
         {
             if (e.TRANSACTION.TX_TYPE == GammaTransactionType.CLEARENV)
             {
-                QAOpResult += string.Format("\r\n{0}: {1}\r\n", e.TRANSACTION.Machine, e.TRANSACTION.TX_RESULT);
+                OpResult += string.Format("\r\n{0}: {1}\r\n", e.TRANSACTION.Machine, e.TRANSACTION.TX_RESULT);
             }
         }
 
@@ -38,14 +38,14 @@ namespace GammaCrsQA.ViewModel
 
         private void ClearEnv(GammaTXClearEnv tx_code)
         {
-            QAOpResult = string.Empty;
-            GroupAbled = false;
+            OpResult = string.Empty;
+            CanExec = false;
             Task client_job = ClearEnvOnNodes(tx_code);
 
             client_job.GetAwaiter().OnCompleted(() =>
             {
 
-                GroupAbled = true;
+                CanExec = true;
             });
 
             
@@ -54,9 +54,9 @@ namespace GammaCrsQA.ViewModel
         private Task ClearEnvOnNodes(GammaTXClearEnv tx_code)
         {
             List<Task<string>> tasks = new List<Task<string>>();
-            foreach (var machine in from m in nodeMgr.Machines where m.IsSelected && m.Alive == NodeState.Online select m)
+            foreach (var machine in from m in NodeMgr.Machines where m.IsSelected && m.Alive == NodeState.Online select m)
             {
-                tasks.Add(txMgr.StartClearEnvTransaction(machine, tx_code));
+                tasks.Add(TxMgr.StartClearEnvTransaction(machine, tx_code));
             }
             return Task.WhenAll(tasks);
         }

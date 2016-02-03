@@ -1,16 +1,14 @@
-﻿<Page x:Class="GammaCrsQA.Pages.QAToolsPage"
+﻿<UserControl x:Class="GammaCrsQA.Pages.QAToolsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GammaCrsQA.Pages"
-      xmlns:ma="clr-namespace:GammaCrsQA.MasterPages"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="500"
-      Title="QAToolsPage">
+      >
 
-    <ma:Master>
-        <ma:Master.Tools>
+
 
             <DockPanel LastChildFill="True" Margin="0" Grid.Row="0">
 
@@ -24,6 +22,4 @@
 
             </DockPanel>
 
-        </ma:Master.Tools>
-    </ma:Master>
-</Page>
+</UserControl>

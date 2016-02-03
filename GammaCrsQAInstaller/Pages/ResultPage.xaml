@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <DockPanel LastChildFill="True" Margin="0" Grid.Row="0">
             <GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" DockPanel.Dock="Left" Header="Result">
-                <TextBox x:Name="ResultRTB" Text="{Binding ResultText}" VerticalScrollBarVisibility="Visible">
+                <TextBox x:Name="ResultTB" Text="{Binding ResultText}" VerticalScrollBarVisibility="Visible">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="TextChanged">
                             <i:InvokeCommandAction Command="{Binding Path=ScrollDownCommand}" CommandParameter="{Binding ElementName=ResultTB}" />
@@ -28,7 +28,7 @@
         <Grid Grid.Row="1">
             
             <ProgressBar HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="40,5" Height="40" Minimum="0" Maximum="100" x:Name="InstallProgressBar"/>
-            <TextBlock x:Name="ResultTB" Text="{Binding ElementName=InstallProgressBar, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="{Binding ElementName=InstallProgressBar, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center">
                 
                 
             </TextBlock>

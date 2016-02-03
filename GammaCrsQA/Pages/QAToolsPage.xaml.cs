@@ -6,7 +6,7 @@ namespace GammaCrsQA.Pages
     /// <summary>
     /// Interaction logic for QAToolsPage.xaml
     /// </summary>
-    public partial class QAToolsPage : Page
+    public partial class QAToolsPage : UserControl
     {
         public QAToolsPage()
         {

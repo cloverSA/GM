@@ -18,7 +18,7 @@ namespace GammaCrsQA.Pages
     /// <summary>
     /// Interaction logic for WorkloadInstallationPage.xaml
     /// </summary>
-    public partial class WorkloadInstallationPage : Page
+    public partial class WorkloadInstallationPage : UserControl
     {
         public WorkloadInstallationPage()
         {

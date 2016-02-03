@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace GammaCrsQA.ViewModel
 {
-    class WorkLoadSetupViewModel
+    class WorkLoadSetupViewModel : IPageViewModel
     {
         private ObservableCollection<Cluster> GetClusterInfo()
         {
@@ -48,5 +48,19 @@ namespace GammaCrsQA.ViewModel
         }
 
         public ICommand SetClusterInfoCommand { get { return new RelayCommand(SetClusterInfo); } }
+
+        private bool _canSwitchPage = false;
+        public bool CanSwitchPage
+        {
+            get
+            {
+                return _canSwitchPage;
+            }
+
+            set
+            {
+                _canSwitchPage = value;
+            }
+        }
     }
 }

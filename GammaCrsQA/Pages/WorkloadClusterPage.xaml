@@ -1,4 +1,4 @@
-﻿<Page x:Class="GammaCrsQA.Pages.WorkloadClusterPage"
+﻿<UserControl x:Class="GammaCrsQA.Pages.WorkloadClusterPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,11 +7,8 @@
       xmlns:local="clr-namespace:GammaCrsQA.Pages"
       xmlns:gvm="clr-namespace:GammaCrsQA.ViewModel"
       mc:Ignorable="d" 
-      d:DesignHeight="539" d:DesignWidth="787"
-      Title="WorkloadClusterPage">
-    <Page.DataContext>
-        <gvm:ClusterInfoViewModel/>
-    </Page.DataContext>
+      d:DesignHeight="539" d:DesignWidth="787">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
@@ -50,8 +47,5 @@
         </DockPanel>
 
     </Grid>
-    <Page.CommandBindings>
-        <CommandBinding Command="NavigationCommands.NextPage" Executed="NextPage_Executed" CanExecute="NextPage_CanExecute"/>
-        <CommandBinding Command="NavigationCommands.PreviousPage" Executed="PreviousPage_Executed" CanExecute="Preivous_CanExecute"/>
-    </Page.CommandBindings>
-</Page>
+
+</UserControl>
