@@ -25,6 +25,7 @@ namespace GammaClient.GCFacilities.NetworkManager
         private SimpleNetworkManager()
         {
             InitMaichines();
+            this.StartNodeCheck();
         }
 
         private void InitMaichines()

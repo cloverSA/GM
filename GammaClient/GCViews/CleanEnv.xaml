@@ -19,8 +19,7 @@
         </Grid.ColumnDefinitions>
         <GridSplitter HorizontalAlignment="Stretch" Margin="0" Width="5" Grid.Column="1"/>
         <DockPanel Margin="0">
-            <Label x:Name="label2" DockPanel.Dock="Top" Content="Clear Environment"/>
-            <StackPanel x:Name="ClearEnvStack" DockPanel.Dock="Bottom">
+            <StackPanel x:Name="ClearEnvStack" DockPanel.Dock="Top">
                 <Button x:Name="ClearRegBtn" Content="Clear Registry" Margin="0,5" Command="{Binding ClearRegistry}" IsEnabled="{Binding CanExec}" />
                 <Button x:Name="ClearGroupBtn" Content="Clear Group" Margin="0,0,0,5" Command="{Binding ClearGroup}" IsEnabled="{Binding CanExec}" />
                 <Button x:Name="RebootBtn" Content="Reboot" Margin="0,0,0,5" Command="{Binding RebootNode}" IsEnabled="{Binding CanExec}" />
