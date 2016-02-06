@@ -5,9 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:GammaClient"
+        xmlns:gcview="clr-namespace:GammaClient.GCViews"
+        xmlns:gcvworkload="clr-namespace:GammaClient.GCViews.WorkloadViews"
+                       
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Width="960"
+        Height="600"
+        Title="MainWindow">
     <Grid>
-        
+        <Controls:MetroAnimatedSingleRowTabControl>
+            <TabItem Header="Clear Env">
+                <gcview:CleanEnv />
+            </TabItem>
+            <TabItem Header="QATools">
+                <gcview:QATools />
+            </TabItem>
+            <TabItem Header="Cmd Executor">
+                <gcview:CommandExecutor />
+            </TabItem>
+            <TabItem Header="Workload">
+                <gcvworkload:Workload />
+            </TabItem>
+        </Controls:MetroAnimatedSingleRowTabControl>
     </Grid>
 </Controls:MetroWindow>

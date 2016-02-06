@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="GammaClient.GCViews.QATools"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GammaClient.GCViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <GridSplitter Grid.Column="1" Width="10" ResizeDirection="Columns"/>
+        <DockPanel LastChildFill="True" Margin="0" Grid.Column="0">
+
+            <StackPanel Orientation="Vertical" Margin="5" >
+                <Label Content="Tools" VerticalContentAlignment="Center" Padding="4" VerticalAlignment="Center"/>
+                <Button x:Name="CollectLogBtn" Content="Collect Log" VerticalAlignment="Center" Margin="0,5" Padding="4" IsEnabled="{Binding CanExec}"/>
+                <Button x:Name="RmLogBtn" Content="Remove Log" Margin="0,0,0,5" Padding="4" VerticalAlignment="Center" IsEnabled="{Binding CanExec}"/>
+                <Button x:Name="UploadLogBtn" Content="Upload Log" Margin="0,0,0,5" Padding="4" VerticalAlignment="Center" IsEnabled="{Binding CanExec}"/>
+            </StackPanel>
+        
+        </DockPanel>
+        <GroupBox x:Name="groupBox" Grid.Column="2" Header="Operation Result" Margin="0">
+            <TextBox x:Name="QAToolsTB" Margin="0" TextWrapping="Wrap" Background="White" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Text="{Binding OpResult}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding Path=ScrollDownCommand}" CommandParameter="{Binding ElementName=QAToolsTB}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+        </GroupBox>
+    </Grid>
+</UserControl>

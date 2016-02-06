@@ -65,6 +65,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="GCViews\CleanEnv.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GCViews\CommandExecutor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GCViews\QATools.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GCViews\WorkloadViews\PageFour.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GCViews\WorkloadViews\PageOne.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GCViews\WorkloadViews\PageThree.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GCViews\WorkloadViews\PageTwo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GCViews\WorkloadViews\Workload.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -88,6 +120,8 @@
     <Compile Include="GCFacilities\TXManager\IGammaClientTransactionBase.cs" />
     <Compile Include="GCFacilities\TXManager\IGammaClientTXLogger.cs" />
     <Compile Include="GCFacilities\TXManager\IGammaClientTXManager.cs" />
+    <Compile Include="GCFacilities\UIServiceProvider\SPBase.cs" />
+    <Compile Include="GCFacilities\UIServiceProvider\SPResultInTextBox.cs" />
     <Compile Include="GCFacilities\WCFProxy\GammaClientBase.cs" />
     <Compile Include="GCFacilities\WCFProxy\GammaProxyFactory.cs" />
     <Compile Include="GCFacilities\WCFProxy\IMachineInfo.cs" />
@@ -103,6 +137,40 @@
     <Compile Include="GCHelpers\RelayCommand.cs" />
     <Compile Include="GCModels\MachineInfo.cs" />
     <Compile Include="GCModels\MachineInfoFactory.cs" />
+    <Compile Include="GCViewModels\CleanEnvViewModel.cs" />
+    <Compile Include="GCViewModels\CommandExecutorViewModel.cs" />
+    <Compile Include="GCViewModels\QAToolsViewModel.cs" />
+    <Compile Include="GCViewModels\WorkloadViewModels\Navigation\IPageViewModel.cs" />
+    <Compile Include="GCViewModels\WorkloadViewModels\Navigation\WorkloadSetupInfo.cs" />
+    <Compile Include="GCViewModels\WorkloadViewModels\PageFourViewModel.cs" />
+    <Compile Include="GCViewModels\WorkloadViewModels\PageThreeViewModel.cs" />
+    <Compile Include="GCViewModels\WorkloadViewModels\PageTwoViewModel.cs" />
+    <Compile Include="GCViewModels\WorkloadViewModels\WorkloadViewModel.cs" />
+    <Compile Include="GCViews\CleanEnv.xaml.cs">
+      <DependentUpon>CleanEnv.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GCViews\CommandExecutor.xaml.cs">
+      <DependentUpon>CommandExecutor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GCViews\QATools.xaml.cs">
+      <DependentUpon>QATools.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GCViewModels\WorkloadViewModels\PageOneViewModel.cs" />
+    <Compile Include="GCViews\WorkloadViews\PageFour.xaml.cs">
+      <DependentUpon>PageFour.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GCViews\WorkloadViews\PageOne.xaml.cs">
+      <DependentUpon>PageOne.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GCViews\WorkloadViews\PageThree.xaml.cs">
+      <DependentUpon>PageThree.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GCViews\WorkloadViews\PageTwo.xaml.cs">
+      <DependentUpon>PageTwo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GCViews\WorkloadViews\Workload.xaml.cs">
+      <DependentUpon>Workload.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -136,10 +204,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GCViews\" />
-    <Folder Include="GCWindows\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\GammaLib\GammaLib.csproj">
       <Project>{349077d7-2b02-4a37-a246-d41443da5cdd}</Project>
