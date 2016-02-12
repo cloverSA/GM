@@ -5,8 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GammaClient.GCViews.WorkloadViews"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="960">
     <Grid>
-            
+        <Button Content="Install" Margin="360,135,360,0" VerticalAlignment="Top" Width="240" Height="50"
+                Command="{Binding DataContext.NextViewModelCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=2, AncestorType={x:Type Grid}}}" />
+
     </Grid>
 </UserControl>
