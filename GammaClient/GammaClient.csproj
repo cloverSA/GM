@@ -106,7 +106,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GCFacilities\NetworkManager\NetworkComponentFactory.cs" />
-    <Compile Include="GCFacilities\NetworkManager\NetworkmanagerBase.cs" />
+    <Compile Include="GCFacilities\NetworkManager\NetworkManagerBase.cs" />
     <Compile Include="GCFacilities\NetworkManager\NetworkManagerFactory.cs" />
     <Compile Include="GCFacilities\NetworkManager\SimpleNetworkComponent.cs" />
     <Compile Include="GCFacilities\NetworkManager\SimpleNetworkManager.cs" />
@@ -135,6 +135,7 @@
     <Compile Include="GCFacilities\WCFProxy\ProxyQATools.cs" />
     <Compile Include="GCHelpers\ObservableObject.cs" />
     <Compile Include="GCHelpers\RelayCommand.cs" />
+    <Compile Include="GCModels\Cluster.cs" />
     <Compile Include="GCModels\MachineInfo.cs" />
     <Compile Include="GCModels\MachineInfoFactory.cs" />
     <Compile Include="GCViewModels\CleanEnvViewModel.cs" />

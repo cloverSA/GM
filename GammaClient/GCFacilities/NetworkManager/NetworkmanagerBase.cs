@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GammaClient.GCFacilities.NetworkManager
 {
-    abstract class NetworkmanagerBase
+    abstract class NetworkManagerBase
     {
         private ObservableCollection<IMachineInfo> _machines;
         public ObservableCollection<IMachineInfo> Machines

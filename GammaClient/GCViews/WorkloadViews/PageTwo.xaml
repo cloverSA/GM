@@ -3,10 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:GammaClient.GCViews.WorkloadViews"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="960">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <GridSplitter x:Name="gridSplitter" Height="5" Grid.Row="1" HorizontalAlignment="Stretch"/>
+        <GroupBox x:Name="groupBox" Header="Cluster Selection" Margin="40,20" >
+            <DataGrid ItemsSource="{Binding ClusterItems}" AutoGenerateColumns="False">
+
+                <DataGrid.Columns>
+
+                    <DataGridTemplateColumn Header="Select">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <RadioButton IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" GroupName="workload"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Cluster name" Binding="{Binding ClusterName}" MinWidth="40"/>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <DockPanel LastChildFill="False" Grid.Row="2">
+            <Button x:Name="NextPageBtn" Content="Next" VerticalAlignment="Top" DockPanel.Dock="Right" MinHeight="70" MinWidth="100" Margin="0,20,40,0"
+                   Command="{Binding DataContext.NextViewModelCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=2, AncestorType={x:Type UserControl}}}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding Path=SetDBsCommand}" CommandParameter="{Binding ElementName=NextPageBtn}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <Button Content="Previous" VerticalAlignment="Top" DockPanel.Dock="Right" MinHeight="70" MinWidth="100" Margin="0,20,40,0"
+                    Command="{Binding DataContext.NextViewModelCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=2, AncestorType={x:Type UserControl}}}"/>
+        </DockPanel>
+
     </Grid>
 </UserControl>

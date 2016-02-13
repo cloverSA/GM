@@ -15,7 +15,7 @@ namespace GammaClient.GCFacilities.UIServiceProvider
 
         private GammaClientTXManager _txMgr = GammaClientTXManagerFactory.GetGammaClientTXManager();
 
-        private NetworkmanagerBase _nodeMgr = NetworkManagerFactory.GetSimpleNetworkManager();
+        private NetworkManagerBase _nodeMgr = NetworkManagerFactory.GetSimpleNetworkManager();
 
         #endregion
 
@@ -30,7 +30,7 @@ namespace GammaClient.GCFacilities.UIServiceProvider
 
         }
 
-        internal NetworkmanagerBase NodeMgr
+        internal NetworkManagerBase NodeMgr
         {
             get
             {

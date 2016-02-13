@@ -7,25 +7,25 @@
              xmlns:gcvmworkload="clr-namespace:GammaClient.GCViewModels.WorkloadViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <gcvmworkload:WorkloadViewModel />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type gcvmworkload:PageOneViewModel}">
+            <local:PageOne />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type gcvmworkload:PageTwoViewModel}">
+            <local:PageTwo/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type gcvmworkload:PageThreeViewModel}">
+            <local:PageThree/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type gcvmworkload:PageFourViewModel}">
+            <local:PageFour/>
+        </DataTemplate>
+    </UserControl.Resources>
     
     <Grid>
-        <Grid.DataContext>
-            <gcvmworkload:WorkloadViewModel />
-        </Grid.DataContext>
-        <Grid.Resources>
-            <DataTemplate DataType="{x:Type gcvmworkload:PageOneViewModel}">
-                <local:PageOne />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type gcvmworkload:PageTwoViewModel}">
-                <local:PageTwo/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type gcvmworkload:PageThreeViewModel}">
-                <local:PageThree/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type gcvmworkload:PageFourViewModel}">
-                <local:PageFour/>
-            </DataTemplate>
-        </Grid.Resources>
         <ContentControl Content="{Binding CurrentPageViewModel}" />
     </Grid>
 </UserControl>

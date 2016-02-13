@@ -9,7 +9,7 @@ namespace GammaClient.GCFacilities.NetworkManager
     class NetworkManagerFactory
     {
 
-        public static NetworkmanagerBase GetSimpleNetworkManager()
+        public static NetworkManagerBase GetSimpleNetworkManager()
         {
             return SimpleNetworkManager.GetInstance();
         }

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace GammaClient.GCFacilities.NetworkManager
 {
-    class SimpleNetworkManager : NetworkmanagerBase
+    class SimpleNetworkManager : NetworkManagerBase
     {
         private static SimpleNetworkManager manager = new SimpleNetworkManager();
 
