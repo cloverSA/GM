@@ -11,7 +11,7 @@
     <UserControl.DataContext>
         <gcvm:CommandExecutorViewModel />
     </UserControl.DataContext>
-    <Grid>
+    <Grid RenderOptions.ClearTypeHint="Enabled" TextOptions.TextFormattingMode="Display">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>

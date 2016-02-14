@@ -12,7 +12,7 @@
         Width="960"
         Height="600"
         Title="MainWindow">
-    <Grid>
+    <Grid RenderOptions.ClearTypeHint="Enabled" TextOptions.TextFormattingMode="Display">
         <Controls:MetroAnimatedSingleRowTabControl>
             <TabItem Header="Clear Env">
                 <gcview:CleanEnv />

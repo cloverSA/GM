@@ -130,7 +130,15 @@ namespace GammaCrsQA.NetworkManager
 
         public static NodeNetManager GetSimpleNetworkManager()
         {
-            return SimpleNetworkManager.GetInstance();
+            NodeNetManager manager = null;
+            try
+            {
+                manager = SimpleNetworkManager.GetInstance();
+            }catch
+            {
+                throw;
+            }
+            return manager;
         }
     }
 }

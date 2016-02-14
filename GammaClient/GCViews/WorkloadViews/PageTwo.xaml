@@ -14,8 +14,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <GridSplitter x:Name="gridSplitter" Height="5" Grid.Row="1" HorizontalAlignment="Stretch"/>
-        <GroupBox x:Name="groupBox" Header="Cluster Selection" Margin="40,20" >
-            <DataGrid ItemsSource="{Binding ClusterItems}" AutoGenerateColumns="False">
+        
+            <DataGrid ItemsSource="{Binding ClusterItems}" AutoGenerateColumns="False" Margin="40,20">
 
                 <DataGrid.Columns>
 
@@ -30,7 +30,7 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-        </GroupBox>
+
         <DockPanel LastChildFill="False" Grid.Row="2">
             <Button x:Name="NextPageBtn" Content="Next" VerticalAlignment="Top" DockPanel.Dock="Right" MinHeight="70" MinWidth="100" Margin="0,20,40,0"
                    Command="{Binding DataContext.NextViewModelCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=2, AncestorType={x:Type UserControl}}}">
