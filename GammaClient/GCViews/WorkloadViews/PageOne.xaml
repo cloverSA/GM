@@ -6,15 +6,22 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:GammaClient.GCViews.WorkloadViews"
              mc:Ignorable="d" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              d:DesignHeight="600" d:DesignWidth="960">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid>
-        <Button x:Name="NextPageBtn" Content="Install" Margin="360,135,360,0" VerticalAlignment="Top" Width="240" Height="50"
-                Command="{Binding DataContext.NextViewModelCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=2, AncestorType={x:Type UserControl}}}">
+        <Button x:Name="NextPageBtn" Content="Install" Margin="360,135,360,0" VerticalAlignment="Top" Width="240" Height="50">
+            <!--
+            Command="{Binding DataContext.NextViewModelCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=2, AncestorType={x:Type UserControl}}}"
+            -->
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
-                    <i:InvokeCommandAction Command="{Binding Path=SetClusterInfoCommand}" CommandParameter="{Binding ElementName=NextPageBtn}" />
+                    <i:InvokeCommandAction Command="{Binding Path=SetClusterInfoCommand}" CommandParameter="{Binding Source=NextPage}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
+        <Controls:ProgressRing Visibility="{Binding InProgress, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}"/>
     </Grid>
 </UserControl>

@@ -1,7 +1,7 @@
-﻿using GammaClient.GCFacilities.TXManager;
+﻿using GalaSoft.MvvmLight.CommandWpf;
+using GammaClient.GCFacilities.TXManager;
 using GammaClient.GCFacilities.UIServiceProvider;
 using GammaClient.GCFacilities.WCFProxy;
-using GammaClient.GCHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;

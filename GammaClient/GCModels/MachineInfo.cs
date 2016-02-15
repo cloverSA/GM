@@ -1,4 +1,5 @@
-﻿using GammaClient.GCFacilities.WCFProxy;
+﻿using GalaSoft.MvvmLight;
+using GammaClient.GCFacilities.WCFProxy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GammaClient.GCModels
 {
-    public class MachineInfo : GCHelpers.ObservableObject, IMachineInfo
+    public class MachineInfo : ObservableObject, IMachineInfo
     {
         private string nodename;
 
@@ -40,7 +41,7 @@ namespace GammaClient.GCModels
                     return;
                 }
                 alive = value;
-                OnPropertyChanged("Alive");
+                RaisePropertyChanged("Alive");
             }
         }
 

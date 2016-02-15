@@ -1,5 +1,5 @@
-﻿using GammaClient.GCFacilities.TXManager;
-using GammaClient.GCHelpers;
+﻿using GalaSoft.MvvmLight.CommandWpf;
+using GammaClient.GCFacilities.TXManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +32,7 @@ namespace GammaClient.GCFacilities.UIServiceProvider
             set
             {
                 _opResult = value;
-                OnPropertyChanged("OpResult");
+                RaisePropertyChanged("OpResult");
             }
         }
 
@@ -46,7 +46,7 @@ namespace GammaClient.GCFacilities.UIServiceProvider
             set
             {
                 _canExec = value;
-                OnPropertyChanged("CanExec");
+                RaisePropertyChanged("CanExec");
             }
         }
 

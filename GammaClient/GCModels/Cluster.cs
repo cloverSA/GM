@@ -1,4 +1,4 @@
-﻿using GammaClient.GCHelpers;
+﻿using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +26,7 @@ namespace GammaClient.GCModels
                     return;
                 }
                 _isSelected = value;
-                OnPropertyChanged("IsSelected");
+                RaisePropertyChanged("IsSelected");
             }
         }
 

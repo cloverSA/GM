@@ -26,7 +26,7 @@ namespace GammaServiceLib.OraCRS
             });
             if (homes.Count() != 1)
             {
-                throw new Exception("CrsEnv Get more than one Active CRS HOME");
+                throw new Exception("No CRSHome found or Get more than one Active CRS HOME");
             }
             else
             {
@@ -51,72 +51,110 @@ namespace GammaServiceLib.OraCRS
 
         public string GetDBHOMEByName(string dbname)
         {
-            var crs = GetCurrentCrsHome();
-            var cmd = Path.Combine(crs, "bin", srvctl);
-            var args = string.Format("config database -db {0}", dbname);
-            var pattern = @"^Oracle home:(.*)$";
-            var cmd_rs = GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
-            Match match = Regex.Match(cmd_rs, pattern, RegexOptions.Multiline);
-            if (match.Groups.Count > 1)
+            try
             {
-                return match.Groups[1].Value.Trim();
+                var crs = GetCurrentCrsHome();
+                var cmd = Path.Combine(crs, "bin", srvctl);
+                var args = string.Format("config database -db {0}", dbname);
+                var pattern = @"^Oracle home:(.*)$";
+                var cmd_rs = GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
+                Match match = Regex.Match(cmd_rs, pattern, RegexOptions.Multiline);
+                if (match.Groups.Count > 1)
+                {
+                    return match.Groups[1].Value.Trim();
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return string.Empty;
+                return ex.Message;
             }
         }
 
         public string GetDBNames()
         {
-            var crs = GetCurrentCrsHome();
-            var cmd = Path.Combine(crs, "bin", srvctl);
-            var args = string.Format("config database");
-            return GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
+            try
+            {
+                var crs = GetCurrentCrsHome();
+                var cmd = Path.Combine(crs, "bin", srvctl);
+                var args = string.Format("config database");
+                return GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
         }
 
         public string GetClusterNames()
         {
-            var crs = GetCurrentCrsHome();
-            var cmd = Path.Combine(crs, "bin", "cemutlo");
-            var args = string.Format("-n");
-            return GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
+            try
+            {
+                var crs = GetCurrentCrsHome();
+                var cmd = Path.Combine(crs, "bin", "cemutlo");
+                var args = string.Format("-n");
+                return GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
+            }catch(Exception ex)
+            {
+                return ex.Message;
+            }
+            
         }
 
         public string GetScan()
         {
-            var crs = GetCurrentCrsHome();
-            var cmd = Path.Combine(crs, "bin", "srvctl");
-            var args = string.Format("config scan");
-            var rs = GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
-            var pattern = @"^SCAN name:(.*?),";
-            Match match = Regex.Match(rs, pattern, RegexOptions.Multiline);
-            if (match.Groups.Count > 1)
+            try
             {
-                return match.Groups[1].Value.Trim();
+                var crs = GetCurrentCrsHome();
+                var cmd = Path.Combine(crs, "bin", "srvctl");
+                var args = string.Format("config scan");
+                var rs = GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
+                var pattern = @"^SCAN name:(.*?),";
+                Match match = Regex.Match(rs, pattern, RegexOptions.Multiline);
+                if (match.Groups.Count > 1)
+                {
+                    return match.Groups[1].Value.Trim();
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return string.Empty;
+                return ex.Message;
             }
+
         }
 
         public string GetScanPort()
         {
-            var crs = GetCurrentCrsHome();
-            var cmd = Path.Combine(crs, "bin", "srvctl");
-            var args = string.Format("config scan_listener");
-            var rs = GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
-            var pattern = @".*?Port: TCP:(.*?)$";
-            Match match = Regex.Match(rs, pattern, RegexOptions.Multiline);
-            if (match.Groups.Count > 1)
+            try
             {
-                return match.Groups[1].Value.Trim();
+                var crs = GetCurrentCrsHome();
+                var cmd = Path.Combine(crs, "bin", "srvctl");
+                var args = string.Format("config scan_listener");
+                var rs = GeneralUtility.PureCmdExec.PureCmdExector(cmd, args);
+                var pattern = @".*?Port: TCP:(.*?)$";
+                Match match = Regex.Match(rs, pattern, RegexOptions.Multiline);
+                if (match.Groups.Count > 1)
+                {
+                    return match.Groups[1].Value.Trim();
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return string.Empty;
+                return ex.Message;
             }
+
         }
     }
 }

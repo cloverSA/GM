@@ -1,4 +1,6 @@
-﻿using GammaClient.GCHelpers;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using GammaClient.GCModels;
 using GammaClient.GCViewModels.WorkloadViewModels.Navigation;
 using System;
 using System.Collections.Generic;
@@ -24,10 +26,21 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
         public WorkloadViewModel()
         {
             // Add available pages
-            PageViewModels.Add(new PageOneViewModel());
-            PageViewModels.Add(new PageTwoViewModel());
-            PageViewModels.Add(new PageThreeViewModel());
-            PageViewModels.Add(new PageFourViewModel());
+            var p1 = new PageOneViewModel();
+            p1.NextPageEventHandler += HanldeNextPageEvent;
+            PageViewModels.Add(p1);
+            var p2 = new PageTwoViewModel();
+            p2.NextPageEventHandler += HanldeNextPageEvent;
+            p2.PreviousPageEventHandler += HanldePreviousPageEvent;
+            PageViewModels.Add(p2);
+            var p3 = new PageThreeViewModel();
+            p3.NextPageEventHandler += HanldeNextPageEvent;
+            p3.PreviousPageEventHandler += HanldePreviousPageEvent;
+            PageViewModels.Add(p3);
+            var p4 = new PageFourViewModel();
+            p4.NextPageEventHandler += HanldeNextPageEvent;
+            p4.PreviousPageEventHandler += HanldePreviousPageEvent;
+            PageViewModels.Add(p4);
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];
         }
@@ -74,7 +87,7 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
                 if (_currentPageViewModel != value)
                 {
                     _currentPageViewModel = value;
-                    OnPropertyChanged("CurrentPageViewModel");
+                    RaisePropertyChanged("CurrentPageViewModel");
                 }
             }
         }
@@ -119,6 +132,40 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
             }
         }
 
+        private void NextViewModel(IPageViewModel current, NavigateArgs e)
+        {
+            if (current.CanSwitchPage)
+            {
+                int current_index = PageViewModels.FindIndex(vm => vm == current);
+                if (current_index + 1 != PageViewModels.Count)
+                {
+                    PageViewModels[current_index + 1].ProcessNavigateArgs(e);
+                    CurrentPageViewModel = PageViewModels[current_index + 1];
+                }
+            }
+        }
+
+        private void PreviousViewModel(IPageViewModel current, NavigateArgs e)
+        {
+            int current_index = PageViewModels.FindIndex(vm => vm == current);
+            if (current_index != 0)
+            {
+                PageViewModels[current_index - 1].ProcessNavigateArgs(e);
+                CurrentPageViewModel = PageViewModels[current_index - 1];
+            }
+        }
+
+        public void HanldeNextPageEvent(object sender, NavigateArgs e)
+        {
+            IPageViewModel vm = sender as IPageViewModel;
+            NextViewModel(vm, e);
+        }
+
+        public void HanldePreviousPageEvent(object sender, NavigateArgs e)
+        {
+            IPageViewModel vm = sender as IPageViewModel;
+            PreviousViewModel(vm, e);
+        }
         #endregion
     }
 }

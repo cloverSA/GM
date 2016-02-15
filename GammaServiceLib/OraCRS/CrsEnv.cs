@@ -153,9 +153,13 @@ namespace GammaServiceLib.OraCRS
             string[] lines = File.ReadAllLines(inf);
             foreach (var line in lines.Where(content_filter))
             {
-                foreach (Match match in Regex.Matches(line, pattern))
+                var matches = Regex.Matches(line, pattern);
+                if (matches != null)
                 {
-                    result.Add(match.Groups[1].Value);
+                    foreach (Match match in Regex.Matches(line, pattern))
+                    {
+                        result.Add(match.Groups[1].Value);
+                    }
                 }
             }
 

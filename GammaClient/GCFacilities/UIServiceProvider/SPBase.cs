@@ -1,6 +1,6 @@
-﻿using GammaClient.GCFacilities.NetworkManager;
+﻿using GalaSoft.MvvmLight;
+using GammaClient.GCFacilities.NetworkManager;
 using GammaClient.GCFacilities.TXManager;
-using GammaClient.GCHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
