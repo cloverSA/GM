@@ -5,8 +5,12 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GammaClient.GCViews"
+             xmlns:gcvm="clr-namespace:GammaClient.GCViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <gcvm:QAToolsViewModel />
+    </UserControl.DataContext>
     <Grid RenderOptions.ClearTypeHint="Enabled" TextOptions.TextFormattingMode="Display">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -17,8 +21,10 @@
         <DockPanel LastChildFill="True" Margin="0" Grid.Column="0">
 
             <StackPanel Orientation="Vertical" Margin="5" DockPanel.Dock="Top">
-                <Button x:Name="CollectLogBtn" Content="Collect Log" VerticalAlignment="Center" Margin="0,5" Padding="4" IsEnabled="{Binding CanExec}"/>
-                <Button x:Name="RmLogBtn" Content="Remove Log" Margin="0,0,0,5" Padding="4" VerticalAlignment="Center" IsEnabled="{Binding CanExec}"/>
+                <Button x:Name="CollectLogBtn" Content="Collect Log" VerticalAlignment="Center" Margin="0,5" Padding="4" IsEnabled="{Binding CanExec}"
+                        Command="{Binding Path=CollectLogCommand}"/>
+                <Button x:Name="RmLogBtn" Content="Remove Log" Margin="0,0,0,5" Padding="4" VerticalAlignment="Center" IsEnabled="{Binding CanExec}"
+                        Command="{Binding Path=RmLogCommand}"/>
                 <Button x:Name="UploadLogBtn" Content="Upload Log" Margin="0,0,0,5" Padding="4" VerticalAlignment="Center" IsEnabled="{Binding CanExec}"/>
             </StackPanel>
         

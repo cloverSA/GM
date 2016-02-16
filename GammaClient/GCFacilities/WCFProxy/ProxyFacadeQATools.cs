@@ -25,26 +25,28 @@ namespace GammaClient.GCFacilities.WCFProxy
 
         }
 
-        public static void CollectLog(bool collect_dmp)
+        public static Task CollectLog(bool collect_dmp)
         {
-
+            var tasks = new List<Task<string>>();
             var tx_mgr = GammaClientTXManagerFactory.GetGammaClientTXManager();
             foreach (var m in from machine in NetworkManagerFactory.GetSimpleNetworkManager().Machines where machine.Alive == NodeState.Online && machine.IsSelected select machine)
             {
-                tx_mgr.StartQAToolsTransaction(m, GammaTXQATools.GETLOG, collect_dmp);
+                var t = tx_mgr.StartQAToolsTransaction(m, GammaTXQATools.GETLOG, collect_dmp);
+                tasks.Add(t);
             }
-
+            return Task.WhenAll(tasks);
         }
 
-        public static void RmLog()
+        public static Task RmLog()
         {
-
+            var tasks = new List<Task<string>>();
             var tx_mgr = GammaClientTXManagerFactory.GetGammaClientTXManager();
             foreach (var m in from machine in NetworkManagerFactory.GetSimpleNetworkManager().Machines where machine.Alive == NodeState.Online && machine.IsSelected select machine)
             {
-                tx_mgr.StartQAToolsTransaction(m, GammaTXQATools.CLEARLOG);
+                var t = tx_mgr.StartQAToolsTransaction(m, GammaTXQATools.CLEARLOG);
+                tasks.Add(t);
             }
-
+            return Task.WhenAll(tasks);
         }
     }
 }
