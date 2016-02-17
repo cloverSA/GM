@@ -5,51 +5,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GammaClient.GCModels;
+using System.Collections.ObjectModel;
+using GalaSoft.MvvmLight.Command;
+using System.Windows.Input;
 
 namespace GammaClient.GCViewModels.WorkloadViewModels
 {
-    class PageThreeViewModel : IPageViewModel
+    class PageThreeViewModel : PageViewModel
     {
-
-        private bool _canSwitchPage = true;
-
-        public bool CanSwitchPage
+        public override void ProcessNavigateArgs(NavigateArgs args)
         {
-            get
-            {
-                return _canSwitchPage;
-            }
+            DBs = args.Item as ObservableCollection<OraDB>;
 
-            set
-            {
-                _canSwitchPage = value;
-            }
+            WorkLoads = new ObservableCollection<string>() { "Swingbench", "Aroltp" };
         }
 
-        public event EventHandler<NavigateArgs> NextPageEventHandler;
-        public event EventHandler<NavigateArgs> PreviousPageEventHandler;
+        public ObservableCollection<OraDB> DBs { get; set; }
+        public ObservableCollection<string> WorkLoads { get; set; }
 
-        public void ProcessNavigateArgs(NavigateArgs args)
+        private void GoNext(object command_parm)
         {
-            
+            RaisePreviousPageEvent(this, new NavigateArgs(DBs));
         }
 
-        private void RaiseNextPageEvent(object sender, NavigateArgs e)
+        private void GoBack(object command_parm)
         {
-            var handler = NextPageEventHandler;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            RaisePreviousPageEvent(this, null);
         }
 
-        private void RaisePreviousPageEvent(object sender, NavigateArgs e)
-        {
-            var handler = PreviousPageEventHandler;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
+        public ICommand GoNextCommand { get { return new RelayCommand<object>(GoNext); } }
+        public ICommand GoBackCommand { get { return new RelayCommand<object>(GoBack); } }
     }
 }

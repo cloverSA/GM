@@ -44,5 +44,13 @@ namespace GammaClient.GCFacilities.WCFProxy
             }
             return rs;
         }
+
+        public Task<string> InstallSwingBenchAsync(string hostname, string dbhome, string dbname, string system_pwd, string sys_pwd, string workloadDmpLoc, string workloadDmpFileName)
+        {
+            return Task.Run(() =>
+            {
+                return InstallSwingBench(hostname, dbhome, dbname, system_pwd, sys_pwd, workloadDmpLoc, workloadDmpFileName);
+            });
+        }
     }
 }

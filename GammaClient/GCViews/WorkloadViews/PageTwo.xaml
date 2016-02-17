@@ -3,10 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:GammaClient.GCViews.WorkloadViews"
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="960">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
@@ -32,17 +35,11 @@
             </DataGrid>
 
         <DockPanel LastChildFill="False" Grid.Row="2">
-            <Button x:Name="NextPageBtn" Content="Next" VerticalAlignment="Top" DockPanel.Dock="Right" MinHeight="70" MinWidth="100" Margin="0,20,40,0"
-                   Command="{Binding DataContext.NextViewModelCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=2, AncestorType={x:Type UserControl}}}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <i:InvokeCommandAction Command="{Binding Path=SetDBsCommand}" CommandParameter="{Binding ElementName=NextPageBtn}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
+            <Button x:Name="NextPageBtn" Content="Next" VerticalAlignment="Top" DockPanel.Dock="Right" MinHeight="70" MinWidth="100" Margin="0,20,40,0" IsEnabled="{Binding CanSwitchPage}"
+                    Command="{Binding Path=SetDBsCommand}"/>
             <Button Content="Previous" VerticalAlignment="Top" DockPanel.Dock="Right" MinHeight="70" MinWidth="100" Margin="0,20,40,0"
-                    Command="{Binding DataContext.NextViewModelCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=2, AncestorType={x:Type UserControl}}}"/>
+                    Command="{Binding Path=GoBackCommand}"/>
         </DockPanel>
-
+        <Controls:ProgressRing Visibility="{Binding InProgress, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}"/>
     </Grid>
 </UserControl>

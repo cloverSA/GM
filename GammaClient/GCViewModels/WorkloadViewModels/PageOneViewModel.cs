@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
+﻿using GalaSoft.MvvmLight.CommandWpf;
 using GammaClient.GCFacilities.NetworkManager;
 using GammaClient.GCFacilities.WCFProxy;
 using GammaClient.GCModels;
@@ -14,97 +13,35 @@ using System.Windows.Input;
 
 namespace GammaClient.GCViewModels.WorkloadViewModels
 {
-    class PageOneViewModel : ObservableObject, IPageViewModel
+    class PageOneViewModel : PageViewModel
     {
-        #region Members
-
-        private bool _inProgress = false;
-        private bool _canSwitchPage = true;
-
-        #endregion
-
-        #region Properties
-
-        public bool InProgress
-        {
-            get
-            {
-                return _inProgress;
-            }
-            set
-            {
-                _inProgress = value;
-                RaisePropertyChanged("InProgress");
-            }
-        }
-
-        public bool CanSwitchPage
-        {
-            get
-            {
-                return _canSwitchPage;
-            }
-
-            set
-            {
-                _canSwitchPage = value;
-                RaisePropertyChanged("CanSwitchPage");
-            }
-        }
-
-        public event EventHandler<NavigateArgs> NextPageEventHandler;
-        public event EventHandler<NavigateArgs> PreviousPageEventHandler;
-
+        #region Command
 
         public ICommand SetClusterInfoCommand { get { return new RelayCommand<object>(SetClusterInfo); } }
-
+        
         #endregion
 
         #region Functions
 
-        private void RaiseNextPageEvent(object sender, NavigateArgs e)
+        public void SetClusterInfo(object command_parm)
         {
-            var handler = NextPageEventHandler;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
-
-        private void RaisePreviousPageEvent(object sender, NavigateArgs e)
-        {
-            var handler = PreviousPageEventHandler;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
-
-        public void SetClusterInfo(object sender)
-        {
-            var way = sender as string;
             CanSwitchPage = false;
             InProgress = true;
-            ObservableCollection<Cluster> rs = null;
-            var task = Task.Run(() =>
-            {
-                rs = GetClusterInfo();
-            });
-            task.GetAwaiter().OnCompleted(() =>
-            {
+            ObservableCollection<ICluster> rs = null;
+            var task = GetClusterInfo();
+            task.GetAwaiter().OnCompleted(()=> {
                 InProgress = false;
                 CanSwitchPage = true;
-                if (way.Contains("NextPage"))
-                {
-                    RaiseNextPageEvent(this, new NavigateArgs(rs));
-                }
+                WorkloadSetupInfo.SetValue(WorkloadSetupKeys.CLUSTERS, rs);
+                RaiseNextPageEvent(this, null);
             });
+            
         }
 
 
-        private ObservableCollection<Cluster> GetClusterInfo()
+        private async Task<ObservableCollection<ICluster>> GetClusterInfo()
         {
-            ObservableCollection<Cluster> clusters = new ObservableCollection<Cluster>();
+            ObservableCollection<ICluster> clusters = new ObservableCollection<ICluster>();
             var net_mgr = NetworkManagerFactory.GetSimpleNetworkManager();
             var tasks = new List<Task>();
             var results = new List<string>();
@@ -121,7 +58,7 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
                     }
                 }));
             }
-            Task.WhenAll(tasks).GetAwaiter().GetResult();
+            await Task.WhenAll(tasks);
 
             int counter = 0;
 
@@ -133,13 +70,6 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
 
             return clusters;
         }
-
-        public void ProcessNavigateArgs(NavigateArgs args)
-        {
-            
-        }
-
-
 
         #endregion
     }

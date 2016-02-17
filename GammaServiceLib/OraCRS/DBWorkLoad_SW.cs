@@ -25,8 +25,8 @@ namespace GammaServiceLib.OraCRS
                 SwingbenchDmpFilePath = Path.Combine(workloadDmpLoc, workloadDmpFileName),
                 TargetDBHome = dbhome,
                 TargetDBName = dbname,
-                SysPwd = "oracle",
-                SysUsr = sys_pwd
+                SysPwd = sys_pwd,
+                SysUsr = "sys"
             };
             try
             {

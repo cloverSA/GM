@@ -12,6 +12,9 @@ namespace GammaClient.GCViewModels.WorkloadViewModels.Navigation
         bool CanSwitchPage { get; set; }
         event EventHandler<NavigateArgs> NextPageEventHandler;
         event EventHandler<NavigateArgs> PreviousPageEventHandler;
+        void RaiseNextPageEvent(object sender, NavigateArgs e);
+        void RaisePreviousPageEvent(object sender, NavigateArgs e);
         void ProcessNavigateArgs(NavigateArgs args);
+
     }
 }
