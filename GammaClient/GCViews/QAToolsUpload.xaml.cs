@@ -12,17 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MahApps.Metro.Controls.Dialogs;
-using GammaClient.GCViewModels;
 
 namespace GammaClient.GCViews
 {
     /// <summary>
-    /// QATools.xaml 的交互逻辑
+    /// Interaction logic for QAToolsUpload.xaml
     /// </summary>
-    public partial class QATools : UserControl
+    public partial class QAToolsUpload : UserControl
     {
-        public QATools()
+        public QAToolsUpload()
         {
             InitializeComponent();
         }

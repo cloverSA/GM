@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="GammaClient.GCViews.QAToolsUpload"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:GammaClient.GCViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800"
+             >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0">User name:</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="1">Password:</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="2">Bugnum:</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Username}"></TextBox>
+        <PasswordBox x:Name="PwdBox" Grid.Column="1" Grid.Row="1">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PasswordChanged">
+                    <i:InvokeCommandAction Command="{Binding PasswordChangeCommand}" CommandParameter="{Binding ElementName=PwdBox}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </PasswordBox>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Bugnum}"></TextBox>
+        <Button Content="Upload" Grid.Column="0" Grid.Row="3" Width="75" Command="{Binding UploadCommand}"/>
+        <Button Content="Close"  Grid.Column="1" Grid.Row="3" Width="75" Command="{Binding CloseCommand}"/>
+
+    </Grid>
+</UserControl>

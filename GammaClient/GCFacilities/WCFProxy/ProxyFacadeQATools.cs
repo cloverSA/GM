@@ -14,15 +14,16 @@ namespace GammaClient.GCFacilities.WCFProxy
     }
     class QAToolsFacade
     {
-        public static void UploadLogToSftp(string usr, string pwd, string bugnum, string location)
+        public static Task<string[]> UploadLogToSftp(string usr, string pwd, string bugnum, string location)
         {
             GeneralUtility.IUploadRecord upload_rec = new UploadRecord() { Usr = usr, Passwd = pwd, Target = bugnum, Source = location };
             var tx_mgr = GammaClientTXManagerFactory.GetGammaClientTXManager();
+            var tasks = new List<Task<string>>();
             foreach (var m in from machine in NetworkManagerFactory.GetSimpleNetworkManager().Machines where machine.Alive == NodeState.Online && machine.IsSelected select machine)
             {
-                tx_mgr.StartQAToolsTransaction(m, GammaTXQATools.UPLOAD, upload_rec);
+                tasks.Add(tx_mgr.StartQAToolsTransaction(m, GammaTXQATools.UPLOAD, upload_rec));
             }
-
+            return Task.WhenAll(tasks);
         }
 
         public static Task CollectLog(bool collect_dmp)

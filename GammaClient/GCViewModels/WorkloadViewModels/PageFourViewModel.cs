@@ -88,7 +88,7 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
             });
         }
 
-        private Task<string> GenerateSwingbench(OraDB db)
+        private Task<string> GenerateSwingbench(IOraDB db)
         {
             var db_cluster = GetSelectedCluster(WorkloadSetupInfo.GetValue<ObservableCollection<Cluster>>(WorkloadSetupKeys.CLUSTERS));
             var machine = CollectOneNodeFromCluster(db_cluster);

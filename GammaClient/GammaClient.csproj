@@ -89,7 +89,12 @@
     <Compile Include="GCModels\NavigateEventArgs.cs" />
     <Compile Include="GCModels\OraDB.cs" />
     <Compile Include="GCModels\OraDBFactory.cs" />
+    <Compile Include="GCViewModels\QAToolsUploadDialog.cs" />
+    <Compile Include="GCViewModels\QAToolsUploadViewModel.cs" />
     <Compile Include="GCViewModels\WorkloadViewModels\Navigation\PageViewModel.cs" />
+    <Compile Include="GCViews\QAToolsUpload.xaml.cs">
+      <DependentUpon>QAToolsUpload.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="GCViews\CleanEnv.xaml">
@@ -101,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GCViews\QATools.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GCViews\QAToolsUpload.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

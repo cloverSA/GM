@@ -9,11 +9,20 @@ using GalaSoft.MvvmLight;
 using GammaClient.GCFacilities.WCFProxy;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using MahApps.Metro.Controls.Dialogs;
+using GammaClient.GCViews;
 
 namespace GammaClient.GCViewModels
 {
     class QAToolsViewModel : SPResultInTextBox
     {
+        private readonly IDialogCoordinator _dialogCoordinator;
+
+        public QAToolsViewModel()
+        {
+            _dialogCoordinator = DialogCoordinator.Instance;
+        }
+
         protected override void RaiseResultComeback(object sender, GammaUIUpdateArgs e)
         {
             if (e.TRANSACTION.TX_TYPE == GammaTransactionType.QATOOLS)
@@ -41,6 +50,24 @@ namespace GammaClient.GCViewModels
             });
         }
 
+        private async void RunUploadLogDiaglog()
+        {
+            var uploadLogDiaglog = new QAToolsUploadDialog();
+            var uploadLogDiaglogContent = new QAToolsUploadViewModel((instance)=> {
+                _dialogCoordinator.HideMetroDialogAsync(this, uploadLogDiaglog);
+            });
+            uploadLogDiaglog.Content = new QAToolsUpload { DataContext = uploadLogDiaglogContent };
+            await _dialogCoordinator.ShowMetroDialogAsync(this, uploadLogDiaglog);
+        }
+
+        private ICommand _uploadDiaglog;
+        public ICommand ShowUploadDiaglogCommand
+        {
+            get
+            {
+                return this._uploadDiaglog ?? (this._uploadDiaglog = new RelayCommand(RunUploadLogDiaglog));
+            }
+        }
         public ICommand CollectLogCommand { get { return new RelayCommand(CollectLog); } }
         public ICommand RmLogCommand { get { return new RelayCommand(RmLog); } }
     }
