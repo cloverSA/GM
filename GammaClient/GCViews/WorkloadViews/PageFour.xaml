@@ -3,10 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:GammaClient.GCViews.WorkloadViews"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0">Dump file location :</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding WorkloadDmpLoc, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Grid.Column="0" Grid.Row="1">Dump file name :</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding WorkloadDmpFilename, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Grid.Column="0" Grid.Row="2">Sys password :</TextBlock>
+        <PasswordBox x:Name="SysPwdBox" Grid.Column="1" Grid.Row="2">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PasswordChanged">
+                    <i:InvokeCommandAction Command="{Binding SysPasswordChangedCommand}" CommandParameter="{Binding ElementName=SysPwdBox}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </PasswordBox>
+        <TextBlock Grid.Column="0" Grid.Row="3">System password :</TextBlock>
+        <PasswordBox x:Name="SystemPwdBox" Grid.Column="1" Grid.Row="3">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PasswordChanged">
+                    <i:InvokeCommandAction Command="{Binding SystemPasswordChangedCommand}" CommandParameter="{Binding ElementName=SystemPwdBox}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </PasswordBox>
+
     </Grid>
 </UserControl>

@@ -23,29 +23,23 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
 
         #region Functions
 
-        public void SetClusterInfo(object command_parm)
+        public async void SetClusterInfo(object command_parm)
         {
-            CanSwitchPage = false;
-            InProgress = true;
-            ObservableCollection<ICluster> rs = null;
+            InProgressWait(true);
             var task = GetClusterInfo();
-            task.GetAwaiter().OnCompleted(()=> {
-                InProgress = false;
-                CanSwitchPage = true;
-                WorkloadSetupInfo.SetValue(WorkloadSetupKeys.CLUSTERS, rs);
-                RaiseNextPageEvent(this, null);
-            });
-            
+            var rs = await task;
+            InProgressWait(false);
+            WorkloadSetupInfo.SetValue(WorkloadSetupKeys.CLUSTERS, rs);
+            RaiseNextPageEvent(this, null);
         }
-
 
         private async Task<ObservableCollection<ICluster>> GetClusterInfo()
         {
             ObservableCollection<ICluster> clusters = new ObservableCollection<ICluster>();
-            var net_mgr = NetworkManagerFactory.GetSimpleNetworkManager();
+            
             var tasks = new List<Task>();
             var results = new List<string>();
-            foreach (var machine in from m in net_mgr.Machines where m.Alive == NodeState.Online && m.IsSelected select m)
+            foreach (var machine in from m in BaseFacility.NodeMgr.Machines where m.Alive == NodeState.Online && m.IsSelected select m)
             {
                 var proxy = GammaProxyFactory.GetCrsEnvProxy(machine);
                 var rs = proxy.GetClusterNamesAsync();

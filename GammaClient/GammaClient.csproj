@@ -85,8 +85,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GCModels\ICluster.cs" />
+    <Compile Include="GCModels\IOraDB.cs" />
     <Compile Include="GCModels\NavigateEventArgs.cs" />
     <Compile Include="GCModels\OraDB.cs" />
+    <Compile Include="GCModels\OraDBFactory.cs" />
     <Compile Include="GCViewModels\WorkloadViewModels\Navigation\PageViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

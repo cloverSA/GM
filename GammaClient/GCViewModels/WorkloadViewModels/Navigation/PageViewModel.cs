@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GammaClient.GCModels;
+using GammaClient.GCFacilities.UIServiceProvider;
 
 namespace GammaClient.GCViewModels.WorkloadViewModels.Navigation
 {
@@ -16,6 +17,8 @@ namespace GammaClient.GCViewModels.WorkloadViewModels.Navigation
         private bool _canSwitchPage = true;
 
         private bool _inProgress = false;
+
+        private readonly SPBase _baseFacility = new SPBase();
 
         #endregion
 
@@ -45,6 +48,14 @@ namespace GammaClient.GCViewModels.WorkloadViewModels.Navigation
             {
                 _inProgress = value;
                 RaisePropertyChanged("InProgress");
+            }
+        }
+
+        public SPBase BaseFacility
+        {
+            get
+            {
+                return _baseFacility;
             }
         }
 
@@ -83,6 +94,18 @@ namespace GammaClient.GCViewModels.WorkloadViewModels.Navigation
             }
         }
 
+        public virtual void InProgressWait(bool inProgress)
+        {
+            if (inProgress)
+            {
+                CanSwitchPage = false;
+                InProgress = true;
+            } else
+            {
+                CanSwitchPage = true;
+                InProgress = false;
+            }
+        }
         #endregion
     }
 }

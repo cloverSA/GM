@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace GammaClient.GCModels
 {
-    enum WorkLoad
+    public enum WorkLoad
     {
         Swingbench,
         Aroltp,
     }
-    class OraDB : ObservableObject
+    class OraDB : ObservableObject, IOraDB
     {
         private string _dbname;
         private string _dbhome;

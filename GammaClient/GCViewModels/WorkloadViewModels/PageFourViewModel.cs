@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using GammaClient.GCModels;
 using System.Collections.ObjectModel;
 using GammaClient.GCFacilities.WCFProxy;
-
+using System.Windows.Controls;
+using GalaSoft.MvvmLight.CommandWpf;
+using System.Windows.Input;
 
 namespace GammaClient.GCViewModels.WorkloadViewModels
 {
@@ -19,11 +21,39 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
         {
             DBs = args.Item as ObservableCollection<OraDB>;
         }
-
+        private string _workloadDmpLoc;
+        private string _workloadDmpFilename;
         public string SYSPWD { get; set; }
         public string SYSTEMPWD { get; set; }
-        public string WorkloadDmpLoc { get; set; }
-        public string WorkloadDmpFilename { get; set; }
+
+
+        public string WorkloadDmpLoc
+        {
+            get
+            {
+                return _workloadDmpLoc;
+            }
+
+            set
+            {
+                _workloadDmpLoc = value;
+                RaisePropertyChanged("WorkloadDmpLoc");
+            }
+        }
+
+        public string WorkloadDmpFilename
+        {
+            get
+            {
+                return _workloadDmpFilename;
+            }
+
+            set
+            {
+                _workloadDmpFilename = value;
+                RaisePropertyChanged("WorkloadDmpFilename");
+            }
+        }
 
         private string _result;
         public string Result
@@ -40,7 +70,7 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
             }
         }
 
-        private void GenerateScript()
+        private async void GenerateScript()
         {
             var tasks = new List<Task<string>>();
             foreach (var db in DBs)
@@ -51,6 +81,7 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
                 }
             }
             var ok = Task.WhenAll(tasks);
+            await ok;
             Array.ForEach(ok.Result, (rs) => 
             {
                 Result += string.Format("Script generated result : {0} \n", rs);
@@ -82,5 +113,21 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
                      select c;
             return rs.First();
         }
+
+        private void SystemPasswordChanged(object sender)
+        {
+            var pwdbox = sender as PasswordBox;
+            SYSTEMPWD = pwdbox.Password;
+        }
+
+        private void SysPasswordChanged(object sender)
+        {
+            var pwdbox = sender as PasswordBox;
+            SYSPWD = pwdbox.Password;
+        }
+
+        public ICommand SysPasswordChangedCommand { get { return new RelayCommand<object>(SysPasswordChanged); } }
+        public ICommand SystemPasswordChangedCommand { get { return new RelayCommand<object>(SystemPasswordChanged); } }
+
     }
 }

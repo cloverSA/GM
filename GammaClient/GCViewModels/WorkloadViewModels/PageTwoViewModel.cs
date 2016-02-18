@@ -41,6 +41,14 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
         public override void ProcessNavigateArgs(NavigateArgs args)
         {
             ClusterItems = WorkloadSetupInfo.GetValue<ObservableCollection<Cluster>>(WorkloadSetupKeys.CLUSTERS);
+            foreach(var cluster in ClusterItems)
+            {
+                var cluster_nodes = CollectNodesFromCluster(cluster.ClusterName);
+                foreach (IMachineInfo m in cluster_nodes)
+                {
+                    cluster.Machines.ToList<IMachineInfo>().Add(m);
+                }
+            }
         }
 
         private void GoBack(object command_parm)
@@ -48,32 +56,17 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
             RaisePreviousPageEvent(this, null);
         }
 
-        private ObservableCollection<OraDB> GetDbsBySelectedCluster()
+        private ObservableCollection<IOraDB> GetDbsBySelectedCluster()
         {
-
-            var updated_items = WorkloadSetupInfo.GetValue<ObservableCollection<Cluster>>(WorkloadSetupKeys.CLUSTERS);
-            var selected = from m in updated_items where m.IsSelected == true select m;
-            var rs_list = new ObservableCollection<OraDB>();
+            var selected = from m in ClusterItems where m.IsSelected == true select m;
+            
             if (selected.Count() == 1)
             {
-                var cluster = selected.First<Cluster>();
-                var cluster_node = CollectNodesFromCluster(cluster.ClusterName);
-                foreach(IMachineInfo m in cluster_node)
-                {
-                    cluster.Machines.ToList<IMachineInfo>().Add(m);
-                }
-                var candiate_node = cluster_node.First();
-                var proxy = GammaProxyFactory.GetCrsEnvProxy(candiate_node);
-                var rs = proxy.GetDBNames();
-                var dbnames = rs.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                int count = 0;
-                foreach (var db in dbnames)
-                {
-                    var dbhome = proxy.GetDBHOMEByName(db);
-                    rs_list.Add(new OraDB(count) { DBHome = dbhome, DBName = db });
-                    count++;
-                }
-                return rs_list;
+                var cluster = ClusterItems.First<ICluster>();
+                var candidate = from m in cluster.Machines
+                                where m.Alive == NodeState.Online
+                                select m;
+                return GetDBnames(candidate.First());
             }
             else
             {
@@ -81,15 +74,35 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
             }
         }
 
+        private ObservableCollection<IOraDB> GetDBnames(IMachineInfo machine)
+        {
+            var proxy = GammaProxyFactory.GetCrsEnvProxy(machine);
+            var rs = proxy.GetDBNames();
+            var dbnames = rs.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            int count = 0;
+            var rs_list = new ObservableCollection<IOraDB>();
+            foreach (var db in dbnames)
+            {
+                var dbhome = proxy.GetDBHOMEByName(db);
+                rs_list.Add(OraDBFactory.GetOraDB(count, db, dbhome));
+                count++;
+            }
+            return rs_list;
+        }
+
         private IGrouping<string, IMachineInfo> CollectNodesFromCluster(string clustername)
         {
-            var net_mgr = NetworkManagerFactory.GetSimpleNetworkManager();
-            var machines = net_mgr.Machines;
-            var igroup = from m in machines
+            var igroup = from m in BaseFacility.NodeMgr.Machines
                          group m by m.ClusterName into gp
                          select gp;
             var cluster_nodes = from nodes in igroup where nodes.Key == clustername select nodes;
-            return cluster_nodes.First();
+            if(cluster_nodes.Count() == 1)
+            {
+                return cluster_nodes.First();
+            } else
+            {
+                return null;
+            }
         }
 
         public void SetDbs(object command_parm)
