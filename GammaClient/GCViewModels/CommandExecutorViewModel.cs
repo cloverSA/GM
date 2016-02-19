@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace GammaClient.GCViewModels
 {
-    class CommandExecutorViewModel : SPResultInTextBox
+    class CommandExecutorViewModel : SPResult
     {
         #region Members
         private string inputcmd;

@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace GammaClient.GCViewModels
 {
-    class CleanEnvViewModel : SPResultInTextBox
+    class CleanEnvViewModel : SPResult
     {
         protected override void RaiseResultComeback(object sender, GammaUIUpdateArgs e)
         {

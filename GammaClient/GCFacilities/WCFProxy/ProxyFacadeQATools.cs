@@ -14,7 +14,7 @@ namespace GammaClient.GCFacilities.WCFProxy
     }
     class QAToolsFacade
     {
-        public static Task<string[]> UploadLogToSftp(string usr, string pwd, string bugnum, string location)
+        public static Task<string[]> UploadLogToSftp(string usr, string pwd, string bugnum, string location, Action<string> callback)
         {
             GeneralUtility.IUploadRecord upload_rec = new UploadRecord() { Usr = usr, Passwd = pwd, Target = bugnum, Source = location };
             var tx_mgr = GammaClientTXManagerFactory.GetGammaClientTXManager();

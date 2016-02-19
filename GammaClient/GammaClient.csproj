@@ -89,6 +89,8 @@
     <Compile Include="GCModels\NavigateEventArgs.cs" />
     <Compile Include="GCModels\OraDB.cs" />
     <Compile Include="GCModels\OraDBFactory.cs" />
+    <Compile Include="GCUIBehavior\IContentScrollDown.cs" />
+    <Compile Include="GCUIBehavior\TextBoxScrollDown.cs" />
     <Compile Include="GCViewModels\QAToolsUploadDialog.cs" />
     <Compile Include="GCViewModels\QAToolsUploadViewModel.cs" />
     <Compile Include="GCViewModels\WorkloadViewModels\Navigation\PageViewModel.cs" />
@@ -157,7 +159,7 @@
     <Compile Include="GCFacilities\TXManager\IGammaClientTXLogger.cs" />
     <Compile Include="GCFacilities\TXManager\IGammaClientTXManager.cs" />
     <Compile Include="GCFacilities\UIServiceProvider\SPBase.cs" />
-    <Compile Include="GCFacilities\UIServiceProvider\SPResultInTextBox.cs" />
+    <Compile Include="GCFacilities\UIServiceProvider\SPResult.cs" />
     <Compile Include="GCFacilities\WCFProxy\GammaClientBase.cs" />
     <Compile Include="GCFacilities\WCFProxy\GammaProxyFactory.cs" />
     <Compile Include="GCFacilities\WCFProxy\IMachineInfo.cs" />

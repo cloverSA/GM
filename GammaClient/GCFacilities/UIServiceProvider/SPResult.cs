@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
 using GammaClient.GCFacilities.TXManager;
+using GammaClient.GCUIBehavior;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,15 @@ using System.Windows.Input;
 
 namespace GammaClient.GCFacilities.UIServiceProvider
 {
-    abstract class SPResultInTextBox : SPBase
+    abstract class SPResult : SPBase
     {
         #region Member
 
         private string _opResult = string.Empty;
 
         private bool _canExec = true;
+
+        private IContentScrollDown _scroller = new TextBoxScrollDown();
 
         #endregion
 
@@ -52,25 +55,11 @@ namespace GammaClient.GCFacilities.UIServiceProvider
 
         #endregion
 
-        #region UI Behavior
-
-        void ScrollDownResult(object sender)
-        {
-            var tb = sender as TextBox;
-            if (tb != null)
-            {
-                tb.Focus();
-                tb.CaretIndex = tb.Text.Length;
-                tb.ScrollToEnd();
-            }
-        }
-
-        public ICommand ScrollDownCommand { get { return new RelayCommand<object>(ScrollDownResult); } }
-        #endregion
+        public ICommand ScrollDownCommand { get { return _scroller.ScrollDownCommand; } }
 
         #region tempalate Constructor
 
-        public SPResultInTextBox()
+        public SPResult()
         {
             TxMgr.OnResultComesBack += RaiseResultComeback;
         }

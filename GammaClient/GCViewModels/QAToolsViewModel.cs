@@ -14,7 +14,7 @@ using GammaClient.GCViews;
 
 namespace GammaClient.GCViewModels
 {
-    class QAToolsViewModel : SPResultInTextBox
+    class QAToolsViewModel : SPResult
     {
         private readonly IDialogCoordinator _dialogCoordinator;
 
