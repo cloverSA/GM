@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </UserControl.Resources>
-    <Grid>
+    <Grid RenderOptions.ClearTypeHint="Enabled" TextOptions.TextFormattingMode="Display">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>

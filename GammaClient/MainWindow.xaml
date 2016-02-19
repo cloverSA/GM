@@ -12,6 +12,20 @@
         Width="960"
         Height="600"
         Title="MainWindow">
+    <Controls:MetroWindow.DataContext>
+        <local:MainWindowViewModel />
+    </Controls:MetroWindow.DataContext>
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands ShowLastSeparator="False">
+            <Button Content="Network" ToolTip="node management" 
+                    Command="{Binding CheckNodeMgrCommand}" CommandParameter="{Binding ElementName=NMFlyout}"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <gcview:NodeManagerFlyout x:Name="NMFlyout" />
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
     <Grid RenderOptions.ClearTypeHint="Enabled" TextOptions.TextFormattingMode="Display">
         <Controls:MetroAnimatedSingleRowTabControl>
             <TabItem Header="Clear Env">
