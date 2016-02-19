@@ -22,58 +22,12 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Grid.ColumnSpan="2" 
-              Visibility="{Binding CanSwitchPage, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0">User name:</TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="1">Password:</TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="2">Bugnum:</TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="3">File Path:</TextBlock>
-            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Username}"/>
-            <PasswordBox x:Name="PwdBox" Grid.Column="1" Grid.Row="1">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="PasswordChanged">
-                        <i:InvokeCommandAction Command="{Binding PasswordChangeCommand}" CommandParameter="{Binding ElementName=PwdBox}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </PasswordBox>
-            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Bugnum}" IsEnabled="{Binding CanSwitchPage}"/>
-            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding UploadPath}" IsEnabled="{Binding CanSwitchPage}"/>
-        </Grid>
+        <local:UploadInput  Grid.Row="0" Grid.ColumnSpan="2" />
+        <local:UploadOutput  Grid.Row="0" Grid.ColumnSpan="2" />
 
-        <Grid Grid.Row="0" Grid.ColumnSpan="2" 
-              Visibility="{Binding ResultOnly, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <GroupBox Header="Result">
-                <TextBox Grid.Row="0" Text="{Binding UploadResult}" x:Name="ResultTB" MinHeight="150" MinWidth="200"
-                     Margin="0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True" >
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="TextChanged">
-                            <i:InvokeCommandAction Command="{Binding ScrollDownCommand}" CommandParameter="{Binding ElementName=ResultTB}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
-            </GroupBox>
-            <Controls:ProgressRing Visibility="{Binding InProgress, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}"/>
-        </Grid>
-
-        <Button Content="Upload" Grid.Column="0" Grid.Row="4" Width="75" Command="{Binding UploadCommand}"
+        <Button Content="Upload" Grid.Column="0" Grid.Row="1" Width="75" Command="{Binding UploadCommand}" Margin="0,5" 
                 Visibility="{Binding CanSwitchPage, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}"/>
-        <Button Content="Close"  Grid.Column="1" Grid.Row="4" Width="75" Command="{Binding CloseCommand}"/>
+        <Button Content="Close"  Grid.Column="1" Grid.Row="1" Width="75" Command="{Binding CloseCommand}" Margin="0,5" />
 
     </Grid>
 </UserControl>

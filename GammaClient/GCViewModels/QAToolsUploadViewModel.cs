@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -126,13 +127,19 @@ namespace GammaClient.GCViewModels
             var pwd = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var pubkf = System.IO.Path.Combine(pwd, "pubkf.xml");
 
-            
+#if !UICHECK           
             var task = QAToolsFacade.UploadLogToSftp(Username, 
                                           GeneralUtility.GammaRSASimplify.RSAEncryptString(Password, pubkf), 
                                           Bugnum, 
                                           UploadPath,
                                           UpdateResult);
-
+#else
+            var task = Task.Run(()=> {
+                UpdateResult("t1!");
+                UpdateResult("t2!");
+                Thread.Sleep(TimeSpan.FromSeconds(2));
+            });
+#endif            
             task.GetAwaiter().OnCompleted(()=> {
                 InProgressWait(false);
                 UpdateResult("Finished!");

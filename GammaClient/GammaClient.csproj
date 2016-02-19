@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;UICHECK</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -97,6 +97,12 @@
     <Compile Include="GCViews\QAToolsUpload.xaml.cs">
       <DependentUpon>QAToolsUpload.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GCViews\UploadInput.xaml.cs">
+      <DependentUpon>UploadInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GCViews\UploadOutput.xaml.cs">
+      <DependentUpon>UploadOutput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="GCViews\CleanEnv.xaml">
@@ -112,6 +118,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GCViews\QAToolsUpload.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GCViews\UploadInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GCViews\UploadOutput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
