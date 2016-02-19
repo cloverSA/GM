@@ -22,8 +22,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <local:UploadInput  Grid.Row="0" Grid.ColumnSpan="2" />
-        <local:UploadOutput  Grid.Row="0" Grid.ColumnSpan="2" />
+        <local:UploadInput  Grid.Row="0" Grid.ColumnSpan="2"  
+                            Visibility="{Binding CanSwitchPage, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}"/>
+        <local:UploadOutput  Grid.Row="0" Grid.ColumnSpan="2"
+                              Visibility="{Binding ResultOnly, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
         <Button Content="Upload" Grid.Column="0" Grid.Row="1" Width="75" Command="{Binding UploadCommand}" Margin="0,5" 
                 Visibility="{Binding CanSwitchPage, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}"/>
