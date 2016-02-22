@@ -8,37 +8,57 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="0" Grid.Row="0">Dump file location :</TextBlock>
-        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding WorkloadDmpLoc, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBlock Grid.Column="0" Grid.Row="1">Dump file name :</TextBlock>
-        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding WorkloadDmpFilename, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBlock Grid.Column="0" Grid.Row="2">Sys password :</TextBlock>
-        <PasswordBox x:Name="SysPwdBox" Grid.Column="1" Grid.Row="2">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="PasswordChanged">
-                    <i:InvokeCommandAction Command="{Binding SysPasswordChangedCommand}" CommandParameter="{Binding ElementName=SysPwdBox}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </PasswordBox>
-        <TextBlock Grid.Column="0" Grid.Row="3">System password :</TextBlock>
-        <PasswordBox x:Name="SystemPwdBox" Grid.Column="1" Grid.Row="3">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="PasswordChanged">
-                    <i:InvokeCommandAction Command="{Binding SystemPasswordChangedCommand}" CommandParameter="{Binding ElementName=SystemPwdBox}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </PasswordBox>
+   
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0">Dump file location :</TextBlock>
+            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding WorkloadDmpLoc, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Grid.Column="0" Grid.Row="1">Dump file name :</TextBlock>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding WorkloadDmpFilename, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Grid.Column="0" Grid.Row="2">Sys password :</TextBlock>
+            <PasswordBox x:Name="SysPwdBox" Grid.Column="1" Grid.Row="2">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PasswordChanged">
+                        <i:InvokeCommandAction Command="{Binding SysPasswordChangedCommand}" CommandParameter="{Binding ElementName=SysPwdBox}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </PasswordBox>
+            <TextBlock Grid.Column="0" Grid.Row="3">System password :</TextBlock>
+            <PasswordBox x:Name="SystemPwdBox" Grid.Column="1" Grid.Row="3">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PasswordChanged">
+                        <i:InvokeCommandAction Command="{Binding SystemPasswordChangedCommand}" CommandParameter="{Binding ElementName=SystemPwdBox}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </PasswordBox>
+            <Button x:Name="button" Content="Install" HorizontalAlignment="Left" Margin="180,0,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75" Command="{Binding InstallCommand}"/>
+            <Button x:Name="button1" Content="Cancel" Grid.Column="1" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
 
+        </Grid>
+
+        <GroupBox Header="Result" Grid.Row="1">
+            <TextBox Grid.Row="0" Text="{Binding Result}" x:Name="ResultTB" MinHeight="50" MinWidth="200"
+                     Margin="0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding ScrollDownCommand}" CommandParameter="{Binding ElementName=ResultTB}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+        </GroupBox>
     </Grid>
 </UserControl>

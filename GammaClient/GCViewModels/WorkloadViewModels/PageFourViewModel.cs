@@ -10,16 +10,24 @@ using GammaClient.GCFacilities.WCFProxy;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Input;
+using GammaClient.GCUIBehavior;
 
 namespace GammaClient.GCViewModels.WorkloadViewModels
 {
     class PageFourViewModel : PageViewModel
     {
-        
+        public PageFourViewModel(Action<PageFourViewModel> handler)
+        {
+            _closehandler = handler;
+            DBs = WorkloadSetupInfo.GetValue<ObservableCollection<OraDB>>(WorkloadSetupKeys.DBS);
+        }
+
+        private readonly Action<PageFourViewModel> _closehandler;
+
         public ObservableCollection<OraDB> DBs { get; set; }
         public override void ProcessNavigateArgs(NavigateArgs args)
         {
-            DBs = args.Item as ObservableCollection<OraDB>;
+            
         }
         private string _workloadDmpLoc;
         private string _workloadDmpFilename;
@@ -56,6 +64,8 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
         }
 
         private string _result;
+        private IContentScrollDown _scroller = new TextBoxScrollDown();
+
         public string Result
         {
             get
@@ -128,6 +138,8 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
 
         public ICommand SysPasswordChangedCommand { get { return new RelayCommand<object>(SysPasswordChanged); } }
         public ICommand SystemPasswordChangedCommand { get { return new RelayCommand<object>(SystemPasswordChanged); } }
-
+        public ICommand CloseCommand { get { return new RelayCommand<PageFourViewModel>(_closehandler); } }
+        public ICommand InstallCommand { get { return new RelayCommand(GenerateScript); } }
+        public ICommand ScrollDownCommand { get { return _scroller.ScrollDownCommand; } }
     }
 }

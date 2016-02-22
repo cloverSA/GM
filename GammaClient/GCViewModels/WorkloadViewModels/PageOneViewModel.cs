@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GammaClient.GCViewModels.WorkloadViewModels
@@ -29,8 +30,15 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
             var task = GetClusterInfo();
             var rs = await task;
             InProgressWait(false);
-            WorkloadSetupInfo.SetValue(WorkloadSetupKeys.CLUSTERS, rs);
-            RaiseNextPageEvent(this, null);
+            if(rs.Count > 0)
+            {
+                WorkloadSetupInfo.SetValue(WorkloadSetupKeys.CLUSTERS, rs);
+                RaiseNextPageEvent(this, null);
+            } else
+            {
+                MessageBox.Show("No cluster info retrieved");
+            }
+            
         }
 
         private async Task<ObservableCollection<ICluster>> GetClusterInfo()
@@ -61,7 +69,6 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
                 clusters.Add(new Cluster(counter) { ClusterName = rs.Trim() });
                 counter += 1;
             }
-
             return clusters;
         }
 

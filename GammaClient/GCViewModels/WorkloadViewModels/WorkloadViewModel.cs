@@ -37,10 +37,6 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
             p3.NextPageEventHandler += HanldeNextPageEvent;
             p3.PreviousPageEventHandler += HanldePreviousPageEvent;
             PageViewModels.Add(p3);
-            var p4 = new PageFourViewModel();
-            p4.NextPageEventHandler += HanldeNextPageEvent;
-            p4.PreviousPageEventHandler += HanldePreviousPageEvent;
-            PageViewModels.Add(p4);
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];
         }

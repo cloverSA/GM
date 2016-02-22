@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GammaClient.GCViewModels.WorkloadViewModels
@@ -126,6 +127,7 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
                 else
                 {
                     //show dialog of no db found.
+                    MessageBox.Show("No Db found in the cluster");
                 }
 
             });
