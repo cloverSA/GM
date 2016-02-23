@@ -19,12 +19,12 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
         public PageFourViewModel(Action<PageFourViewModel> handler)
         {
             _closehandler = handler;
-            DBs = WorkloadSetupInfo.GetValue<ObservableCollection<OraDB>>(WorkloadSetupKeys.DBS);
+            DBs = WorkloadSetupInfo.GetValue<ObservableCollection<IOraDB>>(WorkloadSetupKeys.DBS);
         }
 
         private readonly Action<PageFourViewModel> _closehandler;
 
-        public ObservableCollection<OraDB> DBs { get; set; }
+        public ObservableCollection<IOraDB> DBs { get; set; }
         public override void ProcessNavigateArgs(NavigateArgs args)
         {
             
@@ -100,7 +100,7 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
 
         private Task<string> GenerateSwingbench(IOraDB db)
         {
-            var db_cluster = GetSelectedCluster(WorkloadSetupInfo.GetValue<ObservableCollection<Cluster>>(WorkloadSetupKeys.CLUSTERS));
+            var db_cluster = GetSelectedCluster(WorkloadSetupInfo.GetValue<ObservableCollection<ICluster>>(WorkloadSetupKeys.CLUSTERS));
             var machine = CollectOneNodeFromCluster(db_cluster);
             var proxy = GammaProxyFactory.GetDBWorkloadProxy(machine);
             
@@ -108,7 +108,7 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
             return task;
         }
 
-        private IMachineInfo CollectOneNodeFromCluster(Cluster cluster)
+        private IMachineInfo CollectOneNodeFromCluster(ICluster cluster)
         {
             var rs = from m in cluster.Machines
                      where m.Alive == GCFacilities.WCFProxy.NodeState.Online
@@ -116,7 +116,7 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
             return rs.First();
         }
 
-        private Cluster GetSelectedCluster(ObservableCollection<Cluster> clusters)
+        private ICluster GetSelectedCluster(ObservableCollection<ICluster> clusters)
         {
             var rs = from c in clusters
                      where c.IsSelected == true

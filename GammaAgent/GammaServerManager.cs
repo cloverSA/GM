@@ -20,6 +20,7 @@
         IGammaSerivceHost qa_tools_service;
         IGammaSerivceHost shell_executor_service;
         IGammaSerivceHost crsenv_service;
+        IGammaSerivceHost dbworkload_service;
 
         public GammaServerManager()
         {
@@ -28,6 +29,7 @@
             qa_tools_service = factory.GetQAToolsSerivceHost();
             shell_executor_service = factory.GetCmdExecutorSerivceHost();
             crsenv_service = factory.GetCrsEnvSerivceHost();
+            dbworkload_service = factory.GetDBWorkloadSerivceHost();
         }
 
         public void ServerOpen()
@@ -36,6 +38,7 @@
             qa_tools_service.HostOpen();
             shell_executor_service.HostOpen();
             crsenv_service.HostOpen();
+            dbworkload_service.HostOpen();
         }
         public void ServerClose()
         {
@@ -43,6 +46,7 @@
             qa_tools_service.HostClose();
             shell_executor_service.HostClose();
             crsenv_service.HostClose();
+            dbworkload_service.HostOpen();
         }
     }
 }

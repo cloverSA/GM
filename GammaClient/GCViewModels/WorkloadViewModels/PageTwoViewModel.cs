@@ -17,7 +17,7 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
     class PageTwoViewModel : PageViewModel
     {
         private ObservableCollection<ICluster> _clusterItems;
-
+        
         public ObservableCollection<ICluster> ClusterItems
         {
             get
@@ -42,12 +42,17 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
         public override void ProcessNavigateArgs(NavigateArgs args)
         {
             ClusterItems = WorkloadSetupInfo.GetValue<ObservableCollection<ICluster>>(WorkloadSetupKeys.CLUSTERS);
+           
             foreach(var cluster in ClusterItems)
             {
                 var cluster_nodes = CollectNodesFromCluster(cluster.ClusterName);
+                if (cluster.Machines == null)
+                {
+                    cluster.Machines = new List<IMachineInfo>();
+                }
                 foreach (IMachineInfo m in cluster_nodes)
                 {
-                    cluster.Machines.ToList<IMachineInfo>().Add(m);
+                    cluster.Machines.Add(m);
                 }
             }
         }

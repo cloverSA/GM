@@ -8,6 +8,6 @@ namespace GammaClient.GCModels
         string ClusterName { get; set; }
         int CUID { get; set; }
         bool IsSelected { get; set; }
-        IEnumerable<IMachineInfo> Machines { get; set; }
+        IList<IMachineInfo> Machines { get; set; }
     }
 }

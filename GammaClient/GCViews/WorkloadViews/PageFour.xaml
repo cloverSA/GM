@@ -10,7 +10,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
    
         <Grid>
@@ -45,8 +45,8 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </PasswordBox>
-            <Button x:Name="button" Content="Install" HorizontalAlignment="Left" Margin="180,0,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75" Command="{Binding InstallCommand}"/>
-            <Button x:Name="button1" Content="Cancel" Grid.Column="1" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
+            <Button x:Name="button" Content="Install" Grid.Column="0" HorizontalAlignment="Right" Grid.Row="4" VerticalAlignment="Center" Width="75" Command="{Binding InstallCommand}"/>
+            <Button x:Name="button1" Content="Cancel" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Center" Width="75" Command="{Binding CloseCommand}"/>
 
         </Grid>
 

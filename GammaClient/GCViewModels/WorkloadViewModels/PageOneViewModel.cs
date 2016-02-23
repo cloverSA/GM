@@ -16,6 +16,7 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
 {
     class PageOneViewModel : PageViewModel
     {
+        private const string no_crs_home_found = "no crshome found";
         #region Command
 
         public ICommand SetClusterInfoCommand { get { return new RelayCommand<object>(SetClusterInfo); } }
@@ -53,10 +54,14 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
                 var rs = proxy.GetClusterNamesAsync();
                 tasks.Add(rs.ContinueWith((t) =>
                 {
-                    if (!t.Result.ToLower().Contains("error"))
+                    if (!t.Result.ToLower().Contains("error") && !t.Result.ToLower().Contains(no_crs_home_found))
                     {
                         machine.ClusterName = t.Result;
                         results.Add(t.Result);
+                    }
+                    else
+                    {
+                        MessageBox.Show(t.Result);
                     }
                 }));
             }

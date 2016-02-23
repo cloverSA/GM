@@ -24,12 +24,12 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
 
         public override void ProcessNavigateArgs(NavigateArgs args)
         {
-            DBs = WorkloadSetupInfo.GetValue<ObservableCollection<OraDB>>(WorkloadSetupKeys.DBS);
+            DBs = WorkloadSetupInfo.GetValue<ObservableCollection<IOraDB>>(WorkloadSetupKeys.DBS);
 
             WorkLoads = new ObservableCollection<string>() { "Swingbench", "Aroltp" };
         }
 
-        public ObservableCollection<OraDB> DBs { get; set; }
+        public ObservableCollection<IOraDB> DBs { get; set; }
         public ObservableCollection<string> WorkLoads { get; set; }
 
         private void GoNext(object command_parm)
