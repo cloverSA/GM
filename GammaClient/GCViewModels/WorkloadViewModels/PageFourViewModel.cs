@@ -10,16 +10,24 @@ using GammaClient.GCFacilities.WCFProxy;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Input;
+using GammaClient.GCUIBehavior;
 
 namespace GammaClient.GCViewModels.WorkloadViewModels
 {
     class PageFourViewModel : PageViewModel
     {
-        
-        public ObservableCollection<OraDB> DBs { get; set; }
+        public PageFourViewModel(Action<PageFourViewModel> handler)
+        {
+            _closehandler = handler;
+            DBs = WorkloadSetupInfo.GetValue<ObservableCollection<IOraDB>>(WorkloadSetupKeys.DBS);
+        }
+
+        private readonly Action<PageFourViewModel> _closehandler;
+
+        public ObservableCollection<IOraDB> DBs { get; set; }
         public override void ProcessNavigateArgs(NavigateArgs args)
         {
-            DBs = args.Item as ObservableCollection<OraDB>;
+            
         }
         private string _workloadDmpLoc;
         private string _workloadDmpFilename;
@@ -56,6 +64,8 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
         }
 
         private string _result;
+        private IContentScrollDown _scroller = new TextBoxScrollDown();
+
         public string Result
         {
             get
@@ -90,7 +100,7 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
 
         private Task<string> GenerateSwingbench(IOraDB db)
         {
-            var db_cluster = GetSelectedCluster(WorkloadSetupInfo.GetValue<ObservableCollection<Cluster>>(WorkloadSetupKeys.CLUSTERS));
+            var db_cluster = GetSelectedCluster(WorkloadSetupInfo.GetValue<ObservableCollection<ICluster>>(WorkloadSetupKeys.CLUSTERS));
             var machine = CollectOneNodeFromCluster(db_cluster);
             var proxy = GammaProxyFactory.GetDBWorkloadProxy(machine);
             
@@ -98,7 +108,7 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
             return task;
         }
 
-        private IMachineInfo CollectOneNodeFromCluster(Cluster cluster)
+        private IMachineInfo CollectOneNodeFromCluster(ICluster cluster)
         {
             var rs = from m in cluster.Machines
                      where m.Alive == GCFacilities.WCFProxy.NodeState.Online
@@ -106,7 +116,7 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
             return rs.First();
         }
 
-        private Cluster GetSelectedCluster(ObservableCollection<Cluster> clusters)
+        private ICluster GetSelectedCluster(ObservableCollection<ICluster> clusters)
         {
             var rs = from c in clusters
                      where c.IsSelected == true
@@ -128,6 +138,8 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
 
         public ICommand SysPasswordChangedCommand { get { return new RelayCommand<object>(SysPasswordChanged); } }
         public ICommand SystemPasswordChangedCommand { get { return new RelayCommand<object>(SystemPasswordChanged); } }
-
+        public ICommand CloseCommand { get { return new RelayCommand<PageFourViewModel>(_closehandler); } }
+        public ICommand InstallCommand { get { return new RelayCommand(GenerateScript); } }
+        public ICommand ScrollDownCommand { get { return _scroller.ScrollDownCommand; } }
     }
 }

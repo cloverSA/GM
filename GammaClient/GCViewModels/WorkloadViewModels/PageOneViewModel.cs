@@ -9,12 +9,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GammaClient.GCViewModels.WorkloadViewModels
 {
     class PageOneViewModel : PageViewModel
     {
+        private const string no_crs_home_found = "no crshome found";
         #region Command
 
         public ICommand SetClusterInfoCommand { get { return new RelayCommand<object>(SetClusterInfo); } }
@@ -29,8 +31,15 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
             var task = GetClusterInfo();
             var rs = await task;
             InProgressWait(false);
-            WorkloadSetupInfo.SetValue(WorkloadSetupKeys.CLUSTERS, rs);
-            RaiseNextPageEvent(this, null);
+            if(rs.Count > 0)
+            {
+                WorkloadSetupInfo.SetValue(WorkloadSetupKeys.CLUSTERS, rs);
+                RaiseNextPageEvent(this, null);
+            } else
+            {
+                MessageBox.Show("No cluster info retrieved");
+            }
+            
         }
 
         private async Task<ObservableCollection<ICluster>> GetClusterInfo()
@@ -45,10 +54,14 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
                 var rs = proxy.GetClusterNamesAsync();
                 tasks.Add(rs.ContinueWith((t) =>
                 {
-                    if (!t.Result.ToLower().Contains("error"))
+                    if (!t.Result.ToLower().Contains("error") && !t.Result.ToLower().Contains(no_crs_home_found))
                     {
                         machine.ClusterName = t.Result;
                         results.Add(t.Result);
+                    }
+                    else
+                    {
+                        MessageBox.Show(t.Result);
                     }
                 }));
             }
@@ -61,7 +74,6 @@ namespace GammaClient.GCViewModels.WorkloadViewModels
                 clusters.Add(new Cluster(counter) { ClusterName = rs.Trim() });
                 counter += 1;
             }
-
             return clusters;
         }
 

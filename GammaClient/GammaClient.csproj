@@ -94,6 +94,7 @@
     <Compile Include="GCViewModels\NodeManagerFlyoutViewModel.cs" />
     <Compile Include="GCViewModels\QAToolsUploadDialog.cs" />
     <Compile Include="GCViewModels\QAToolsUploadViewModel.cs" />
+    <Compile Include="GCViewModels\WorkLoadInstallDialog.cs" />
     <Compile Include="GCViewModels\WorkloadViewModels\Navigation\PageViewModel.cs" />
     <Compile Include="GCViews\NodeManagerFlyout.xaml.cs">
       <DependentUpon>NodeManagerFlyout.xaml</DependentUpon>
