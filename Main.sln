@@ -5,13 +5,11 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GammaAgent", "GammaAgent\GammaAgent.csproj", "{F687446E-726A-4765-B286-442D6C0EBC56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GammaCrsQA", "GammaCrsQA\GammaCrsQA.csproj", "{4FD5841E-CB1B-4397-B6BF-24ABECA31925}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GammaServiceLib", "GammaServiceLib\GammaServiceLib.csproj", "{1FF49551-EFB5-46BB-9DE3-D4EE4B979094}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GammaLib", "GammaLib\GammaLib.csproj", "{349077D7-2B02-4A37-A246-D41443DA5CDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GammaCrsQAInstaller", "GammaCrsQAInstaller\GammaCrsQAInstaller.csproj", "{387845E5-D147-446A-AC32-BDF9AFE73AB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GammaInstaller", "GammaCrsQAInstaller\GammaInstaller.csproj", "{387845E5-D147-446A-AC32-BDF9AFE73AB1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTest", "UTest\UTest.csproj", "{5133B1FD-A7CB-4A7E-AAE4-27C57A90458D}"
 EndProject
@@ -27,10 +25,6 @@ Global
 		{F687446E-726A-4765-B286-442D6C0EBC56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F687446E-726A-4765-B286-442D6C0EBC56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F687446E-726A-4765-B286-442D6C0EBC56}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4FD5841E-CB1B-4397-B6BF-24ABECA31925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4FD5841E-CB1B-4397-B6BF-24ABECA31925}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4FD5841E-CB1B-4397-B6BF-24ABECA31925}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4FD5841E-CB1B-4397-B6BF-24ABECA31925}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1FF49551-EFB5-46BB-9DE3-D4EE4B979094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1FF49551-EFB5-46BB-9DE3-D4EE4B979094}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FF49551-EFB5-46BB-9DE3-D4EE4B979094}.Release|Any CPU.ActiveCfg = Release|Any CPU

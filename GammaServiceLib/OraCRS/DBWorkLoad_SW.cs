@@ -36,7 +36,7 @@ namespace GammaServiceLib.OraCRS
             {
                 return string.Format("{0} hit error when generating the installation script: {1}", TX_RESULT_FAIL, ex.Message);
             }
-            return string.Format("{0} please run the script {1} to install workload.", TX_RESULT_SUC, sw.SwingbenchInstallScript);
+            return string.Format("{0} please run the script {1} on {2} to install workload.", TX_RESULT_SUC, sw.SwingbenchInstallScript, hostname);
         }
     }
 }

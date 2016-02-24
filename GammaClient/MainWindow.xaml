@@ -11,7 +11,7 @@
         mc:Ignorable="d"
         Width="960"
         Height="600"
-        Title="MainWindow">
+        Title="Gamma Client">
     <Controls:MetroWindow.DataContext>
         <local:MainWindowViewModel />
     </Controls:MetroWindow.DataContext>
