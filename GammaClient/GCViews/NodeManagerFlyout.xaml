@@ -19,31 +19,31 @@
     <controls:Flyout.Resources>
         <gcconverter:NodeIsOfflineConverter x:Key="NodeIsOfflineConverter" />
     </controls:Flyout.Resources>
-    
+
     <Grid RenderOptions.ClearTypeHint="Enabled" TextOptions.TextFormattingMode="Display">
-        
-            <DataGrid x:Name="MachinesDG" AutoGenerateColumns="False" ItemsSource="{Binding NetMgr}" Margin="5">
-                <DataGrid.ItemBindingGroup>
-                    <BindingGroup/>
-                </DataGrid.ItemBindingGroup>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Machine" Binding="{Binding MachineName}"/>
-                    <DataGridTextColumn Header="Alive" Binding="{Binding Alive}"/>
-                    <DataGridTemplateColumn Header="Select">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-                <DataGrid.Style>
-                    <Style BasedOn="{StaticResource MetroDataGrid}"
+
+        <DataGrid x:Name="MachinesDG" AutoGenerateColumns="False" ItemsSource="{Binding NetMgr}" Margin="5">
+            <DataGrid.ItemBindingGroup>
+                <BindingGroup/>
+            </DataGrid.ItemBindingGroup>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Machine" Binding="{Binding MachineName}"/>
+                <DataGridTextColumn Header="Alive" Binding="{Binding Alive}"/>
+                <DataGridTemplateColumn Header="Select">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.Style>
+                <Style BasedOn="{StaticResource MetroDataGrid}"
                            TargetType="{x:Type DataGrid}">
-                        <Setter Property="AlternatingRowBackground"
+                    <Setter Property="AlternatingRowBackground"
                                 Value="{DynamicResource GrayBrush10}" />
-                    </Style>
-                </DataGrid.Style>
+                </Style>
+            </DataGrid.Style>
             <DataGrid.RowStyle>
                 <Style BasedOn="{StaticResource MetroDataGridRow}"
                        TargetType="{x:Type DataGridRow}">
@@ -70,6 +70,6 @@
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
-        
+
     </Grid>
 </controls:Flyout>

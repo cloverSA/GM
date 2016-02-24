@@ -33,7 +33,7 @@
         
         </DockPanel>
         <GroupBox x:Name="groupBox" Grid.Column="2" Header="Operation Result" Margin="0">
-            <TextBox x:Name="QAToolsTB" Margin="0" TextWrapping="Wrap" Background="White" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Text="{Binding OpResult}">
+            <TextBox x:Name="QAToolsTB" Margin="0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Text="{Binding OpResult}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="TextChanged">
                         <i:InvokeCommandAction Command="{Binding Path=ScrollDownCommand}" CommandParameter="{Binding ElementName=QAToolsTB}" />

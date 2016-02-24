@@ -19,6 +19,9 @@
         <Controls:WindowCommands ShowLastSeparator="False">
             <Button Content="Network" ToolTip="node management" 
                     Command="{Binding CheckNodeMgrCommand}" CommandParameter="{Binding ElementName=NMFlyout}"/>
+            <ToggleButton Content="Dark Theme"
+                          ToolTip="Switch to Dark"
+                          IsChecked="{Binding ToggleDark}" />
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Controls:MetroWindow.Flyouts>
@@ -26,20 +29,62 @@
             <gcview:NodeManagerFlyout x:Name="NMFlyout" />
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
-    <Grid RenderOptions.ClearTypeHint="Enabled" TextOptions.TextFormattingMode="Display">
-        <Controls:MetroAnimatedSingleRowTabControl>
-            <TabItem Header="Clear Env">
-                <gcview:CleanEnv />
-            </TabItem>
-            <TabItem Header="QATools">
-                <gcview:QATools />
-            </TabItem>
-            <TabItem Header="Cmd Executor">
-                <gcview:CommandExecutor />
-            </TabItem>
-            <TabItem Header="Workload">
-                <gcvworkload:Workload />
-            </TabItem>
-        </Controls:MetroAnimatedSingleRowTabControl>
-    </Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Ellipse x:Key="AccentMenuIcon"
+                     x:Shared="False"
+                     Width="16"
+                     Height="16"
+                     Fill="{Binding ColorBrush, Mode=OneWay}" />
+
+            <Style x:Key="AccentColorMenuItemStyle"
+                   TargetType="{x:Type MenuItem}"
+                   BasedOn="{StaticResource MetroMenuItem}">
+                <Setter Property="Command"
+                        Value="{Binding ChangeAccentCommand}" />
+                <Setter Property="Icon"
+                        Value="{StaticResource AccentMenuIcon}" />
+                <Setter Property="Header"
+                        Value="{Binding Name, Mode=OneWay}" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Controls:MetroContentControl>
+        <Grid RenderOptions.ClearTypeHint="Enabled" TextOptions.TextFormattingMode="Display">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Menu Grid.Row="0" FlowDirection="RightToLeft">
+                <MenuItem Header="Theme color" FlowDirection="LeftToRight"
+                          ItemsSource="{Binding AccentColors, Mode=OneWay}"
+                          ItemContainerStyle="{StaticResource AccentColorMenuItemStyle}" />
+            </Menu>
+            <Controls:MetroAnimatedSingleRowTabControl Grid.Row="1"  x:Name="MainTabControl">
+                <TabItem Header="Clear Env">
+                    <gcview:CleanEnv />
+                </TabItem>
+                <TabItem Header="QATools">
+                    <gcview:QATools />
+                </TabItem>
+                <TabItem Header="Cmd Executor">
+                    <gcview:CommandExecutor />
+                </TabItem>
+                <TabItem Header="Workload">
+                    <gcvworkload:Workload />
+                </TabItem>
+            </Controls:MetroAnimatedSingleRowTabControl>
+            <StatusBar Grid.Row="2">
+                <StatusBarItem>QA tools for Windows By CDC team All rights reserved</StatusBarItem>
+                <Separator Style="{StaticResource MetroStatusBarSeparator}" />
+                <StatusBarItem>Selected Tab:</StatusBarItem>
+                <StatusBarItem Content="{Binding ElementName=MainTabControl, Path=SelectedItem.Header, Mode=OneWay}" />
+            </StatusBar>
+        </Grid>
+    </Controls:MetroContentControl>
 </Controls:MetroWindow>

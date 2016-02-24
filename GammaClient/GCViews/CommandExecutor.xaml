@@ -26,10 +26,10 @@
                 <RadioButton x:Name="InParallelRBtn" Content="In Parallel" DockPanel.Dock="Top" Margin="5" GroupName="executerGroup" IsChecked="{Binding IsParallelMode}"/>
                 <Button x:Name="cmdExeBtn" Content="Send" DockPanel.Dock="Top" Margin="5,0" MinHeight="40" Command="{Binding ExecuteCmds}" IsEnabled="{Binding CanExec}" />
             </DockPanel>
-            <TextBox x:Name="CmdInputTB" DockPanel.Dock="Right" Margin="5" TextWrapping="Wrap" Background="White" AcceptsReturn="True" Text="{Binding InputCmd}"/>
+            <TextBox x:Name="CmdInputTB" DockPanel.Dock="Right" Margin="5" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding InputCmd}"/>
         </DockPanel>
         <GroupBox x:Name="groupBox2" Header="Operation Result" Margin="0" Grid.Row="2">
-            <TextBox x:Name="CmdResultTB" Margin="0" TextWrapping="Wrap" Background="White" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding OpResult}">
+            <TextBox x:Name="CmdResultTB" Margin="0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding OpResult}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="TextChanged">
                         <i:InvokeCommandAction Command="{Binding Path=ScrollDownCommand}" CommandParameter="{Binding ElementName=CmdResultTB}" />

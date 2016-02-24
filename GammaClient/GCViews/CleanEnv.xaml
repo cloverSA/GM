@@ -18,7 +18,7 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <GridSplitter HorizontalAlignment="Stretch" Margin="0" Width="5" Grid.Column="1"/>
-        <DockPanel Margin="0">
+        <DockPanel Margin="5">
             <StackPanel x:Name="ClearEnvStack" DockPanel.Dock="Top">
                 <Button x:Name="ClearRegBtn" Content="Clear Registry" Margin="0,5" Command="{Binding ClearRegistry}" IsEnabled="{Binding CanExec}" />
                 <Button x:Name="ClearGroupBtn" Content="Clear Group" Margin="0,0,0,5" Command="{Binding ClearGroup}" IsEnabled="{Binding CanExec}" />
@@ -29,7 +29,7 @@
             </StackPanel>
         </DockPanel>
         <GroupBox x:Name="groupBox" Grid.Column="2" Header="Operation Result" Margin="0">
-            <TextBox x:Name="ClearEnvTB" Margin="0" TextWrapping="Wrap" Background="White" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Text="{Binding OpResult}">
+            <TextBox x:Name="ClearEnvTB" Margin="0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Text="{Binding OpResult}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="TextChanged">
                         <i:InvokeCommandAction Command="{Binding Path=ScrollDownCommand}" CommandParameter="{Binding ElementName=ClearEnvTB}" />
