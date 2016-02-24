@@ -4,6 +4,7 @@ using System.ServiceModel.Description;
 
 using GammaServiceLib;
 using GammaServiceLib.OraCRS;
+using GammaStressAgent.BaseService;
 
 namespace GammaAgent
 {
@@ -53,8 +54,19 @@ namespace GammaAgent
 
         public void HostClose()
         {
-            host.Close();
-            host = null;
+            try
+            {
+                host.Abort();
+                host = null;
+            }catch(InvalidOperationException e)
+            {
+                Logger.WriteAppLog("GammaAgent", string.Format("Close failed, Current state of host is: {0}; {1}", host.State.ToString(), e.Message));
+            }
+            catch (CommunicationObjectFaultedException e)
+            {
+                Logger.WriteAppLog("GammaAgent", string.Format("Close failed, Current state of host is: {0}", host.State.ToString(), e.Message));
+            }
+
         }
     }
 

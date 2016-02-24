@@ -46,7 +46,7 @@
             qa_tools_service.HostClose();
             shell_executor_service.HostClose();
             crsenv_service.HostClose();
-            dbworkload_service.HostOpen();
+            dbworkload_service.HostClose();
         }
     }
 }

@@ -15,7 +15,8 @@ namespace UTest
         static void Main(string[] args)
         {
             //SLibTest.Test();
-            SLibTest.Swingbench();
+            //SLibTest.Swingbench();
+            ServiceHostTest.test1();
             Console.ReadLine();
         }
     }
@@ -61,6 +62,17 @@ namespace UTest
                 SysPwd ="oracle",
                 SysUsr ="sys"};
             sw.InstallWorkload();
+        }
+    }
+
+    class ServiceHostTest
+    {
+        public static void test1()
+        {
+            var sch = GammaServerManagerFactory.GetServerManager();
+            sch.ServerOpen();
+
+            sch.ServerClose();
         }
     }
 }
