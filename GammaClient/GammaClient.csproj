@@ -84,6 +84,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GCConverter\NodeIsOfflineConverter.cs" />
     <Compile Include="GCModels\ICluster.cs" />
     <Compile Include="GCModels\IOraDB.cs" />
     <Compile Include="GCModels\NavigateEventArgs.cs" />

@@ -15,6 +15,17 @@ namespace GammaCrsQAInstaller.Pages
 {
     class ResultPageViewModel : ObservableObject, IPageViewModel
     {
+        public event EventHandler FinishInstallEventHandler;
+
+        private void RaiseFinishInstallEvent(EventArgs e)
+        {
+            var handler = FinishInstallEventHandler;
+            if (handler != null)
+            {
+                FinishInstallEventHandler(this, e);
+            }
+        }
+
         public string Name
         {
             get
@@ -60,6 +71,7 @@ namespace GammaCrsQAInstaller.Pages
             });
             t.GetAwaiter().OnCompleted(() => {
                 progressBar.Value = 100;
+                RaiseFinishInstallEvent(null);
                 ResultText += "\n===========FINISHED===============\n";
             });
 

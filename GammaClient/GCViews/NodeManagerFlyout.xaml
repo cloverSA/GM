@@ -6,6 +6,7 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:local="clr-namespace:GammaClient.GCViews"
              xmlns:gcvm="clr-namespace:GammaClient.GCViewModels"
+             xmlns:gcconverter="clr-namespace:GammaClient.GCConverter"
              mc:Ignorable="d" 
              Header="Node Manager"
                  Position="Right"
@@ -15,8 +16,12 @@
     <controls:Flyout.DataContext>
         <gcvm:NodeManagerFlyoutViewModel />
     </controls:Flyout.DataContext>
+    <controls:Flyout.Resources>
+        <gcconverter:NodeIsOfflineConverter x:Key="NodeIsOfflineConverter" />
+    </controls:Flyout.Resources>
+    
     <Grid RenderOptions.ClearTypeHint="Enabled" TextOptions.TextFormattingMode="Display">
-        <DockPanel Margin="0">
+        
             <DataGrid x:Name="MachinesDG" AutoGenerateColumns="False" ItemsSource="{Binding NetMgr}" Margin="5">
                 <DataGrid.ItemBindingGroup>
                     <BindingGroup/>
@@ -32,8 +37,39 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
-
-            </DataGrid>
-        </DockPanel>
+                <DataGrid.Style>
+                    <Style BasedOn="{StaticResource MetroDataGrid}"
+                           TargetType="{x:Type DataGrid}">
+                        <Setter Property="AlternatingRowBackground"
+                                Value="{DynamicResource GrayBrush10}" />
+                    </Style>
+                </DataGrid.Style>
+            <DataGrid.RowStyle>
+                <Style BasedOn="{StaticResource MetroDataGridRow}"
+                       TargetType="{x:Type DataGridRow}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Alive, Mode=OneWay, Converter={StaticResource NodeIsOfflineConverter}}"
+                                     Value="True">
+                            <Setter Property="Background"
+                                    Value="#FF8B8B" />
+                            <Setter Property="Foreground"
+                                    Value="Red" />
+                        </DataTrigger>
+                        <!-- IsMouseOver -->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Alive, Mode=OneWay, Converter={StaticResource NodeIsOfflineConverter}}"
+                                           Value="True" />
+                                <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}"
+                                           Value="true" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Background"
+                                    Value="#FFBDBD" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+        
     </Grid>
 </controls:Flyout>
