@@ -50,7 +50,7 @@ namespace GammaServiceLib.OraCRS
                 lines.Add(string.Format(@"{0} {1}/{2}@{3}/{4} fromuser=soe touser=soe directory={5} file={6} log=logfile_imp.log",
                                                                Impdp, DBPumpUser, DBPumpPwd, DBHost, TargetDBName, DBDirName, SwingbenchDmpFilename));
                 lines.Add(GetSysExecuteSqlStr(sw_post_sql));
-                lines.Add("exit");
+                lines.Add("exit!!");
                 File.WriteAllLines(sw_install, lines);
             }
             catch
