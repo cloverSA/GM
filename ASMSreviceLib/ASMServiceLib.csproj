@@ -4,18 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F687446E-726A-4765-B286-442D6C0EBC56}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{2B346BC2-E7A8-478F-85B0-9D666C90DE00}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GammaAgent</RootNamespace>
-    <AssemblyName>GammaAgent</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <RootNamespace>ASMSreviceLib</RootNamespace>
+    <AssemblyName>ASMSreviceLib</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -34,60 +30,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
-    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Numerics" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GammaAgent.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="GammaAgent.Designer.cs">
-      <DependentUpon>GammaAgent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GammaAgentInfo.cs" />
-    <Compile Include="GammaServerManager.cs" />
-    <Compile Include="GammaServiceHost.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="ProjectInstaller.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ProjectInstaller.Designer.cs">
-      <DependentUpon>ProjectInstaller.cs</DependentUpon>
-    </Compile>
+    <Compile Include="ASM_Contracts.cs" />
+    <Compile Include="OraASM\ASMCMDCommand.cs" />
+    <Compile Include="OraASM\ASMCMDExecutor.cs" />
+    <Compile Include="OraASM\DGOperation.cs" />
+    <Compile Include="OraASM\DiskOperation.cs" />
+    <Compile Include="OraASM\FlexDGOperation.cs" />
+    <Compile Include="OraASM\ListInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="GammaAgent.resx">
-      <DependentUpon>GammaAgent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProjectInstaller.resx">
-      <DependentUpon>ProjectInstaller.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ASMSreviceLib\ASMServiceLib.csproj">
-      <Project>{2b346bc2-e7a8-478f-85b0-9d666c90de00}</Project>
-      <Name>ASMServiceLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GammaLib\GammaLib.csproj">
-      <Project>{349077d7-2b02-4a37-a246-d41443da5cdd}</Project>
-      <Name>GammaLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GammaServiceLib\GammaServiceLib.csproj">
       <Project>{1ff49551-efb5-46bb-9de3-d4ee4b979094}</Project>
       <Name>GammaServiceLib</Name>

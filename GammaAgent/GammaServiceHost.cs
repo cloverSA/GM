@@ -6,6 +6,9 @@ using GammaServiceLib;
 using GammaServiceLib.OraCRS;
 using GammaStressAgent.BaseService;
 
+using ASMServiceLib;
+using ASMSreviceLib.OraASM;
+
 namespace GammaAgent
 {
     interface IGammaSerivceHost
@@ -140,6 +143,71 @@ namespace GammaAgent
         public override Type GetServiceType()
         {
             return typeof(DBWorkLoad);
+        }
+    }
+
+    class ASMListInfoServiceHost: GammaServiceHost
+    {
+        public ASMListInfoServiceHost(string uri) : base(uri) { }
+        public override Type GetInterfaceType()
+        {
+            return typeof(IListInfo);
+        }
+        public override Type GetServiceType()
+        {
+            return typeof(ListInfo);
+        }
+    }
+
+    class ASMDGServiceHost: GammaServiceHost
+    {
+        public ASMDGServiceHost(string uri) : base(uri) { }
+        public override Type GetInterfaceType()
+        {
+            return typeof(IDGOperation);
+        }
+        public override Type GetServiceType()
+        {
+            return typeof(DGOperation);
+        }
+    }
+
+    class ASMDiskServiceHost:GammaServiceHost
+    {
+        public ASMDiskServiceHost(string uri) : base(uri) { }
+        public override Type GetInterfaceType()
+        {
+            return typeof(IDiskOperation);
+        }
+        public override Type GetServiceType()
+        {
+            return typeof(DiskOperation);
+        }
+    }
+
+    class ASMFlexdgServiceHost:GammaServiceHost
+    {
+        public ASMFlexdgServiceHost(string uri) : base(uri) { }
+        public override Type GetInterfaceType()
+        {
+            return typeof(IFlexDGOperation);
+        }
+        public override Type GetServiceType()
+        {
+            return typeof(FlexDGOperation);
+        }
+    }
+
+    class ASMCMDServiceHost:GammaServiceHost
+    {
+        public ASMCMDServiceHost(string uri) : base(uri) { }
+        public override Type GetInterfaceType()
+        {
+            return typeof(IASMCMDCommand);
+        }
+        public override Type GetServiceType()
+        {
+            return typeof(ASMCMDCommand);
         }
     }
 

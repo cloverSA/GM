@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTest", "UTest\UTest.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GammaClient", "GammaClient\GammaClient.csproj", "{AEA55118-7899-4911-AD7C-E75DDB21FF0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASMServiceLib", "ASMSreviceLib\ASMServiceLib.csproj", "{2B346BC2-E7A8-478F-85B0-9D666C90DE00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASMLib", "ASMLib\ASMLib.csproj", "{C40EBE92-AAA7-4EED-8378-AD24CCB735DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{AEA55118-7899-4911-AD7C-E75DDB21FF0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEA55118-7899-4911-AD7C-E75DDB21FF0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEA55118-7899-4911-AD7C-E75DDB21FF0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B346BC2-E7A8-478F-85B0-9D666C90DE00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B346BC2-E7A8-478F-85B0-9D666C90DE00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B346BC2-E7A8-478F-85B0-9D666C90DE00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B346BC2-E7A8-478F-85B0-9D666C90DE00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C40EBE92-AAA7-4EED-8378-AD24CCB735DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C40EBE92-AAA7-4EED-8378-AD24CCB735DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C40EBE92-AAA7-4EED-8378-AD24CCB735DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C40EBE92-AAA7-4EED-8378-AD24CCB735DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
